@@ -1,4 +1,7 @@
+import {useAuth} from '../context/authContext';
+
 const Profile = () => {
+    const {user, logout} = useAuth();
 
     // on va avoir besoin de récupérer les infos de l'utilisateur connecté
     // aussi avoir les infos de lecture de l'utilisateur
@@ -8,7 +11,7 @@ const Profile = () => {
     return (
         <div>
             <h1>Votre profil</h1>
-            <p> Email : </p>
+            <p> Email : {user.email}</p>
             <div>
                 <p>vos favoris</p>
             </div>
@@ -18,8 +21,10 @@ const Profile = () => {
             <div>
                 <p>vos plus écoutés</p>
             </div>
-            <button>Déconnexion</button>
+            <button onClick={logout}>Déconnexion</button>
         </div>
+
+        
     );
 }
 
