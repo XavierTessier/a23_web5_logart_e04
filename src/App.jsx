@@ -11,8 +11,10 @@ import Playlists from "./pages/Playlists";
 import Profile from "./pages/Profile";
 import Layout from "./components/Layout";
 
+import { useAuth } from './context/authContext';
 
 const App = () => {
+    const { user } = useAuth();
     const routesNotAuth = [
         {
             path: "/",
