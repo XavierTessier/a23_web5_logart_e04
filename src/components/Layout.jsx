@@ -1,11 +1,16 @@
+import { Oulet } from "react";
 import BarreRecherche from "./BarreRecherche";
 import Header from "./Header";
 
 const Layout = () => {
     return (
         <div>
-            <Header/>
-            <BarreRecherche />
+            <div>
+                <Header/>
+                <BarreRecherche />
+            </div>
+            
+            {/* <Outlet/> */}
         </div>
     );
 };
