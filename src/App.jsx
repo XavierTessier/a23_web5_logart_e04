@@ -65,12 +65,12 @@ const App = () => {
         },
         {
             path: "*",
-            element: <Navigate to="/profil" replace />,
+            element: <Navigate to="/profile" replace />,
         },
     ];
 
     return(
-        <RouterProvider router={createBrowserRouter(routesNotAuth)}/>
+        <RouterProvider router={createBrowserRouter(!!user ? routesAuth : routesNotAuth)}/>
 
     )
 }

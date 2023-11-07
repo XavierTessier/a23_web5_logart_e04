@@ -1,6 +1,6 @@
-import { Oulet } from "react";
 import BarreRecherche from "./BarreRecherche";
 import Header from "./Header";
+import { Outlet } from "react-router";
 
 const Layout = () => {
     return (
@@ -10,7 +10,7 @@ const Layout = () => {
                 <BarreRecherche />
             </div>
             
-            {/* <Outlet/> */}
+            <Outlet/>
         </div>
     );
 };
