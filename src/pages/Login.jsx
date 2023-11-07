@@ -1,36 +1,23 @@
-import { auth, googleProvider } from 'firebase/auth';
+import { auth, googleProvider } from '../config/firebase';
 import { signInWithPopup, signOut } from "firebase/auth";
+import { useAuth } from '../context/authContext';
 import { useState } from 'react';
 const Login = () => {
-    const [user, setUser] = useState(null);
-    const signInWithGoogle = async() => {
-        try {
-            googleProvider.setCustomParameters({ prompt: 'select_account' });
-            setUser(await signInWithPopup(auth,googleProvider)); 
-            console.log("Ce test fonctionne");
-            // name
-            
-        } catch(error){
-            console.log(error);
-            console.log("Ce test ne fonctionne pas");
-        }
-    }
-    const logout = async() => {
-        try {
-            await signOut(auth);
-            setUser(null); 
+    const { googleLogin, logout, user } = useAuth();
 
-            console.log("log outted");
-        } catch(error){
-            console.log(error);
-            console.log("Oops");
+    const handleGoogleLogin = async () => {
+        try {
+            const result = await googleLogin(googleProvider); // assuming googleProvider is defined somewhere
+            console.log(result); // Optional: Log the result of Google login
+        } catch (error) {
+            console.error("Error during Google login:", error);
         }
-    }
+    };
     return (
         <div className='authentification_lite'>
             {user?
                 <button onClick={logout}>LogOut</button>
-                : <button onClick={signInWithGoogle}>Sign In with Google</button>
+                : <button onClick={handleGoogleLogin}>Sign In with Google</button>
             }
         </div>
     );

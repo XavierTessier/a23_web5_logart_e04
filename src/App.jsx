@@ -11,8 +11,10 @@ import Playlists from "./pages/Playlists";
 import Profile from "./pages/Profile";
 import Layout from "./components/Layout";
 
+import { useAuth } from './context/authContext';
 
 const App = () => {
+    const { user } = useAuth();
     const routesNotAuth = [
         {
             path: "/",
@@ -66,6 +68,13 @@ const App = () => {
             element: <Navigate to="/profil" replace />,
         },
     ];
+    return (
+    //     <RouterProvider
+    //     router={createBrowserRouter(!!user ? routesAuth : routesNotAuth)}
+    //   />
+    <Login></Login>
+    );
 }
+
 
 export default App

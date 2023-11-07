@@ -1,7 +1,9 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { auth, db } from '../config/firebase';
+import { auth } from '../config/firebase';
 import { signInWithPopup, signOut, onAuthStateChanged } from "firebase/auth";
-import { addDoc, collection, doc, onSnapshot, query, where, getDocs } from "firebase/firestore";
+
+
+
 
 
 const authContext = React.createContext({
@@ -14,18 +16,25 @@ const authContext = React.createContext({
 const { Provider } = authContext;
 
 const AuthProvider = ({children}) => {
-    [user, setUser] = useState(null);
+    const [user, setUser] = useState(null);
+
     useEffect(() => {
         const unConnectApp = onAuthStateChanged(auth, (user) => {
-            if(user) setUser(user);
-            else setUser(null);
+            if(user) {
+                setUser(user);
+            }else{
+                setUser(null);
+            }
         });
         return () => unConnectApp();
-    });
-    return () => unConnectApp();
+    }, []);
+    
     const googleLogin = async(googleProvider) => {
         try {
-            const creds = await signInWithPopup(googleProvider)
+            googleProvider.setCustomParameters({ prompt: 'select_account' });
+            const creds = await signInWithPopup(auth,googleProvider);
+            setUser(creds.user);
+            return creds;
         } catch (error) {
             return {success: false, message:"connection non établie"}
         }
@@ -33,15 +42,24 @@ const AuthProvider = ({children}) => {
     const logout = async() => {
         try {
             await signOut(auth);
+            setUser(null);
             console.log("unconnection successful");
         } catch (error) {
             console.log("Oops: " + error);
         } 
-        setUser(null);
+        
     }
     return (
         <Provider value = {{googleLogin, logout, user}}>
             {children}         
         </Provider>
     );
+
+    
+};
+const useAuth = () => {
+    const context = useContext(authContext);
+    return context;
 }
+
+export { authContext, AuthProvider, useAuth };
