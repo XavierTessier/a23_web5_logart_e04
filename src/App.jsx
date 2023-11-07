@@ -66,6 +66,11 @@ const App = () => {
             element: <Navigate to="/profil" replace />,
         },
     ];
+
+    return(
+        <RouterProvider router={createBrowserRouter(routesNotAuth)}/>
+
+    )
 }
 
 export default App
