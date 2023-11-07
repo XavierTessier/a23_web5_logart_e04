@@ -22,9 +22,8 @@ const Profile = () => {
                 <p>vos plus écoutés</p>
             </div>
             <button onClick={logout}>Déconnexion</button>
+            <button>Modifier le profil</button>
         </div>
-
-        
     );
 }
 
