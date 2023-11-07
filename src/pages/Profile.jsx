@@ -7,7 +7,18 @@ const Profile = () => {
 
     return (
         <div>
-            <h1>Profile</h1>
+            <h1>Votre profil</h1>
+            <p> Email : </p>
+            <div>
+                <p>vos favoris</p>
+            </div>
+            <div>
+                <p>vos playlists</p>
+            </div>
+            <div>
+                <p>vos plus écoutés</p>
+            </div>
+            <button>Déconnexion</button>
         </div>
     );
 }
