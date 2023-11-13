@@ -8,6 +8,7 @@ const ListeRecherche = ({liste}) => {
                         {console.log(result.artist)}
                         <p className='album'>{result.album.title}</p>
                         <img className='albumCover' src={result.album.cover_medium} alt=""/>
+                        <button>Like</button>
                     </div>
                 ))}
             </div>
