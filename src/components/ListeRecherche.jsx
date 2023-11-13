@@ -1,6 +1,10 @@
 import { useAuth } from "../context/authContext";
 
 const ListeRecherche = ({liste}) => {
+
+    const onClickHandler = (result) => {
+        addMusicToUser(user.uid, result.title, result.link);
+    }
     const { addMusicToUser, user } = useAuth();
     return (
         <div className='results'>
@@ -11,7 +15,7 @@ const ListeRecherche = ({liste}) => {
                         {console.log(result)}
                         <p className='album'>{result.album.title}</p>
                         <img className='albumCover' src={result.album.cover_medium} alt=""/>
-                        <button onClick={addMusicToUser(user.uid, result.title, result.link)}>Like</button>
+                        <button onClick={onClickHandler(result)}>Like</button>
                     </div>
                 ))}
             </div>

@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { auth, db } from '../config/firebase';
 import { signInWithPopup, signOut, onAuthStateChanged } from "firebase/auth";
-import { addDoc, collection, query, where } from 'firebase/firestore';
+import { addDoc, collection, getDoc, getDocs, query, updateDoc, where } from 'firebase/firestore';
 
 
 
