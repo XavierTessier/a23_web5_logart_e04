@@ -15,10 +15,7 @@ const Login = () => {
     };
     return (
         <div className='authentification_lite'>
-            {user?
-                <button onClick={logout}>LogOut</button>
-                : <button onClick={handleGoogleLogin}>Sign In with Google</button>
-            }
+                <button onClick={handleGoogleLogin}>Sign In with Google</button>
         </div>
     );
 }   

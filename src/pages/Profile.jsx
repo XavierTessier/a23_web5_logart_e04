@@ -1,14 +1,23 @@
-const Profile = () => {
+import {useAuth} from '../context/authContext';
+import {useState} from 'react';
 
-    // on va avoir besoin de récupérer les infos de l'utilisateur connecté
-    // aussi avoir les infos de lecture de l'utilisateur
-    // stocker les infos dans firebase
-    // favoris dans la base de données
+const Profile = () => {
+    const [showForm, setShowForm] = useState(false);
+    const {user, logout} = useAuth();
+    console.log(user);
+
+    const AfficherForm = () => {
+        setShowForm(!showForm);
+    }
 
     return (
         <div>
             <h1>Votre profil</h1>
-            <p> Email : </p>
+            <div>
+                <img src={user.photoURL} alt="avatar" />
+                <p>{user.displayName}</p>
+            </div>
+            <p> Email : {user.email}</p>
             <div>
                 <p>vos favoris</p>
             </div>
@@ -18,7 +27,7 @@ const Profile = () => {
             <div>
                 <p>vos plus écoutés</p>
             </div>
-            <button>Déconnexion</button>
+            <button onClick={logout}>Déconnexion</button>
         </div>
     );
 }
