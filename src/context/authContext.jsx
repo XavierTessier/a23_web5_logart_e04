@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { auth, db } from '../config/firebase';
 import { signInWithPopup, signOut, onAuthStateChanged } from "firebase/auth";
-import { addDoc, collection, getDoc, getDocs, query, updateDoc, where } from 'firebase/firestore';
+import { addDoc, collection, doc, getDoc, getDocs, onSnapshot, query, setDoc, updateDoc, where } from 'firebase/firestore';
 
 
 
@@ -31,10 +31,22 @@ const AuthProvider = ({ children }) => {
         return () => unConnectApp();
     }, []);
 
+    useEffect(() => {
+        if(!user) return;
+        const userRef = doc(db, 'users', user.uid);
+        const unsub = onSnapshot(userRef, (snapshot) => {
+            const data = snapshot.data();
+            console.log('TRIGGERED', data);
+            setUserData(data);
+        });
+        return () => unsub();
+    }, [user]);
+    
     const googleLogin = async (googleProvider) => {
         try {
             googleProvider.setCustomParameters({ prompt: 'select_account' });
             const creds = await signInWithPopup(auth, googleProvider);
+            // console.log(creds.user);
             setUser(creds.user);
             return creds;
         } catch (error) {
@@ -54,17 +66,20 @@ const AuthProvider = ({ children }) => {
 
     const addDocHandler = async (uid, displayName) => {
         try {
+            console.log(uid);
             // Check if the user with the given uid already exists
-            const querySnapshot = await getDocs(query(collection(db, 'users'), where('uid', '==', uid)));
+            const docRef = doc(db, 'users', uid);
+            const querySnapshot = await getDoc(docRef);
 
-            if (querySnapshot.empty) {
-                // If no user with the given uid exists, add a new user to the database
-                const docRef = await addDoc(collection(db, 'users'), {
+            if (!querySnapshot.exists()) {
+                console.log('[IS EMPTY]');
+                const objUser = {
                     uid: uid,
                     displayName: displayName,
                     playlist: [],
-                });
-                console.log('User added with ID: ', docRef.id);
+                };
+                // If no user with the given uid exists, add a new user to the database
+                await setDoc(docRef, objUser);
             } else {
                 // Handle case where user with the given uid already exists
                 console.log('User with this UID already exists');
@@ -75,7 +90,7 @@ const AuthProvider = ({ children }) => {
     };
 
     const addMusicToUser = async (uid, info) => {
-        const userQuery = query(collection(db, "users"), where("uid", "==", uid));
+        const userQuery = query(userData);
         const userSnapshot = await getDocs(userQuery);
 
         if (userSnapshot.empty) {
@@ -101,25 +116,11 @@ const AuthProvider = ({ children }) => {
         }
     };
 
-    const getPlaylist = async (uid) => {
-        const userQuery = query(collection(db, "users"), where("uid", "==", uid));
-        const userSnapshot = await getDocs(userQuery);
-        const userDocRef = userSnapshot.docs[0].ref;
-        try {
-            const userData = (await getDoc(userDocRef)).data();
-            const playlist = userData.playlist;
-            return playlist;
-        } catch (error) {
-            console.error("Erreur lors de la récupération de la playlist:", error);
-        }
-    }
-
     return (
-        <Provider value={{ googleLogin, logout, user, addMusicToUser, addDocHandler, getPlaylist }}>
+        <Provider value={{ /*{playlist: userData?.playlist}*/ googleLogin, logout, user, addMusicToUser, addDocHandler, setUser}}>
             {children}
         </Provider>
     );
-
 
 };
 const useAuth = () => {

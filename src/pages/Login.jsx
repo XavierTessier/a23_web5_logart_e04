@@ -3,12 +3,13 @@ import { signInWithPopup, signOut } from "firebase/auth";
 import { useAuth } from '../context/authContext';
 import { useState } from 'react';
 const Login = () => {
-    const { googleLogin, logout, user, addDocHandler } = useAuth();
+    const { googleLogin, logout, user, addDocHandler} = useAuth();
 
     const handleGoogleLogin = async () => {
         try {
             const result = await googleLogin(googleProvider); // assuming googleProvider is defined somewhere
             console.log(result); // Optional: Log the result of Google login
+            console.log(user);
             addDocHandler(result.user.uid, result.user.displayName);
         } catch (error) {
             console.error("Error during Google login:", error);
