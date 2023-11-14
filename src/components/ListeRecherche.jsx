@@ -1,11 +1,9 @@
+import { useState } from "react";
 import { useAuth } from "../context/authContext";
 
 const ListeRecherche = ({liste}) => {
-
-    const onClickHandler = (result) => {
-        addMusicToUser(user.uid, result.title, result.link);
-    }
     const { addMusicToUser, user } = useAuth();
+
     return (
         <div className='results'>
                 {liste.data && liste.data.map((result) => (
@@ -15,7 +13,7 @@ const ListeRecherche = ({liste}) => {
                         {console.log(result)}
                         <p className='album'>{result.album.title}</p>
                         <img className='albumCover' src={result.album.cover_medium} alt=""/>
-                        <button onClick={onClickHandler(result)}>Like</button>
+                        <button onClick={() => addMusicToUser(user.uid, result)}>Like</button>
                     </div>
                 ))}
             </div>

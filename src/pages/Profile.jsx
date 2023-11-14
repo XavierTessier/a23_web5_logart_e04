@@ -2,14 +2,16 @@ import {useAuth} from '../context/authContext';
 import {useState} from 'react';
 
 const Profile = () => {
-    const [showForm, setShowForm] = useState(false);
-    const {user, logout} = useAuth();
-    console.log(user);
+    const {user, logout, getPlaylist} = useAuth();
 
-    const AfficherForm = () => {
-        setShowForm(!showForm);
+    const Playlist = async () => {
+        const playlist = await getPlaylist(user.uid);
+        return playlist;
     }
 
+    const maPlaylist = Playlist(); 
+    console.log(maPlaylist);    
+ 
     return (
         <div>
             <h1>Votre profil</h1>
@@ -20,9 +22,12 @@ const Profile = () => {
             <p> Email : {user.email}</p>
             <div>
                 <p>vos favoris</p>
-            </div>
-            <div>
-                <p>vos playlists</p>
+                {maPlaylist && maPlaylist.map((music) => (
+                    <div>
+                        <p>{music.title}</p>
+                        <p>{music.artist}</p>
+                    </div>
+                ))}
             </div>
             <div>
                 <p>vos plus écoutés</p>
