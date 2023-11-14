@@ -10,7 +10,8 @@ const Layout = () => {
         <div>
             <div>
                 <Header />
-                <AffichageElements categorieChercher="album"/>
+                <AffichageElements categorieChercher="chart" type="albums"/>
+                <AffichageElements categorieChercher="chart" type="artists"/>
                 {user ? (
                     <BarreRecherche />
                 ) : (
