@@ -50,7 +50,7 @@ const App = () => {
                     element: <Favorites />,
                 },
                 {
-                    path: "reader",
+                    path: "reader/album/:id",
                     element: <Reader />,
                 },
                 {

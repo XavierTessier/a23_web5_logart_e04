@@ -1,22 +1,23 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import fetchJsonp from "fetch-jsonp";
+import { Link } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 const AffichageElements = ({categorieChercher, type, }) => {
   const [listeCategorie, setListeCategorie] = useState(null);
-  // const [categorie, setCategorie] = useState([]);
+  let test = null;
   useEffect(() => {
     const fetchByCategorie = async () => {
         try {
             const resp = await fetchJsonp(`https://api.deezer.com/${categorieChercher}&output=jsonp`);
             if(!resp) throw new Error('Network response was incorrect');
             const data = await resp.json();
-            console.log(data)
+            // console.log(data);
             setListeCategorie(data[type].data);
         }catch (error){
             console.error(`Error fetching ${categorieChercher}:`,error);
         }
-        
     };
     fetchByCategorie();
 
@@ -30,13 +31,26 @@ const AffichageElements = ({categorieChercher, type, }) => {
         return {
           text: element.name,
           image: element.picture_medium,
+          toReader:(e) => {},
+          toDetails:(e) => {},
+          debug:() => {console.log(element.type)}
         };
       case "albums":
         return {
           text: element.title,
           image: element.cover_medium,
-        }; // You can adjust this as needed
-      // Add more cases as needed
+          toReader:(e) => {console.log(e)},
+          toDetails:(e) => {},
+          debug:() => {console.log(element.type)}
+        };
+      case "tracks":
+        return {
+          text: element.title,
+          image: element.album.cover_medium,
+          toReader:(e) => {},
+          toDetails:(e) => {},
+          debug:() => {console.log(element.type)}
+        };
       default:
         return element.title;
       }
@@ -51,10 +65,11 @@ const AffichageElements = ({categorieChercher, type, }) => {
           listeCategorie && listeCategorie.map((element) => (
             <li key={element.id}>
               <p>{getDisplayValue(element).text}</p>
-              <img src={getDisplayValue(element).image} alt="" />
+              <Link to={`/reader/${element.type}/${element.id}`} state = {element}>
+                <img onClick = {getDisplayValue(element).toReader} src={getDisplayValue(element).image} alt="" />
+              </Link>
               </li>
           ))
-          
         }
       </ul>
     </div>
