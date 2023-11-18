@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useAuth } from "../context/authContext";
 
 const ListeRecherche = ({liste}) => {
-    const { addMusicToUser, user } = useAuth();
+    const { addMusicToUser, user, userData } = useAuth();
 
     return (
         <div className='results'>
@@ -13,7 +13,7 @@ const ListeRecherche = ({liste}) => {
                         {console.log(result)}
                         <p className='album'>{result.album.title}</p>
                         <img className='albumCover' src={result.album.cover_medium} alt=""/>
-                        <button onClick={() => addMusicToUser(user.uid, result)}>Like</button>
+                        <button onClick={() => addMusicToUser(userData.playlist, result)}>Like</button>
                     </div>
                 ))}
             </div>
