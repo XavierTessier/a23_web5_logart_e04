@@ -22,9 +22,9 @@ const Profile = () => {
                     <Reorder.Group
                         axis='y'
                         values={playlist}
-                        onReorder={(values) => {
-                            setUserData({ ...userData, playlist: values });
-                            updateDoc(doc(db, 'users', user.uid), { playlist: values });
+                        onReorder={(values) => { // values est la liste réordonnée
+                            setUserData({ ...userData, playlist: values }); // on met à jour le state de userData, qui contient la playlist
+                            updateDoc(doc(db, 'users', user.uid), { playlist: values }); // on met à jour la playlist dans la base de données
                         }}
                     >
                         {playlist.map((item, index) => (

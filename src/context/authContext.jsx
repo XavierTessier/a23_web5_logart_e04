@@ -111,19 +111,16 @@ const AuthProvider = ({ children }) => {
 
     const deleteMusic = async (playlist, musicId) => {
         try {
-            // Clone the original playlist to avoid modifying it directly
-            const updatedPlaylist = [...playlist];
+            
+            const updatedPlaylist = [...playlist]; // On clone la playlist pour ne pas modifier l'originale
     
-            // Find the index of the music to be removed
-            const indexToDelete = updatedPlaylist.findIndex(item => item.info.id === musicId);
+            const indexToDelete = updatedPlaylist.findIndex(item => item.info.id === musicId); // On cherche l'index de la musique à supprimer, l'index est l'id de la musique
     
-            if (indexToDelete !== -1) {
-                // Remove the music from the cloned playlist array
-                updatedPlaylist.splice(indexToDelete, 1);
+            if (indexToDelete !== -1) { // Si la musique est trouvée dans la playlist
+                updatedPlaylist.splice(indexToDelete, 1); // On supprime la musique de la playlist
     
-                // Mettre à jour le document utilisateur avec la nouvelle liste de playlists
-                const userDocRef = doc(db, 'users', userData.uid);
-                await updateDoc(userDocRef, { playlist: updatedPlaylist });
+                const userDocRef = doc(db, 'users', userData.uid); // On récupère le document utilisateur
+                await updateDoc(userDocRef, { playlist: updatedPlaylist }); // On met à jour la playlist de l'utilisateur
     
                 console.log("Musique retirée de la playlist avec succès");
             } else {
