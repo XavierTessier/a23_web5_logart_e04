@@ -2,6 +2,8 @@ import { useAuth } from '../context/authContext';
 import { Reorder } from 'framer-motion';
 import { useState } from 'react';
 import '../css/Profile.css';
+import { doc, updateDoc } from 'firebase/firestore';
+import { db } from '../config/firebase';
 
 const Profile = () => {
     const { user, logout, playlist, deleteMusic, setUserData, userData } = useAuth();
@@ -20,10 +22,13 @@ const Profile = () => {
                     <Reorder.Group
                         axis='y'
                         values={playlist}
-                        onReorder={(reorderedItems) => setUserData({ ...userData, playlist: reorderedItems })}
+                        onReorder={(values) => {
+                            setUserData({ ...userData, playlist: values });
+                            updateDoc(doc(db, 'users', user.uid), { playlist: values });
+                        }}
                     >
                         {playlist.map((item, index) => (
-                            <Reorder.Item key={index} className='song' value={item}>
+                            <Reorder.Item key={item.info.id} className='song' value={item}>
                                 <img src={item.info.album.cover} className='cover' />
                                 <div className="info">
                                     <p>{item.info.title}</p>
