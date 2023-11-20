@@ -1,0 +1,29 @@
+.song {
+    border: 1px solid #ccc;
+    border-radius: 2em;
+    padding: 2em;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 1em;
+}
+
+.cover {
+    width: 10%;
+    height: 10%;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    margin-right: 2em;
+}
+
+.song p {
+    margin: 0 0 0.5em 0;
+}
+
+.Delete {
+    width: 10em;
+    height: 2em;
+    margin-left: auto;
+    cursor: pointer;
+}
+
+
