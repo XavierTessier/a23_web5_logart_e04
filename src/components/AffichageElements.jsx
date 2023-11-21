@@ -38,6 +38,7 @@ const AffichageElements = ({categorieChercher, type, }) => {
       case "albums":
         return {
           text: element.title,
+          // trackId: element.tracks.data[0].id,
           image: element.cover_medium,
           toReader:(e) => {console.log(e)},
           toDetails:(e) => {},
@@ -65,7 +66,7 @@ const AffichageElements = ({categorieChercher, type, }) => {
           listeCategorie && listeCategorie.map((element) => (
             <li key={element.id}>
               <p>{getDisplayValue(element).text}</p>
-              <Link to={`/reader/${element.type}/${element.id}`} state = {element}>
+              <Link to={`/reader/track/${element.track}`} state = {element}>
                 <img onClick = {getDisplayValue(element).toReader} src={getDisplayValue(element).image} alt="" />
               </Link>
               </li>
