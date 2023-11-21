@@ -25,7 +25,7 @@ const Profile = () => {
             <p>Email : {user.email}</p>
             <div>
                 <p>Réorganiser votre playlist</p>
-                <div onClick={() => setShowPlaylist(!showPlaylist)}>
+                <div onClick={() => setShowPlaylist(!showPlaylist)}> {/* On affiche la playlist si on clique sur le titre */}
                     <h1 onClick={() => navigate()}>Votre playlist</h1>
                 </div>
                 {showPlaylist && (
