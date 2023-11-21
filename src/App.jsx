@@ -12,6 +12,9 @@ import Profile from "./pages/Profile";
 import Layout from "./components/Layout";
 
 import { useAuth } from './context/authContext';
+import { MusicProvider } from "./context/musicContext.jsx";
+import { AudioProvider } from "./context/audiotim.jsx";
+
 
 const App = () => {
     const { user } = useAuth();
@@ -50,8 +53,8 @@ const App = () => {
                     element: <Favorites />,
                 },
                 {
-                    path: "reader",
-                    element: <Reader />,
+                    path: "reader/track/:id",
+                    element:  <MusicProvider><AudioProvider><Reader/></AudioProvider></MusicProvider>,
                 },
                 {
                     path: "playlists",

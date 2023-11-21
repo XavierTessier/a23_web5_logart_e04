@@ -4,7 +4,7 @@ import {useState} from 'react';
 const Profile = () => {
     const [showForm, setShowForm] = useState(false);
     const {user, logout} = useAuth();
-    console.log(user);
+    // console.log(user.uid);
 
     const AfficherForm = () => {
         setShowForm(!showForm);
