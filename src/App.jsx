@@ -13,6 +13,7 @@ import Layout from "./components/Layout";
 
 import { useAuth } from './context/authContext';
 import { MusicProvider } from "./context/musicContext.jsx";
+import { AudioProvider } from "./context/audiotim.jsx";
 
 
 const App = () => {
@@ -53,7 +54,7 @@ const App = () => {
                 },
                 {
                     path: "reader/track/:id",
-                    element: <MusicProvider><Reader/></MusicProvider>,
+                    element:  <MusicProvider><AudioProvider><Reader/></AudioProvider></MusicProvider>,
                 },
                 {
                     path: "playlists",

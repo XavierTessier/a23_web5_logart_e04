@@ -73,6 +73,22 @@ const MusicProvider = ({children}) => {
             fetchLink(link);
         }, [link]);
     }
+    // const getMP3 = async (link) => {
+    //     useEffect(() => {
+    //         const fetchLink = async () => {
+    //             if(link == null) return;
+    //             try {
+    //                 const resp = await fetchJsonp(`${link}&output=jsonp`);
+    //                 if (!resp.ok) throw new Error('Network response was not ok');
+    //                 const {data} = await resp.json();
+    //                 setAlbum(data);
+    //             } catch (error) {
+    //                 console.error('Error fetching track:', error);
+    //             }
+    //         };
+    //         fetchLink(link);
+    //     }, [link]);
+    // }
     return (
         <Provider value = {{getTrack, getTracks, getAlbum , choosenTrack, album, tracks, trackIndex, currentTrack}}>
             {children}
