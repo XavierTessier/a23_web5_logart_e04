@@ -3,10 +3,6 @@ import { auth, db } from '../config/firebase';
 import { signInWithPopup, signOut, onAuthStateChanged } from "firebase/auth";
 import { addDoc, collection, doc, getDoc, getDocs, onSnapshot, query, setDoc, updateDoc, where } from 'firebase/firestore';
 
-
-
-
-
 const authContext = React.createContext({
     googleLogin: async (googleProvider) => { },
     logout: () => { },
@@ -58,6 +54,7 @@ const AuthProvider = ({ children }) => {
             await signOut(auth);
             setUser(null);
             console.log("unconnection successful");
+            createSuccessNotif({title: "Déconnexion", message: "Vous avez été déconnecté avec succès"});
         } catch (error) {
             console.log("Oops: " + error);
         }
