@@ -10,6 +10,7 @@ import Reader from "./pages/Reader";
 import Playlists from "./pages/Playlists";
 import Profile from "./pages/Profile";
 import Layout from "./components/Layout";
+import Accueil from "./pages/Accueil";
 
 import { useAuth } from './context/authContext';
 import { MusicProvider } from "./context/musicContext.jsx";
@@ -47,7 +48,7 @@ const App = () => {
             children: [
                 {
                     index: true,
-                    element: <Navigate to="/profil" replace />,
+                    element: <Navigate to="/accueil" replace />,
                 },
                 {
                     path: "favorites",
@@ -73,7 +74,7 @@ const App = () => {
         },
         {
             path: "*",
-            element: <Navigate to="/profile" replace />,
+            element: <Navigate to="/accueil" replace />,
         },
     ];
 

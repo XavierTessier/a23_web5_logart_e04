@@ -6,11 +6,11 @@ const Header = () => {
     const { user } = useAuth();
 
     return (
-        <nav>
+        <nav >
             <div>
                 {user ? (
                     <ul>
-                        <li>
+                        <li className="">
                             <Link to="/favorites">Favorites</Link>
                         </li>
                         <li>
@@ -21,6 +21,9 @@ const Header = () => {
                         </li>
                         <li>
                             <Link to="/profile">Profile</Link>
+                        </li>
+                        <li>
+                            <Link to="/accueil">Accueil</Link>
                         </li>
                     </ul>
                 ) : (
