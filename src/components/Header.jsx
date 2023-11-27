@@ -23,7 +23,7 @@ const Header = () => {
 
   const { pathname } = useLocation();
   const { user } = useAuth();
-
+  console.log(pathname.pathname);
   return (
     <>
       {showSearch ? <BarreRecherche className="" /> : <> </>}
@@ -31,14 +31,14 @@ const Header = () => {
         <div>
           {user ? (
             <ul className="flex flex-row justify-around items-center">
-              <li className="actif">
+              <li className={pathname === "/accueil" ? "actif" : null}>
                 <HiHome
                   style={{ color: "white" }}
                   className="text-5xl text-white"
                   onClick={goToHome}
                 />
               </li>
-              <li className="">
+              <li className={pathname === "/recherche" ? "actif" : null}>
                 {user ? (
                   <BsSearch
                     style={{ color: "white" }}
@@ -52,7 +52,7 @@ const Header = () => {
                   />
                 )}
               </li>
-              <li className="hover:actif">
+              <li className={pathname === "/profile" ? "actif" : null}>
                 <FaRegUserCircle
                   style={{ color: "white" }}
                   className="text-5xl"
