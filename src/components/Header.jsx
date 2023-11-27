@@ -15,7 +15,9 @@ const Header = () => {
     navigate("/accueil");
   };
   const goToUser = () => {
-    navigate("/profile");
+    {
+      user ? navigate("/profile") : navigate("/login");
+    }
   };
   const OpenSearch = () => {
     setShowSearch(!showSearch);
@@ -29,44 +31,36 @@ const Header = () => {
       {showSearch ? <BarreRecherche className="" /> : <> </>}
       <nav className="navigation fixed bottom-0 bg-corail-reg w-full h-max py-4">
         <div>
-          {user ? (
-            <ul className="flex flex-row justify-around items-center">
-              <li className={pathname === "/accueil" ? "actif" : null}>
-                <HiHome
-                  style={{ color: "white" }}
-                  className="text-5xl text-white"
-                  onClick={goToHome}
-                />
-              </li>
-              <li className={pathname === "/recherche" ? "actif" : null}>
-                {user ? (
-                  <BsSearch
-                    style={{ color: "white" }}
-                    className="text-5xl hover:"
-                    onClick={OpenSearch}
-                  />
-                ) : (
-                  <BsSearch
-                    style={{ color: "white" }}
-                    className="opacity-50 text-4xl"
-                  />
-                )}
-              </li>
-              <li className={pathname === "/profile" ? "actif" : null}>
-                <FaRegUserCircle
+          <ul className="flex flex-row justify-around items-center">
+            <li className={pathname === "/accueil" ? "actif" : null}>
+              <HiHome
+                style={{ color: "white" }}
+                className="text-5xl text-white"
+                onClick={goToHome}
+              />
+            </li>
+            <li className={pathname === "/recherche" ? "actif" : null}>
+              {user ? (
+                <BsSearch
                   style={{ color: "white" }}
                   className="text-5xl"
-                  onClick={goToUser}
+                  onClick={OpenSearch}
                 />
-              </li>
-            </ul>
-          ) : (
-            <ul>
-              <li>
-                <Link to="/login">login</Link>
-              </li>
-            </ul>
-          )}
+              ) : (
+                <BsSearch
+                  style={{ color: "white" }}
+                  className="opacity-50 text-4xl"
+                />
+              )}
+            </li>
+            <li className={pathname === "/profile" ? "actif" : null}>
+              <FaRegUserCircle
+                style={{ color: "white" }}
+                className="text-5xl"
+                onClick={goToUser}
+              />
+            </li>
+          </ul>
         </div>
       </nav>
     </>

@@ -41,7 +41,7 @@ const BarreRecherche = () => {
     <div>
       <form
         action=""
-        className="fixed barre-recherche bg-corail-reg p-4 w-full text-center"
+        className="relative barre-recherche bg-corail-reg p-4 w-full text-center"
       >
         <input
           className="rounded-md px-2 py-1 w-7/12"
