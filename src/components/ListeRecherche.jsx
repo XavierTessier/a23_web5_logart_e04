@@ -18,13 +18,14 @@ const ListeRecherche = ({ liste, type }) => {
                             {liste.data && liste.data.map((result) => (
                                 <div className='card' key={result.id}>
                                     <p className='title'>{result.title}</p>
-                                    <p className='artist'>{result.artist.name}</p>
+                                    <p className='artist'>{result.artist && result.artist.name}</p>
                                     {console.log(result)}
                                     <img className='albumCover' src={result.cover_medium} alt="" />
                                 </div>
                             ))}
                         </InfiniteScroll>
-                    </div>);
+                    </div>
+                );
             case "artist":
                 return (
                     <div className='results'>

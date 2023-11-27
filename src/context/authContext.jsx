@@ -92,18 +92,22 @@ const AuthProvider = ({ children }) => {
 
     const addMusicToUser = async (playlist, info) => {
         try {
-            // Vérifier si le champ "playlist" existe dans les données de l'utilisateur
-            // const playlist = userData.playlist || [];
+            // Vérifier si la musique est déjà dans la playlist
+            if (playlist.some(item => item.info.id === info.id)) {
+                console.log("Musique déjà présente dans la playlist");
+                return;
+            }
+            else {
+                // Ajouter la nouvelle playlist avec la musique
+                const newPlaylist = { info };
+                playlist.push(newPlaylist);
 
-            // Ajouter la nouvelle playlist avec la musique
-            const newPlaylist = { info };
-            playlist.push(newPlaylist);
+                // Mettre à jour le document utilisateur avec la nouvelle liste de playlists
+                const userDocRef = doc(db, 'users', userData.uid);
+                await updateDoc(userDocRef, { playlist });
 
-            // Mettre à jour le document utilisateur avec la nouvelle liste de playlists
-            const userDocRef = doc(db, 'users', userData.uid);
-            await updateDoc(userDocRef, { playlist });
-
-            console.log("Musique ajoutée à la playlist avec succès");
+                console.log("Musique ajoutée à la playlist avec succès");
+            }
         } catch (error) {
             console.error("Erreur lors de l'ajout de la musique à la nouvelle playlist:", error);
         }
@@ -111,17 +115,17 @@ const AuthProvider = ({ children }) => {
 
     const deleteMusic = async (playlist, musicId) => {
         try {
-            
+
             const updatedPlaylist = [...playlist]; // On clone la playlist pour ne pas modifier l'originale
-    
+
             const indexToDelete = updatedPlaylist.findIndex(item => item.info.id === musicId); // On cherche l'index de la musique à supprimer, l'index est l'id de la musique
-    
+
             if (indexToDelete !== -1) { // Si la musique est trouvée dans la playlist
                 updatedPlaylist.splice(indexToDelete, 1); // On supprime la musique de la playlist
-    
+
                 const userDocRef = doc(db, 'users', userData.uid); // On récupère le document utilisateur
                 await updateDoc(userDocRef, { playlist: updatedPlaylist }); // On met à jour la playlist de l'utilisateur
-    
+
                 console.log("Musique retirée de la playlist avec succès");
             } else {
                 console.log("Musique non trouvée dans la playlist");
@@ -130,7 +134,7 @@ const AuthProvider = ({ children }) => {
             console.error("Erreur lors de la suppression de la musique à la nouvelle playlist:", error);
         }
     };
-    
+
 
     return (
         <Provider value={{ playlist: userData?.playlist, googleLogin, logout, user, addMusicToUser, addDocHandler, userData, deleteMusic, setUserData }}>
