@@ -15,7 +15,7 @@ import Accueil from "./pages/Accueil";
 import { useAuth } from './context/authContext';
 import { MusicProvider } from "./context/musicContext.jsx";
 import { AudioProvider } from "./context/audiotim.jsx";
-import Accueil from "./pages/Accueil";
+
 
 
 const App = () => {

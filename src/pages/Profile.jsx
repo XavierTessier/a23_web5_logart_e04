@@ -18,8 +18,11 @@ const Profile = () => {
     return (
         <div>
             <div className='user'>
-                <h1>{user.displayName}</h1>
+                <div className='background' ></div>
+                <h1 className='name'>{user.displayName}</h1>
                 <img src={user.photoURL} alt="avatar" />
+                <img src="src\img\Fichier 7.png" alt="forme" className='forme'/>
+                <img src="src\img\Fichier 11.png" alt="forme" className='ligne'/>
             </div>
             {/* <p>Email : {user.email}</p> */}
             <div>

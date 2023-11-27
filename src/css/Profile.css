@@ -27,13 +27,99 @@
 }
 
 .user {
-    /* display: flex; */
-    width: 300px;
-    height: 300px;
-    border: 1px solid red;
+    width: 28em;
+    height: 25em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.user .background {
+    z-index: -10;
+    position: absolute;
+    background-color: white;
+    border-radius: 5em;
+    width: 19em;
+    height: 17em;
 }
 
 .user img {
-    width: 10em;
+    position: relative;
+    top: 6em;
+    width: 12em;
     border-radius: 25em;
+}
+
+.user .name {
+    position: relative;
+    top: 3em;
+    font-family: 'Playpen Sans', cursive;
+}
+
+.user .forme {
+    z-index: -30;
+    position: absolute;
+    top: -3em;
+    left: 12em;
+    width: 19em;
+    height: 17em;
+}
+
+.user .ligne {
+    z-index: -20;
+    position: absolute;
+    top: -3em;
+    left: 13em;
+    rotate: 71deg;
+    width: 17em;
+}
+
+@media only screen and (min-width: 768px) {
+    .user .background {
+        left: 4em;
+        width: 38em;
+        height: 17em;
+    }
+
+    .user .name {
+        left: 7em;
+    }
+
+    .user img {
+        top: -3em;
+    }
+
+    .user .forme {
+        left: 30em;
+    }
+
+    .user .ligne {
+        left: 32em;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    .user .background {
+        width: 61em;
+    }
+
+    .user .name {
+        left: 5em;
+        top: 1.5em;
+        font-size: 50px;
+    }
+
+    .user img {
+        top: -6em;
+    }
+
+    .user .forme {
+        width: 23em;
+        left: 50em;
+    }
+
+    .user .ligne {
+        width: 19em;
+        left: 52em;
+    }
 }
