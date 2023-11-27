@@ -52,6 +52,7 @@
 
 .user .name {
     position: relative;
+    font-size: 20px;
     top: 3em;
     font-family: 'Playpen Sans', cursive;
 }
@@ -60,7 +61,7 @@
     z-index: -30;
     position: absolute;
     top: -3em;
-    left: 12em;
+    left: 13em;
     width: 19em;
     height: 17em;
 }
@@ -82,19 +83,21 @@
     }
 
     .user .name {
+        top: 4em;
         left: 7em;
+        font-size: 30px;
     }
 
     .user img {
-        top: -3em;
+        top: 0em;
     }
 
     .user .forme {
-        left: 30em;
+        left: 31em;
     }
 
     .user .ligne {
-        left: 32em;
+        left: 31em;
     }
 }
 
@@ -105,12 +108,12 @@
 
     .user .name {
         left: 5em;
-        top: 1.5em;
+        top: 2em;
         font-size: 50px;
     }
 
     .user img {
-        top: -6em;
+        top: -2em;
     }
 
     .user .forme {
