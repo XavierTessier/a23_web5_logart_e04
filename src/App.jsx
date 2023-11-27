@@ -10,6 +10,7 @@ import Reader from "./pages/Reader";
 import Playlists from "./pages/Playlists";
 import Profile from "./pages/Profile";
 import Layout from "./components/Layout";
+import Search from "./pages/Search";
 
 import { useAuth } from './context/authContext';
 import { MusicProvider } from "./context/musicContext.jsx";
@@ -63,6 +64,10 @@ const App = () => {
                 {
                     path: "profile",
                     element: <Profile />,
+                },
+                {
+                    path: "search",
+                    element: <Search />,
                 },
             ],
         },

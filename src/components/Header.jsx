@@ -8,7 +8,6 @@ const Header = () => {
     return (
         <nav>
             <div>
-                {user ? (
                     <ul>
                         <li>
                             <Link to="/favorites">Favorites</Link>
@@ -22,14 +21,10 @@ const Header = () => {
                         <li>
                             <Link to="/profile">Profile</Link>
                         </li>
-                    </ul>
-                ) : (
-                    <ul>
                         <li>
-                            <Link to="/login">login</Link>
+                            <Link to="/search">Search</Link>
                         </li>
                     </ul>
-                )}
             </div>
         </nav>
     )
