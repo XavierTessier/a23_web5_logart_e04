@@ -2,6 +2,7 @@ import { auth, googleProvider } from '../config/firebase';
 import { signInWithPopup, signOut } from "firebase/auth";
 import { useAuth } from '../context/authContext';
 import { useState } from 'react';
+import '../css/Login.css';
 const Login = () => {
     const { googleLogin, logout, user, addDocHandler} = useAuth();
 
@@ -16,7 +17,12 @@ const Login = () => {
     };
     return (
         <div className='authentification_lite'>
-                <button onClick={handleGoogleLogin}>Sign In with Google</button>
+            <div className='cercle'></div>
+            <button onClick={handleGoogleLogin} className='connexion'>Sign In with Google</button>
+            <img src="src\img\png\Fichier 3.png" alt="forme" className='forme1'/>
+            <img src="src/img/png/Fichier 1.png" alt="forme" className='ligne1'/>
+            <img src="src\img\png\Fichier 4.png" alt="forme" className='forme2'/>
+            <img src="src/img/png/Fichier 2.png" alt="forme" className='ligne2'/>
         </div>
     );
 }   
