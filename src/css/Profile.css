@@ -26,4 +26,14 @@
     cursor: pointer;
 }
 
+.user {
+    /* display: flex; */
+    width: 300px;
+    height: 300px;
+    border: 1px solid red;
+}
 
+.user img {
+    width: 10em;
+    border-radius: 25em;
+}

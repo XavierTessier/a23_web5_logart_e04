@@ -17,12 +17,11 @@ const Profile = () => {
 
     return (
         <div>
-            <h1>Votre profil</h1>
-            <div>
+            <div className='user'>
+                <h1>{user.displayName}</h1>
                 <img src={user.photoURL} alt="avatar" />
-                <p>{user.displayName}</p>
             </div>
-            <p>Email : {user.email}</p>
+            {/* <p>Email : {user.email}</p> */}
             <div>
                 <p>Réorganiser votre playlist</p>
                 <div onClick={() => setShowPlaylist(!showPlaylist)}> {/* On affiche la playlist si on clique sur le titre */}
