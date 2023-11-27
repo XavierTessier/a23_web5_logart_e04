@@ -16,8 +16,8 @@ const Layout = () => {
                 ) : (
                     <></>
                 )}
-                <AffichageElements categorieChercher="chart" type="albums"/>
-                <AffichageElements categorieChercher="chart" type="artists"/>
+                {/* <AffichageElements categorieChercher="chart" type="albums"/> */}
+                {/* <AffichageElements categorieChercher="chart" type="artists"/> */}
                 <AffichageElements categorieChercher="chart" type="tracks"/>
             </div>
 
