@@ -16,7 +16,7 @@ const Profile = () => {
     const navigate = useNavigate();
 
     return (
-        <div>
+        <div className='Profile'>
             <h1>Votre profil</h1>
             <div>
                 <img src={user.photoURL} alt="avatar" />
