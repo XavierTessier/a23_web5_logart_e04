@@ -1,13 +1,50 @@
-.vinyle{
-    width: 100px;
-    height: 100px;
-    position: relative;
-    background-color: gray;
-    border-radius: 50%;
+.vinyle {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  background-color: #575756;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 6px solid #3c3c3b;
 }
 
-.vinyle img{
-    width: 100%;
-    height: 100%;
-    
+.ligne {
+  content: "";
+  width: 90%;
+  height: 90%;
+  position: absolute;
+  border: 2px solid #b3b3b3;
+  border-color: #b3b3b3 transparent #b3b3b3 transparent;
+  border-radius: 50%;
+  transform: rotate(-45deg);
 }
+
+.vinyle img {
+  width: 45%;
+  height: 45%;
+  position: absolute;
+  border-radius: 50%;
+}
+
+/* .perspective-gauche {
+  transform: matrix3d(
+    0.5071,
+    0,
+    -0.5071,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0.5071,
+    0,
+    0.9071,
+    0,
+    0,
+    0,
+    0,
+    1
+  );
+} */
