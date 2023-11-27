@@ -18,10 +18,10 @@ const Login = () => {
     };
     return (
         <div className='authentification_lite'>
+            <img src='src\img\svg\logo.svg' className='logo'></img>
             <FaRegUserCircle className='z-10'
                 style={{ color: "coral" }}
               />
-            {/* <div className='cercle'></div> */}
             <button onClick={handleGoogleLogin} className='connexion'>Se connecter avec Google</button>
             <img src="src\img\png\Fichier 3.png" alt="forme" className='forme1'/>
             <img src="src/img/png/Fichier 1.png" alt="forme" className='ligne1'/>
