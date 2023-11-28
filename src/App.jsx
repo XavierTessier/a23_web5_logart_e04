@@ -11,7 +11,6 @@ import Playlists from "./pages/Playlists";
 import Profile from "./pages/Profile";
 import Layout from "./components/Layout";
 import Search from "./pages/Search";
-import 'react-notifications/lib/notifications.css';
 
 import { useAuth } from './context/authContext';
 import { MusicProvider } from "./context/musicContext.jsx";
