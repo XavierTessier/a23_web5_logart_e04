@@ -154,7 +154,7 @@ const MusicController = () => {
             togglePause();
           }}
         >
-          {joue ? <FaPause /> : <FaPlay />}
+          {joue ? <FaPlay /> : <FaPause />}
         </div>
         <div onClick={nextMusic} className="pointer">
           <RiSkipForwardFill className="text-4xl" />
