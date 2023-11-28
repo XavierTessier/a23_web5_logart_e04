@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import "../css/music-controler.css";
 import { FaPlay, FaPause } from "react-icons/fa6";
 import { RiSkipBackFill, RiSkipForwardFill } from "react-icons/ri";
+import { ImVolumeMedium } from "react-icons/im";
 
 const MusicController = () => {
   const [joue, setJoue] = useState(false);
@@ -184,6 +185,7 @@ const MusicController = () => {
         </div>
       </div>
       <div className="volume">
+        <ImVolumeMedium />
         <input
           onChange={(e) => volumeHandler(e.target.value)}
           type="range"

@@ -9,7 +9,8 @@ section.music-controler {}
 }
 
 .volume {
-    display: ;
+    display: flex;
+    flex-direction: row;
 }
 
 
