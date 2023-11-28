@@ -9,7 +9,9 @@ import MusicController from "../components/MusicController";
 import { useAudio } from "../context/audiotim";
 import "../css/Reader.css";
 
+import VinylePers from "../components/VinylePerspective";
 import Vinyle from "../components/Vinyle";
+import Bras from "../components/BrasReader";
 
 const Reader = () => {
   const {
@@ -49,20 +51,23 @@ const Reader = () => {
     <div className="Reader">
       <div className="wrapper_vinyle">
         <div className="vinyles flex flex-row">
-          <Vinyle />
-          <Vinyle />
-          <Vinyle />
-          <Vinyle />
+          <VinylePers />
+          <VinylePers />
+          <VinylePers />
+          <VinylePers />
         </div>
         <div className="vinyles flex flex-row">
-          <Vinyle />
-          <Vinyle />
-          <Vinyle />
-          <Vinyle />
+          <VinylePers />
+          <VinylePers />
+          <VinylePers />
+          <VinylePers />
         </div>
       </div>
-
-      <InfoMusic />
+      <div className="vinyle-tourne relative">
+        <Vinyle />
+        <Bras />
+      </div>
+      <InfoMusic className="sm:hidden" />
       <Tracks />
       <MusicController />
     </div>

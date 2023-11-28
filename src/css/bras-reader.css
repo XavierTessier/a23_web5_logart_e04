@@ -1,0 +1,9 @@
+div.bras-reader {
+    position: absolute;
+    top: -110px;
+    right: -35px;
+    height: 400px;
+    width: 400px;
+    scale: 0.25;
+    transform: rotate(5deg);
+}
