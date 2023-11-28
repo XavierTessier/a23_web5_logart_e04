@@ -66,7 +66,7 @@ const Reader = () => {
       <div className="vinyle-tourne relative">
         <Vinyle />
       </div>
-      <InfoMusic className="sm:hidden" />
+      <InfoMusic />
       <Tracks />
       <MusicController />
     </div>
