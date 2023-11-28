@@ -8,6 +8,7 @@ const MusicController = () => {
     let value = 0;
     const {album, tracks ,currentTrack, choosenTrack, getTrack, getTracks, getAlbum } = useMusic();
     const [compteur, setCompteur] = useState(0);
+    const [link,SetLink] = useState("");
     const {changeSource, isReady, play, pause, stop, isPaused,
         togglePause, duration, volume, changeVolume} = useAudio();
         
@@ -26,10 +27,19 @@ const MusicController = () => {
             //code to change duration
             //value = seconde?
         }
-        console.log(tracks[compteur]);
-        useEffect(() => {
-            changeSource("https://cdns-preview-b.dzcdn.net/stream/c-b2e0166bba75a78251d6dca9c9c3b41a-9.mp3", false);
-          }, []);
+        console.log("compteur de tracks");
+        console.log(tracks[compteur]?.preview);
+        // changeSource(tracks[compteur]?.preview);
+            useEffect(() => {
+                console.log('USE EFFECT')
+                if (tracks[compteur] && tracks[compteur].hasOwnProperty('preview')){
+                    SetLink(tracks[compteur]?.preview);
+                    changeSource(tracks[compteur]?.preview, false);
+                }
+              }, []);
+              console.log("unLink");
+
+              console.log(link);
     return (
         <section>
             <div className="useMusic">

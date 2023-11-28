@@ -28,6 +28,7 @@ const MusicProvider = ({children}) => {
                     if (!resp.ok) throw new Error('Network response was not ok');
                     const data = await resp.json();
                     // Handle the data as needed
+                    console.log("album:")
                     console.log(data);
                     setChoosenTrack(data);
                     setAlbum(data.album);
@@ -48,6 +49,8 @@ const MusicProvider = ({children}) => {
                     const resp = await fetchJsonp(`${tracklist}&output=jsonp`);
                     if (!resp.ok) throw new Error('Network response was not ok');
                     const {data} = await resp.json();
+                    // console.log("data GetTracks");
+                    // console.log(data);
                     setTracks(data);
                 } catch (error) {
                     console.error('Error fetching track:', error);

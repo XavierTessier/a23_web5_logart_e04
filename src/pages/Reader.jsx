@@ -14,7 +14,8 @@ const Reader = () => {
     const {changeSource, isReady, play, pause, stop, isPaused,
         togglePause, duration, volume, changeVolume} = useAudio();
     //this is a id of a track
-    getTrack(3135554);
+    console.log(id);
+    getTrack(id);
     getTracks(album?.tracklist);
     getAlbum(tracks?.album?.link);
     console.log(choosenTrack?.preview);

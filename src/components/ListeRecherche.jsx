@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "../context/authContext";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { Link } from "react-router-dom";
 
 const ListeRecherche = ({liste}) => {
     const { addMusicToUser, user, userData } = useAuth();
@@ -18,7 +19,10 @@ const ListeRecherche = ({liste}) => {
                         <p className='artist'>{result.artist.name}</p>
                         {console.log(result)}
                         <p className='album'>{result.album.title}</p>
-                        <img className='albumCover' src={result.album.cover_medium} alt=""/>
+                        {/* '/reader/track/' */}
+                        <Link to={'/reader/track/'+result.id}>
+                            <img className='albumCover' src={result.album.cover_medium} alt=""/>
+                        </Link>
                         <button onClick={() => addMusicToUser(userData.playlist, result)}>Like</button>
                     </div>
                 ))}
