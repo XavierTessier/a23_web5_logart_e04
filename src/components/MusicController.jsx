@@ -44,10 +44,6 @@ const MusicController = () => {
     setChoosenTrack(tracks[value]);
     setCompteur(value);
   };
-  const changeDuration = (e) => {
-    //code to change duration
-    //value = seconde?
-  };
   const volumeHandler = (value) => {
     changeVolume(value / 100);
   };
@@ -122,6 +118,33 @@ const MusicController = () => {
     // play(isReady);
   });
   //
+  useEffect(() => {
+    const inputRange = document.querySelector('input[type="range"]');
+    const progressBefore = document.querySelector(".progress");
+
+    if (inputRange && progressBefore) {
+      const updateProgress = () => {
+        const percent = (progress * 100).toFixed(2) + "%";
+        progressBefore.style.width = percent;
+      };
+
+      inputRange.addEventListener("input", updateProgress);
+      updateProgress(); // Update during initialization
+
+      return () => {
+        inputRange.removeEventListener("input", updateProgress);
+      };
+    }
+  }, [progress]);
+  console.log((tracks[compteur]?.duration / 60).toFixed(2));
+  const tempsChanson = tracks[compteur]?.duration;
+
+  const formatTime = (time) => {
+    const minutes = Math.floor(time / 60);
+    const seconds = time % 60;
+    return `${minutes}:${seconds}`;
+  };
+
   return (
     <section className="music-controler relative">
       <div className="audio-duration flex flex-row justify-center items-center">
@@ -141,7 +164,7 @@ const MusicController = () => {
           <div className="progress"></div>
         </div>
         {/* peux-tu affiché la duré finale de la chansons dans le <p></p> en dessous pls */}
-        <p className="temps-fin ml-4">5:00</p>
+        <p className="temps-fin ml-4">{formatTime(tempsChanson)}</p>
       </div>
       <div className="btns-lecture mt-4">
         <div onClick={previousMusic} className="pointer">
