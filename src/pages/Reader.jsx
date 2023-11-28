@@ -14,11 +14,11 @@ const Reader = () => {
     const {changeSource, isReady, play, pause, stop, isPaused,
         togglePause, duration, volume, changeVolume} = useAudio();
     //this is a id of a track
-    console.log(id);
+    // console.log(id);
     getTrack(id);
     getTracks(album?.tracklist);
     getAlbum(tracks?.album?.link);
-    console.log(choosenTrack?.preview);
+    // console.log(choosenTrack?.preview);
     // const {album:tracklist} = choosenTrack;
     // const track = await getTrack(id); //the id being a certain number in reader/album/:id
     // id is the only dependency here
