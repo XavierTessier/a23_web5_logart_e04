@@ -23,7 +23,7 @@ const AuthProvider = ({ children }) => {
 
             } else {
                 setUser(null);
-                
+
             }
         });
         return () => unConnectApp();
@@ -56,7 +56,7 @@ const AuthProvider = ({ children }) => {
             await signOut(auth);
             setUser(null);
             console.log("unconnection successful");
-            createSuccessNotif({title: "Déconnexion", message: "Vous avez été déconnecté avec succès"});
+            createSuccessNotif({ title: "Déconnexion", message: "Vous avez été déconnecté avec succès" });
         } catch (error) {
             console.log("Oops: " + error);
         }
@@ -151,8 +151,21 @@ const AuthProvider = ({ children }) => {
                 const userDocRef = doc(db, 'users', userData.uid);
                 await updateDoc(userDocRef, { favorites });
 
-                const favDocRef = doc(db, 'favoris', 'favorisDuSite');
-                await updateDoc(favDocRef, { allTimeFav: favorites });
+                const favDocRef = doc(db, 'favoris' , String(info.id));
+                const querySnapshot = await getDoc(favDocRef);
+                if (!querySnapshot.exists()) {
+                    console.log('[IS EMPTY SITE FAVORITE]');
+                    const objMusic = {
+                        music: info,
+                        nbFavorites: 1,
+                    }
+                    await setDoc(favDocRef, objMusic);
+
+                    console.log("Musique ajoutée à la playlist avec succès");
+                } else {
+                    // Handle case where user with the given uid already exists
+                    console.log('La musique est déja dans les favoris du site');
+                }
 
 
                 console.log("Musique ajoutée à vos favoris avec succès");
@@ -186,10 +199,10 @@ const AuthProvider = ({ children }) => {
 
 
 
-    
+
 
     return (
-        <Provider value={{ playlist: userData?.playlist, googleLogin, logout, user, addMusicToUser, addDocHandler, userData, deleteMusic, setUserData, addToFav, removeFromFav}}>
+        <Provider value={{ playlist: userData?.playlist, googleLogin, logout, user, addMusicToUser, addDocHandler, userData, deleteMusic, setUserData, addToFav, removeFromFav }}>
             {children}
         </Provider>
     );
