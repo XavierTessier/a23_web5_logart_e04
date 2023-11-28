@@ -1,4 +1,3 @@
-import "./ReaderBeta.css";
 import { useMusic } from "../context/musicContext";
 import { useParams } from "react-router";
 import { useEffect } from "react";
@@ -11,7 +10,6 @@ import "../css/Reader.css";
 
 import VinylePers from "../components/VinylePerspective";
 import Vinyle from "../components/Vinyle";
-import Bras from "../components/BrasReader";
 
 const Reader = () => {
   const {
