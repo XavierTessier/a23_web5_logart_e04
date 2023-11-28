@@ -126,6 +126,8 @@ const MusicController = () => {
       const updateProgress = () => {
         const percent = (progress * 100).toFixed(2) + "%";
         progressBefore.style.width = percent;
+        console.log(Math.round(progress * 100));
+        inputRange.value = (progress * 100).toFixed(2);
       };
 
       inputRange.addEventListener("input", updateProgress);
@@ -136,7 +138,6 @@ const MusicController = () => {
       };
     }
   }, [progress]);
-  console.log((tracks[compteur]?.duration / 60).toFixed(2));
   const tempsChanson = tracks[compteur]?.duration;
 
   const formatTime = (time) => {
@@ -158,12 +159,11 @@ const MusicController = () => {
             type="range"
             min="0"
             max="100"
-            value="30"
+            value={Math.round(progress * 100)}
             id="duration"
           />
           <div className="progress"></div>
         </div>
-        {/* peux-tu affiché la duré finale de la chansons dans le <p></p> en dessous pls */}
         <p className="temps-fin ml-4">{formatTime(tempsChanson)}</p>
       </div>
       <div className="btns-lecture mt-4">
@@ -185,7 +185,7 @@ const MusicController = () => {
       </div>
       <div className="volume">
         <input
-          onChange={(e) => changeVolume(e.target.value / 100)}
+          onChange={(e) => volumeHandler(e.target.value)}
           type="range"
           min="0"
           max="100"
