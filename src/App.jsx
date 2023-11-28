@@ -77,6 +77,8 @@ const App = () => {
         },
     ];
 
+
+
     return(
         <RouterProvider router={createBrowserRouter(!!user ? routesAuth : routesNotAuth)}/>
     )
