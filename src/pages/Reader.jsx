@@ -9,7 +9,7 @@ import MusicController from "../components/MusicController";
 import { useAudio } from "../context/audiotim";
 
 const Reader = () => {
-    const {album, tracks ,currentTrack, choosenTrack, getTrack, getTracks, getAlbum } = useMusic();
+    const {album, tracks, getTrack, getTracks, getAlbum } = useMusic();
     const { id } = useParams(); 
     const {changeSource, isReady, play, pause, stop, isPaused,
         togglePause, duration, volume, changeVolume} = useAudio();

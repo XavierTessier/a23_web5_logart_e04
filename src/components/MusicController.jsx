@@ -1,4 +1,4 @@
-import { useAudio, useAudioProgress } from "../context/audiotim";
+import { useAudio, useAudioEnded, useAudioProgress } from "../context/audiotim";
 import { useMusic } from "../context/musicContext";
 import { useEffect, useState } from "react";
 import { BsCaretRightFill, BsChevronBarLeft, BsChevronBarRight   } from "react-icons/bs";
@@ -6,7 +6,7 @@ import { BsCaretRightFill, BsChevronBarLeft, BsChevronBarRight   } from "react-i
 
 const MusicController = () => {
     let value = 0;
-    const {trackIndex, setTrackIndex, album, tracks ,currentTrack, choosenTrack, setChoosenTrack, getTrack, getTracks, getAlbum } = useMusic();
+    const {tracks,choosenTrack, setChoosenTrack} = useMusic();
     const [compteur, setCompteur] = useState(0);
     const [link,SetLink] = useState("");
     const [volumeInput, setVolumeInput] = useState(0.3);
@@ -16,6 +16,8 @@ const MusicController = () => {
     const {changeSource, isReady, play, pause, stop, isPaused,
         togglePause, duration, volume, changeVolume} = useAudio();
     const {progress, changeProgress} = useAudioProgress();
+
+    
         
 
         const previousMusic = () => {
@@ -38,6 +40,18 @@ const MusicController = () => {
             changeVolume(value/100)
         }
 
+  const handleProgressBarClick = (event) => {
+    const progressBar = event.target;
+    const totalWidth = progressBar.offsetWidth;
+    const clickedPosition = (event.clientX - progressBar.getBoundingClientRect().left) / totalWidth;
+    const newProgress = clickedPosition;
+    
+    // Update the state to re-render the component with the new progress
+    // setProgress(newProgress);
+    
+    // Perform additional actions here, e.g., update playback time
+    changeProgress(newProgress);
+  };
 
         //currentTrack
         //tracks
@@ -82,7 +96,7 @@ const MusicController = () => {
             if (choosenTrack && tracks[compteur]){
                 // console.log("Choosen Track is true");
                 // console.log(tracks[compteur]?.preview);
-                changeSource(tracks[compteur]?.preview, false);
+                changeSource(tracks[compteur]?.preview, true);
             }
             }, [compteur, tracks]);
         }catch(error){
@@ -90,7 +104,12 @@ const MusicController = () => {
         }
         // console.log("After use Effect: ");
         // console.log(tracks[compteur]?.preview);
-
+        useAudioEnded(() => {
+            console.log("chanson TERMINER")
+            nextMusic();
+            changeSource(tracks[compteur]?.preview, true);
+            // play(isReady);
+        });
         //
     return (
         <section>  
@@ -107,7 +126,8 @@ const MusicController = () => {
                 <input onChange={(e) => changeVolume(e.target.value/100)} type="range" min="0" max="100" value={volume*100} id="volume"/>
             </div>
             <div>                                                                   
-                <input onChange={(e) => {changeProgress(e.target.value)/100}} type="range" min="1" max="100" value={progress} id="duration"/>
+                {/* <input onChange={(e) => {changeProgress(e.target.value)/100}} type="range" min="1" max="100" value={progress}/> */}
+                <progress id="trackProgress" value={progress} max="1" style={{ width: '300px' }} onClick={handleProgressBarClick}></progress>
             </div>
         </section>
     );
