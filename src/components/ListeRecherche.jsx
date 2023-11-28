@@ -3,7 +3,8 @@ import { useAuth } from "../context/authContext";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 const ListeRecherche = ({ liste, type }) => {
-    const { addMusicToUser, user, userData } = useAuth();
+    const { addMusicToUser, user, userData, addToFav } = useAuth();
+    console.log(userData);
 
     const displayList = (type) => {
         switch (type) {
@@ -59,6 +60,7 @@ const ListeRecherche = ({ liste, type }) => {
                                     <p className='album'>{result.album && result.album.title}</p>
                                     <img className='albumCover' src={result.album && result.album.cover_medium} alt="" />
                                     <button onClick={() => addMusicToUser(userData.playlist, result)}>Like</button>
+                                    <button onClick={() => addToFav(userData.favorites, result)}>Fav</button>
                                 </div>
                             ))}
                         </InfiniteScroll>
@@ -80,6 +82,7 @@ const ListeRecherche = ({ liste, type }) => {
                                     <p className='album'>{result.album && result.album.title}</p>
                                     <img className='albumCover' src={result.album && result.album.cover_medium} alt="" />
                                     <button onClick={() => addMusicToUser(userData.playlist, result)}>Like</button>
+                                    <button onClick={() => addToFav(userData.favorites, result)}>Fav</button>
                                 </div>
                             ))}
                         </InfiniteScroll>

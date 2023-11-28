@@ -74,6 +74,7 @@ const AuthProvider = ({ children }) => {
                     uid: uid,
                     displayName: displayName,
                     playlist: [],
+                    favorites: [],
                 };
                 // If no user with the given uid exists, add a new user to the database
                 await setDoc(docRef, objUser);
@@ -132,9 +133,61 @@ const AuthProvider = ({ children }) => {
         }
     };
 
+    const addToFav = async (favorites, info) => {
+        try {
+            // Vérifier si la musique est déjà dans la playlist
+            if (favorites.some(item => item.info.id === info.id)) {
+                console.log("Musique déjà présente dans vos favoris");
+                return;
+            }
+            else {
+                // Ajouter la nouvelle playlist avec la musique
+                const newFav = { info };
+                favorites.push(newFav);
+
+                // Mettre à jour le document utilisateur avec la nouvelle liste de playlists
+                const userDocRef = doc(db, 'users', userData.uid);
+                await updateDoc(userDocRef, { favorites });
+
+                const favDocRef = doc(db, 'favoris', 'favorisDuSite');
+                await updateDoc(favDocRef, { allTimeFav: favorites});
+
+
+                console.log("Musique ajoutée à vos favoris avec succès");
+            }
+        } catch (error) {
+            console.error("Erreur lors de l'ajout de la musique dans vos favoris:", error);
+        }
+    };
+
+    const removeFromFav = async (favorites, musicId) => {
+        try {
+
+            const updatedFavorites = [...favorites]; // On clone la playlist pour ne pas modifier l'originale
+
+            const indexToDelete = updatedFavorites.findIndex(item => item.info.id === musicId); // On cherche l'index de la musique à supprimer, l'index est l'id de la musique
+
+            if (indexToDelete !== -1) { // Si la musique est trouvée dans la playlist
+                updatedFavorites.splice(indexToDelete, 1); // On supprime la musique de la playlist
+
+                const userDocRef = doc(db, 'users', userData.uid); // On récupère le document utilisateur
+                await updateDoc(userDocRef, { favorites: updatedFavorites }); // On met à jour la playlist de l'utilisateur
+
+                console.log("Musique retirée de vos favoris avec succès");
+            } else {
+                console.log("Musique non trouvée dans vos favoris");
+            }
+        } catch (error) {
+            console.error("Erreur lors de la suppression de la musique de vos favoris:", error);
+        }
+    };
+
+
+
+    
 
     return (
-        <Provider value={{ playlist: userData?.playlist, googleLogin, logout, user, addMusicToUser, addDocHandler, userData, deleteMusic, setUserData }}>
+        <Provider value={{ playlist: userData?.playlist, googleLogin, logout, user, addMusicToUser, addDocHandler, userData, deleteMusic, setUserData, addToFav, removeFromFav}}>
             {children}
         </Provider>
     );

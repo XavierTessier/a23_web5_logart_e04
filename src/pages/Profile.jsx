@@ -9,10 +9,11 @@ import BarreRecherche from '../components/BarreRecherche';
 import { Navigate, useNavigate } from 'react-router-dom';
 
 const Profile = () => {
-    const { user, logout, playlist, deleteMusic, setUserData, userData } = useAuth();
+    const { user, logout, playlist, deleteMusic, setUserData, userData, removeFromFav } = useAuth();
 
     const [showModal, setShowModal] = useState(false);
     const [showPlaylist, setShowPlaylist] = useState(false);
+    const [showFav, setShowFav] = useState(false);
     const navigate = useNavigate();
 
     return (
@@ -32,7 +33,7 @@ const Profile = () => {
                     <Modal>
                         <button onClick={() => setShowModal(!showModal)}>+</button>
                         {showModal && (
-                                <BarreRecherche />
+                            <BarreRecherche />
                         )}
                         {playlist && (
                             <Reorder.Group
@@ -62,6 +63,23 @@ const Profile = () => {
             </div>
             <div>
                 <p>vos plus écoutés</p>
+            </div>
+            <div>
+                <button onClick={() => setShowFav(!showFav)}>Voir vos favoris</button>
+                {showFav && (
+                    userData.favorites.map((item, index) => (
+                        <div className="fav" id={index}>
+                            <img src={item.info.album.cover} className='cover' />
+                            <div className="info">
+                                <p>{item.info.title}</p>
+                                <p>{item.info.artist.name}</p>
+                                <p>{item.info.album.title}</p>
+                                <p>{item.info.duration}s</p>
+                             </div>
+                            <button className='Delete' onClick={() => removeFromFav(userData.favorites, item.info.id)}>Remove</button>
+                        </div>
+                    ))
+                )}
             </div>
             <button onClick={logout}>Déconnexion</button>
         </div>
