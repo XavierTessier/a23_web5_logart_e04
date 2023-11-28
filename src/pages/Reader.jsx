@@ -47,11 +47,19 @@ const Reader = () => {
   // }, []);
   return (
     <div className="Reader">
-      <div className="vinyles flex flex-row mt-24 ">
-        <Vinyle />
-        <Vinyle />
-        <Vinyle />
-        <Vinyle />
+      <div className="wrapper_vinyle">
+        <div className="vinyles flex flex-row">
+          <Vinyle />
+          <Vinyle />
+          <Vinyle />
+          <Vinyle />
+        </div>
+        <div className="vinyles flex flex-row">
+          <Vinyle />
+          <Vinyle />
+          <Vinyle />
+          <Vinyle />
+        </div>
       </div>
 
       <InfoMusic />
