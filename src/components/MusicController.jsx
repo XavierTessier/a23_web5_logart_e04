@@ -1,22 +1,22 @@
 import { useAudio, useAudioEnded, useAudioProgress } from "../context/audiotim";
 import { useMusic } from "../context/musicContext";
 import { useEffect, useState } from "react";
-import {
-  BsCaretRightFill,
-  BsChevronBarLeft,
-  BsChevronBarRight,
-} from "react-icons/bs";
 
 import "../css/music-controler.css";
-import { FaPlay } from "react-icons/fa6";
+import { FaPlay, FaPause } from "react-icons/fa6";
 import { RiSkipBackFill, RiSkipForwardFill } from "react-icons/ri";
 
 const MusicController = () => {
+  const [joue, setJoue] = useState(false);
   let value = 0;
   const { tracks, choosenTrack, setChoosenTrack } = useMusic();
   const [compteur, setCompteur] = useState(0);
   const [link, SetLink] = useState("");
   const [volumeInput, setVolumeInput] = useState(0.3);
+
+  const isPlaying = () => {
+    setJoue(!joue);
+  };
 
   const {
     changeSource,
@@ -147,8 +147,14 @@ const MusicController = () => {
         <div onClick={previousMusic} className="pointer">
           <RiSkipBackFill className="text-4xl" />
         </div>
-        <div className="play pointer relative bg-corail-pale rounded-full text-4xl pl-1 w-16 h-16 flex justify-center items-center">
-          <FaPlay />
+        <div
+          className="play cursor-pointer relative bg-corail-pale rounded-full text-4xl pl-1 w-16 h-16 flex justify-center items-center"
+          onClick={() => {
+            isPlaying();
+            togglePause();
+          }}
+        >
+          {joue ? <FaPause /> : <FaPlay />}
         </div>
         <div onClick={nextMusic} className="pointer">
           <RiSkipForwardFill className="text-4xl" />
