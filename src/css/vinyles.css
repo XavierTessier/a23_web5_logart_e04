@@ -1,0 +1,50 @@
+.perspective-droite {
+  transform: matrix3d(0.5071,
+      0,
+      -0.5071,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0.5071,
+      0,
+      0.5071,
+      0,
+      0,
+      0,
+      0,
+      1);
+}
+
+.vinyle_container {
+  width: 220px;
+  height: 260px;
+}
+
+.vinyle_container:not(:first-child) {
+  margin-left: -200px;
+}
+
+.vinyle_container:nth-child(2) {
+  z-index: -1;
+}
+
+.vinyle_container:nth-child(3) {
+  z-index: -2;
+}
+
+.vinyle_container:nth-child(4) {
+  z-index: -3;
+}
+
+@media screen and (min-width: 768px) {
+  .vinyle_container {
+    width: 300px;
+    height: 300px;
+  }
+
+  .vinyle_container:not(:first-child) {
+    margin-left: -280px;
+  }
+}
