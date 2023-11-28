@@ -20,8 +20,10 @@ const AuthProvider = ({ children }) => {
         const unConnectApp = onAuthStateChanged(auth, (user) => {
             if (user) {
                 setUser(user);
+
             } else {
                 setUser(null);
+                
             }
         });
         return () => unConnectApp();
@@ -150,7 +152,7 @@ const AuthProvider = ({ children }) => {
                 await updateDoc(userDocRef, { favorites });
 
                 const favDocRef = doc(db, 'favoris', 'favorisDuSite');
-                await updateDoc(favDocRef, { allTimeFav: favorites});
+                await updateDoc(favDocRef, { allTimeFav: favorites });
 
 
                 console.log("Musique ajoutée à vos favoris avec succès");
