@@ -1,0 +1,3 @@
+.vinyles div:not:first-child {
+    margin-left: -1000px;
+}

@@ -7,6 +7,7 @@ import fetchJsonp from "fetch-jsonp";
 import InfoMusic from "../components/InfoMusic";
 import MusicController from "../components/MusicController";
 import { useAudio } from "../context/audiotim";
+import "../css/Reader.css";
 
 import Vinyle from "../components/Vinyle";
 
@@ -46,7 +47,13 @@ const Reader = () => {
   // }, []);
   return (
     <div className="Reader">
-      <Vinyle />
+      <div className="vinyles flex flex-row mt-24 ">
+        <Vinyle />
+        <Vinyle />
+        <Vinyle />
+        <Vinyle />
+      </div>
+
       <InfoMusic />
       <Tracks />
       <MusicController />
