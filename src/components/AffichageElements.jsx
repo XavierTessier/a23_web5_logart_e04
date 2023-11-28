@@ -6,6 +6,7 @@ import { Navigate } from "react-router-dom";
 
 const AffichageElements = ({categorieChercher, type, }) => {
   const [listeCategorie, setListeCategorie] = useState(null);
+  const [link, setLink] = useState("");
   let test = null;
   useEffect(() => {
     const fetchByCategorie = async () => {
@@ -13,7 +14,6 @@ const AffichageElements = ({categorieChercher, type, }) => {
             const resp = await fetchJsonp(`https://api.deezer.com/${categorieChercher}&output=jsonp`);
             if(!resp) throw new Error('Network response was incorrect');
             const data = await resp.json();
-            // console.log(data);
             setListeCategorie(data[type].data);
         }catch (error){
             console.error(`Error fetching ${categorieChercher}:`,error);
@@ -22,6 +22,29 @@ const AffichageElements = ({categorieChercher, type, }) => {
     fetchByCategorie();
 
   },[]);
+  const fetchTest = async (id) => {
+    console.log("try to fetch");
+    try {
+      console.log("async fetch");
+  
+      const resp = await fetchJsonp(`https://api.deezer.com/album/${id}/tracks&output=jsonp`);
+      if (!resp) throw new Error('Network response was incorrect');
+      const data = await resp.json();
+      console.log(data.data[0].id);
+      if (data) setLink(data.data[0].id);
+    } catch (error) {
+      console.error('Error fetching tracks:', error);
+    }
+    return link;
+  };
+  const fetchTracks = async(id) => {
+        const resp = await fetchJsonp(`https://api.deezer.com/album/${id}/tracks&output=jsonp`);
+        if(!resp) throw new Error('Network response was incorrect');
+        const data = await resp.json();
+  
+        // await setLink(data.data[0].id);
+        return id;
+  }
   const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
@@ -31,25 +54,27 @@ const AffichageElements = ({categorieChercher, type, }) => {
         return {
           text: element.name,
           image: element.picture_medium,
-          toReader:(e) => {},
-          toDetails:(e) => {},
+          link:'/artist/' + element.id,
           debug:() => {console.log(element.type)}
         };
-      case "albums":
-        return {
-          text: element.title,
-          // trackId: element.tracks.data[0].id,
-          image: element.cover_medium,
-          toReader:(e) => {console.log(e)},
-          toDetails:(e) => {},
-          debug:() => {console.log(element.type)}
-        };
+        // '/reader/track/' + 
+        case "albums":
+          const getAlbumLink = async () => {
+            const trackId = await fetchTest(element.id);
+            return '/reader/track/' + trackId;
+          };
+        
+          return {
+            text: element.title,
+            image: element.cover_medium,
+            link: getAlbumLink(),
+            debug: () => { console.log(element.type) }
+          };
       case "tracks":
         return {
           text: element.title,
           image: element.album.cover_medium,
-          toReader:(e) => {},
-          toDetails:(e) => {},
+          link:'/reader/track/' + element.id,
           debug:() => {console.log(element.type)}
         };
       default:
@@ -66,8 +91,8 @@ const AffichageElements = ({categorieChercher, type, }) => {
           listeCategorie && listeCategorie.map((element) => (
             <li key={element.id}>
               <p>{getDisplayValue(element).text}</p>
-              <Link to={`/reader/track/${element.track}`} state = {element}>
-                <img onClick = {getDisplayValue(element).toReader} src={getDisplayValue(element).image} alt="" />
+              <Link to={getDisplayValue(element).link} state = {element}>
+                <img src={getDisplayValue(element).image} alt="" />
               </Link>
               </li>
           ))

@@ -1,4 +1,4 @@
-import { useAuth } from '../context/authContext';
+ import { useAuth } from '../context/authContext';
 import { Reorder } from 'framer-motion';
 import { useState } from 'react';
 import '../css/Profile.css';

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "../context/authContext";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { Link } from "react-router-dom";
 
 const ListeRecherche = ({ liste, type }) => {
     const { addMusicToUser, user, userData, addToFav } = useAuth();

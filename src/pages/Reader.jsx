@@ -9,15 +9,16 @@ import MusicController from "../components/MusicController";
 import { useAudio } from "../context/audiotim";
 
 const Reader = () => {
-    const {album, tracks ,currentTrack, choosenTrack, getTrack, getTracks, getAlbum } = useMusic();
+    const {album, tracks, getTrack, getTracks, getAlbum } = useMusic();
     const { id } = useParams(); 
     const {changeSource, isReady, play, pause, stop, isPaused,
         togglePause, duration, volume, changeVolume} = useAudio();
     //this is a id of a track
-    getTrack(3135554);
+    // console.log(id);
+    getTrack(id);
     getTracks(album?.tracklist);
     getAlbum(tracks?.album?.link);
-    console.log(choosenTrack?.preview);
+    // console.log(choosenTrack?.preview);
     // const {album:tracklist} = choosenTrack;
     // const track = await getTrack(id); //the id being a certain number in reader/album/:id
     // id is the only dependency here
