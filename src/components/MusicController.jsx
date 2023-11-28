@@ -57,21 +57,25 @@ const MusicController = () => {
       false
     );
   }, []);
+
   return (
     <section className="music-controler relative">
       <div className="audio-duration flex flex-row justify-center items-center">
         <p className="temps-start mr-4">0:00</p>
-        <input
-          className="slider-audio w-1/2"
-          onChange={(e) => {
-            changeProgress(e.target.value);
-          }}
-          type="range"
-          min="1"
-          max="100"
-          value="50"
-          id="duration"
-        />
+        <div className="lecteur w-1/2 relative">
+          <input
+            className="slider-audio w-full"
+            onChange={(e) => {
+              changeProgress(e.target.value);
+            }}
+            type="range"
+            min="0"
+            max="100"
+            value="30"
+            id="duration"
+          />
+          <div className="progress"></div>
+        </div>
         {/* peux-tu affiché la duré finale de la chansons dans le <p></p> en dessous pls */}
         <p className="temps-fin ml-4">5:00</p>
       </div>

@@ -12,7 +12,34 @@ section.music-controler {}
     display: none;
 }
 
+
+div.progress {
+    position: absolute;
+    top: 8px;
+    height: 10px;
+    width: 100%;
+    background-color: #ffa485;
+    border-radius: 50px;
+}
+
 .slider-audio {
-    height: 40px;
+    appearance: none;
+    height: 10px;
+    background-color: rgb(85, 85, 85);
+    border-radius: 50px;
+}
+
+.slider-audio:hover {
+    cursor: pointer;
+    background-color: black;
+}
+
+.slider-audio::-webkit-slider-thumb {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border-radius: 50%;
+    cursor: pointer;
 
 }
