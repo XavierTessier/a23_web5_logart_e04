@@ -4,7 +4,7 @@ import "../css/info-track.css";
 const InfoMusic = () => {
   // const {album:{genre:{data}, title}, choosenTrack:{release_date}} = useMusic();
   const { album, choosenTrack } = useMusic();
-  // console.log(album);
+  console.log(album);
   return (
     <section className="info-track">
       <ul>

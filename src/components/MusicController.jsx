@@ -6,6 +6,7 @@ import "../css/music-controler.css";
 import { FaPlay, FaPause } from "react-icons/fa6";
 import { RiSkipBackFill, RiSkipForwardFill } from "react-icons/ri";
 import { ImVolumeMedium } from "react-icons/im";
+import Like from "./like";
 
 const MusicController = () => {
   const [joue, setJoue] = useState(false);
@@ -127,7 +128,7 @@ const MusicController = () => {
       const updateProgress = () => {
         const percent = (progress * 100).toFixed(2) + "%";
         progressBefore.style.width = percent;
-        console.log(Math.round(progress * 100));
+        // console.log(Math.round(progress * 100));
         inputRange.value = (progress * 100).toFixed(2);
       };
 
@@ -149,44 +150,49 @@ const MusicController = () => {
 
   return (
     <section className="music-controler relative">
-      <div className="audio-duration flex flex-row justify-center items-center">
-        <p className="temps-start mr-4">0:00</p>
-        <div className="lecteur w-1/2 relative">
-          <input
-            className="slider-audio w-full"
-            onChange={(e) => {
-              changeProgress(e.target.value);
-            }}
-            type="range"
-            min="0"
-            max="100"
-            value={Math.round(progress * 100)}
-            id="duration"
-          />
-          <div className="progress"></div>
+      <div className="wrapper-controller flex flex-col">
+        <div className="wrapper-like relative end-px w-full flex justify-end pr-16 pb-6">
+          <Like />
         </div>
-        <p className="temps-fin ml-4">{formatTime(tempsChanson)}</p>
+        <div className="audio-duration flex flex-row justify-center items-center">
+          <p className="temps-start mr-4">0:00</p>
+          <div className="lecteur w-1/2 relative">
+            <input
+              className="slider-audio w-full"
+              onChange={(e) => {
+                changeProgress(e.target.value);
+              }}
+              type="range"
+              min="0"
+              max="100"
+              value={Math.round(progress * 100)}
+              id="duration"
+            />
+            <div className="progress"></div>
+          </div>
+          <p className="temps-fin ml-4">{formatTime(tempsChanson)}</p>
+        </div>
       </div>
       <div className="btns-lecture mt-4">
         <div onClick={previousMusic} className="pointer">
           <RiSkipBackFill className="text-4xl" />
         </div>
         <div
-          className="play cursor-pointer relative bg-corail-pale rounded-full text-4xl pl-1 w-16 h-16 flex justify-center items-center"
+          className="play cursor-pointer relative bg-corail-pale rounded-full text-4xl  w-16 h-16 flex justify-center items-center"
           onClick={() => {
             isPlaying();
             togglePause();
           }}
         >
-          {joue ? <FaPlay /> : <FaPause />}
+          {joue ? <FaPlay className="pl-1" /> : <FaPause />}
         </div>
         <div onClick={nextMusic} className="pointer">
           <RiSkipForwardFill className="text-4xl" />
         </div>
       </div>
-      <div className="volume">
-        <ImVolumeMedium />
+      <div className="volume flex flex-col items-end pr-4">
         <input
+          className="slider-volume "
           onChange={(e) => volumeHandler(e.target.value)}
           type="range"
           min="0"
@@ -194,6 +200,7 @@ const MusicController = () => {
           value={volume * 100}
           id="volume"
         />
+        <ImVolumeMedium className="text-4xl w-fit" />
       </div>
     </section>
   );

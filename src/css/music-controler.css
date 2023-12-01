@@ -8,12 +8,6 @@ section.music-controler {}
     gap: 1rem;
 }
 
-.volume {
-    display: flex;
-    flex-direction: row;
-}
-
-
 div.progress {
     position: absolute;
     top: 8px;
@@ -32,6 +26,7 @@ div.progress {
 }
 
 .slider-audio:hover {
+
     cursor: pointer;
     background-color: black;
 }
@@ -45,5 +40,16 @@ div.progress {
     border-radius: 50%;
     cursor: pointer;
     z-index: 50;
+}
 
+.slider-volume {
+    appearance: slider-vertical;
+    width: 10px;
+    background-color: rgb(85, 85, 85);
+    border-radius: 50px;
+}
+
+.slider-volume:hover {
+    cursor: pointer;
+    background-color: black;
 }
