@@ -21,13 +21,15 @@ const Profile = () => {
     }, []);
 
     return (
-        <div className='Profile'>
-            <h1>Votre profil</h1>
-            <div>
+        <div>
+            <div className='user'>
+                <div className='background' ></div>
+                <h1 className='name'>{user.displayName}</h1>
                 <img src={user.photoURL} alt="avatar" />
-                <p>{user.displayName}</p>
+                <img src="src\img\png\Fichier 7.png" alt="forme" className='forme'/>
+                <img src="src/img/png/Fichier 11.png" alt="forme" className='ligne'/>
             </div>
-            <p>Email : {user.email}</p>
+            {/* <p>Email : {user.email}</p> */}
             <div>
                 <p>vos plus écoutés</p>
             </div>

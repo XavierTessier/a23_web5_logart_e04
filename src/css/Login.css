@@ -1,0 +1,80 @@
+.authentification_lite {
+    width: 100%;
+    height: 50em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    overflow: hidden;
+}
+
+.authentification_lite .connexion {
+    position: absolute;
+    bottom: 18em;
+    background-color: #FF7E50;
+    padding: 10px;
+    border-radius: 2em;
+    color: white;
+    width: 15em;
+}
+
+.authentification_lite .cercle{
+    width: 12em;
+    height: 12em;
+    position: absolute;
+    top: 15em;
+    background-color: #FF7E50;
+    border-radius: 25em;
+}
+
+.authentification_lite .forme1{
+    z-index: -30;
+    position: absolute;
+    rotate: -19deg;
+    top: -3em;
+    left: -4em;
+    width: 19em;
+    height: 17em;
+}
+
+.authentification_lite .ligne1{
+    rotate: 107deg;
+    z-index: -30;
+    position: absolute;
+    top: -6em;
+    left: 8em;
+    width: 15em;
+    height: 17em;
+}
+
+.authentification_lite .forme2{
+    z-index: -30;
+    position: absolute;
+    right: 0em;
+    width: 19em;
+    height: 15em;
+}
+
+.authentification_lite .ligne2{
+    z-index: -30;
+    position: absolute;
+    right: 0em;
+    width: 19em;
+    height: 15em;
+}
+
+.authentification_lite .z-10{
+    position: absolute;
+    top: 13.5em;
+    width: 12em;
+    height: 15em;
+}
+
+.authentification_lite img.logo{
+    position: absolute;
+    top:2em;
+    right: 2em;
+    width: 8em;
+    height: 6em;
+}
+

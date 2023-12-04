@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import fetchJsonp from "fetch-jsonp";
+import '../css/Liste.css';
 import { Link } from "react-router-dom";
+import { HiDotsHorizontal } from "react-icons/hi";
 import { Navigate } from "react-router-dom";
 
 const AffichageElements = ({categorieChercher, type, }) => {
@@ -85,13 +87,15 @@ const AffichageElements = ({categorieChercher, type, }) => {
 
   return (
         <div>
-      <h2>{capitalizeFirstLetter(type)} recommander</h2>
-      <ul>
+      <h2 className="recommander">{capitalizeFirstLetter(type)} recommander</h2>
+      <ul className="liste_elements">
         {
           listeCategorie && listeCategorie.map((element) => (
             <li key={element.id}>
               <p>{getDisplayValue(element).text}</p>
               <Link to={getDisplayValue(element).link} state = {element}>
+                <div className="white"><HiDotsHorizontal /></div>
+                <div className="opacite"></div>
                 <img src={getDisplayValue(element).image} alt="" />
               </Link>
               </li>

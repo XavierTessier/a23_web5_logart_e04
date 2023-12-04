@@ -2,6 +2,8 @@ import { auth, googleProvider } from '../config/firebase';
 import { signInWithPopup, signOut } from "firebase/auth";
 import { useAuth } from '../context/authContext';
 import { useState } from 'react';
+import '../css/Login.css';
+import { FaRegUserCircle } from "react-icons/fa";
 const Login = () => {
     const { googleLogin, logout, user, addDocHandler} = useAuth();
 
@@ -16,7 +18,15 @@ const Login = () => {
     };
     return (
         <div className='authentification_lite'>
-                <button onClick={handleGoogleLogin}>Sign In with Google</button>
+            <img src='src\img\svg\logo.svg' className='logo'></img>
+            <FaRegUserCircle className='z-10'
+                style={{ color: "coral" }}
+              />
+            <button onClick={handleGoogleLogin} className='connexion'>Se connecter avec Google</button>
+            <img src="src\img\png\Fichier 3.png" alt="forme" className='forme1'/>
+            <img src="src/img/png/Fichier 1.png" alt="forme" className='ligne1'/>
+            <img src="src\img\png\Fichier 13.png" alt="forme" className='forme2'/>
+            <img src="src/img/png/Fichier 14.png" alt="forme" className='ligne2'/>
         </div>
     );
 }   
