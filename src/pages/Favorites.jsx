@@ -8,9 +8,9 @@ const Favorites = () => {
         <div>
             {userData.favorites && (
                 userData.favorites.map((item, index) => (
-                    <div className="fav" id={index}>
+                    <div className="fav" id={index} key={item.info.id}>
                         <img src={item.info.album.cover} className='cover' />
-                        <div className="info">
+                        <div className="info" >
                             <p>{item.info.title}</p>
                             <p>{item.info.artist.name}</p>
                             <p>{item.info.album.title}</p>

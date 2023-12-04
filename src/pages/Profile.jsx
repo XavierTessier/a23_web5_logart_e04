@@ -1,6 +1,6 @@
 import { useAuth } from '../context/authContext';
 import { Reorder } from 'framer-motion';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import '../css/Profile.css';
 import { doc, updateDoc } from 'firebase/firestore';
 import { db } from '../config/firebase';
@@ -9,9 +9,16 @@ import BarreRecherche from '../components/BarreRecherche';
 import { Navigate, useNavigate } from 'react-router-dom';
 
 const Profile = () => {
-    const { user, logout, playlist, deleteMusic, setUserData, userData, removeFromFav } = useAuth();
+    const { user, logout, setUserData, userData, getTopMusic} = useAuth();
+    const [topMusic, setTopMusic] = useState([]);
 
-    const navigate = useNavigate();
+    useEffect(() => {
+        const unsub = getTopMusic(newTopMusic => {
+            setTopMusic(newTopMusic);
+        });
+
+        return () => unsub;
+    }, []);
 
     return (
         <div>
@@ -23,6 +30,21 @@ const Profile = () => {
             <p>Email : {user.email}</p>
             <div>
                 <p>vos plus écoutés</p>
+            </div>
+            <div>
+                <p>Musique tendance</p>
+                {topMusic.map((item, index) => (
+                    <div className="fav" id={index} key={item.music.id}>
+                        <img src={item.music.album.cover_small} className='cover' />
+                        <div className="info" >
+                            <p>{item.music.title}</p>
+                            <p>{item.music.artist.name}</p>
+                            <p>{item.music.album.title}</p>
+                            <p>{item.music.duration}s</p>
+                        </div>
+                    </div>
+                )
+                )}
             </div>
             <button onClick={logout}>Déconnexion</button>
         </div>
