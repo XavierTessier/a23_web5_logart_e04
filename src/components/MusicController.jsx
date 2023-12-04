@@ -7,7 +7,7 @@ import "../css/motion-reader.css";
 import { FaPlay, FaPause } from "react-icons/fa6";
 import { RiSkipBackFill, RiSkipForwardFill } from "react-icons/ri";
 import { ImVolumeMedium } from "react-icons/im";
-import Like from "./like";
+import Like from "./Like";
 
 const MusicController = () => {
   const [joue, setJoue] = useState(false);
