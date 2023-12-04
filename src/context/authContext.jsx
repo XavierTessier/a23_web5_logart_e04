@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { auth, db } from '../config/firebase';
+import { auth, db, incrementValue} from '../config/firebase';
 import { signInWithPopup, signOut, onAuthStateChanged } from "firebase/auth";
-import { addDoc, collection, doc, getDoc, getDocs, onSnapshot, query, setDoc, updateDoc, where } from 'firebase/firestore';
+import { addDoc, collection, doc, getDoc, getDocs, limit, onSnapshot, orderBy, query, setDoc, updateDoc, where } from 'firebase/firestore';
 
 const authContext = React.createContext({
     googleLogin: async (googleProvider) => { },
@@ -16,6 +16,9 @@ const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [userData, setUserData] = useState(null);
 
+    const increment = incrementValue(1);
+    const decrement = incrementValue(-1);
+
     useEffect(() => {
         const unConnectApp = onAuthStateChanged(auth, (user) => {
             if (user) {
@@ -23,7 +26,7 @@ const AuthProvider = ({ children }) => {
 
             } else {
                 setUser(null);
-                
+
             }
         });
         return () => unConnectApp();
@@ -56,7 +59,7 @@ const AuthProvider = ({ children }) => {
             await signOut(auth);
             setUser(null);
             console.log("unconnection successful");
-            createSuccessNotif({title: "Déconnexion", message: "Vous avez été déconnecté avec succès"});
+            createSuccessNotif({ title: "Déconnexion", message: "Vous avez été déconnecté avec succès" });
         } catch (error) {
             console.log("Oops: " + error);
         }
@@ -151,8 +154,22 @@ const AuthProvider = ({ children }) => {
                 const userDocRef = doc(db, 'users', userData.uid);
                 await updateDoc(userDocRef, { favorites });
 
-                const favDocRef = doc(db, 'favoris', 'favorisDuSite');
-                await updateDoc(favDocRef, { allTimeFav: favorites });
+                const favDocRef = doc(db, 'favoris' , String(info.id));
+                const querySnapshot = await getDoc(favDocRef);
+                if (!querySnapshot.exists()) {
+                    console.log('[IS EMPTY SITE FAVORITE]');
+                    const objMusic = {
+                        music: info,
+                        nbFavorites: 1,
+                    }
+                    await setDoc(favDocRef, objMusic);
+
+                    console.log("Musique ajoutée aux musiques tendances avec succès");
+                } else {
+                    // Handle case where user with the given uid already exists
+                    favDocRef.update({ nbFavorites: increment });
+                    console.log('La musique est déja dans les favoris du site');
+                }
 
 
                 console.log("Musique ajoutée à vos favoris avec succès");
@@ -175,6 +192,15 @@ const AuthProvider = ({ children }) => {
                 const userDocRef = doc(db, 'users', userData.uid); // On récupère le document utilisateur
                 await updateDoc(userDocRef, { favorites: updatedFavorites }); // On met à jour la playlist de l'utilisateur
 
+                const favDocRef = doc(db, 'favoris' , String(musicId));
+                const querySnapshot = await getDoc(favDocRef);
+                if (querySnapshot.exists()) {
+                    console.log('[IS NOT EMPTY SITE FAVORITE]');
+                    favDocRef.update({ nbFavorites: decrement });
+
+                    console.log("Enlever un favoris du site avec succès");
+                } 
+
                 console.log("Musique retirée de vos favoris avec succès");
             } else {
                 console.log("Musique non trouvée dans vos favoris");
@@ -184,12 +210,29 @@ const AuthProvider = ({ children }) => {
         }
     };
 
+    const getTopMusic = async(callback) => {
+        try {
+            const musicCol = collection(db, 'favoris');
+            const q = query(musicCol, orderBy('nbFavorites', 'desc'), limit(10));
+
+            const unsub = onSnapshot(q, (querySnapshot) => {
+                const topMusic = querySnapshot.docs.map((doc) => doc.data());
+                callback(topMusic);
+            });
+
+            return unsub;
+        } catch (error) {
+            console.error("Erreur lors de la récupération des musiques tendances:", error);
+            return () => {};
+        }
+    };
 
 
-    
+
+
 
     return (
-        <Provider value={{ playlist: userData?.playlist, googleLogin, logout, user, addMusicToUser, addDocHandler, userData, deleteMusic, setUserData, addToFav, removeFromFav}}>
+        <Provider value={{ playlist: userData?.playlist, googleLogin, logout, user, addMusicToUser, addDocHandler, userData, deleteMusic, setUserData, addToFav, removeFromFav, getTopMusic }}>
             {children}
         </Provider>
     );

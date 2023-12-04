@@ -3,12 +3,14 @@ import { useState, useEffect } from "react";
 import ListeRecherche from "./ListeRecherche";
 
 const BarreRecherche = () => {
-  const [query, setQuery] = useState({
-    value: "",
-  });
-  const [buttonClicked, setButtonClicked] = useState(false);
-  const [results, setResults] = useState([]);
-  const [type, setType] = useState("");
+    
+    const [query, setQuery] = useState({
+        value: "",
+    });
+    const [buttonClicked, setButtonClicked] = useState(false);
+    const [results, setResults] = useState([]);
+    const [type, setType] = useState("track");
+
 
   const handleType = (e) => {
     setType(e.target.value);
