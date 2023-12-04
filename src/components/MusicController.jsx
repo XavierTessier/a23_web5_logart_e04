@@ -193,8 +193,8 @@ const MusicController = () => {
           </div>
         </div>
       </div>
-      <div className="volume flex flex-row justify-end pr-4 pt-8 items-center">
-        <ImVolumeMedium className="text-4xl w-fit -mt-[30px]" />
+      <div className="volume flex flex-row justify-end pr-4 pt-8 items-center relative">
+        <ImVolumeMedium className="text-4xl w-fit mr-2" />
         <div className="volume-wrap relative">
           <input
             className="slider-audio"
@@ -205,7 +205,7 @@ const MusicController = () => {
             value={volume * 100}
             id="volume"
           />
-          <div className="progress"></div>
+          <div className="progress-volume"></div>
         </div>
       </div>
       <div className="motion-bg-front z-30 bg-corail-reg "></div>

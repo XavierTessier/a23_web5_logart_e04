@@ -39,3 +39,20 @@ div.progress {
     z-index: 50;
     position: relative;
 }
+
+.volume-wrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+div.progress-volume {
+    position: absolute;
+    height: 10px;
+    width: 100%;
+    background-color: #ffa485;
+    border-radius: 50px;
+    transition: width 0.3s;
+    z-index: 30;
+}
