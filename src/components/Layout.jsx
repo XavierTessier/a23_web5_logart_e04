@@ -5,15 +5,19 @@ import { useAuth } from "../context/authContext";
 import AffichageElements from "./AffichageElements";
 
 const Layout = () => {
-  //   const { user } = useAuth();
+  const { user } = useAuth();
   return (
     <div>
       <div>
         <Header />
         <Outlet />
-        {/* {user ? <BarreRecherche /> : <></>} */}
-        <AffichageElements categorieChercher="chart" type="albums" />
-        <AffichageElements categorieChercher="chart" type="artists" />
+        {/* {user ? (
+                    <BarreRecherche />
+                ) : (
+                    <></>
+                )}
+                {/* <AffichageElements categorieChercher="chart" type="albums"/> */}
+        {/* <AffichageElements categorieChercher="chart" type="artists"/> */}
         <AffichageElements categorieChercher="chart" type="tracks" />
       </div>
     </div>

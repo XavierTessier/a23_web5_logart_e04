@@ -1,17 +1,25 @@
-import "../css/vinyle-single.css";
-import Bras from "./BrasReader";
+import "../css/vinyles.css";
 
 const Vinyle = () => {
   return (
-    <div className="vinyle-single relative">
+    <div className="vinyle_container">
       <svg
-        className="vinyle"
+        className="vinyle perspective-droite"
         viewBox="0 0 500 500"
         preserveAspectRatio="none"
         transform="translate(-10 0)"
         height="100%"
         width="100%"
       >
+        <g>
+          <path
+            id="dos_cover"
+            data-name="dos_cover"
+            d="M121.728,425.469,0,396.369V29.728L121.728.33V51.18c-105.573,19.433-105.573,305.1,0,324.366Z"
+            transform="translate(60 80) scale(1.5 0.8)"
+            fill="#1D1D1B"
+          />
+        </g>
         <circle
           cx="50%"
           cy="50%"
@@ -70,10 +78,17 @@ const Vinyle = () => {
           strokeWidth={5}
           strokeLinecap="round"
         />
-
+        <g>
+          <path
+            id="Tracé_151"
+            data-name="Tracé 151"
+            d="M121.728,425.469,0,396.369V29.728L121.728.33V51.18c-105.573,19.433-105.573,305.1,0,324.366Z"
+            transform="translate(40 80) scale(1.6 0.8)"
+            fill="#454444"
+          />
+        </g>
         <circle cx="50%" cy="50%" r="10" />
       </svg>
-      <Bras />
     </div>
   );
 };

@@ -1,0 +1,14 @@
+.motion-bg-front {
+    background-color: #ff7e50;
+    z-index: -50;
+}
+
+.motion-bg-middle {
+    background-color: #ffa485;
+    z-index: -60;
+}
+
+.motion-bg-back {
+    background-color: #ffcab8;
+    z-index: -70;
+}

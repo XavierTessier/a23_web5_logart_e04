@@ -3,11 +3,19 @@ import { useState, useEffect } from "react";
 import ListeRecherche from "./ListeRecherche";
 
 const BarreRecherche = () => {
-  const [query, setQuery] = useState({
-    value: "",
-  });
-  const [buttonClicked, setButtonClicked] = useState(false);
-  const [results, setResults] = useState([]);
+    
+    const [query, setQuery] = useState({
+        value: "",
+    });
+    const [buttonClicked, setButtonClicked] = useState(false);
+    const [results, setResults] = useState([]);
+    const [type, setType] = useState("track");
+
+
+  const handleType = (e) => {
+    setType(e.target.value);
+    console.log(type);
+  };
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -24,10 +32,14 @@ const BarreRecherche = () => {
   };
 
   useEffect(() => {
-    if (buttonClicked) {
+    console.log("type changed : " + type);
+  }, [type]);
+
+  useEffect(() => {
+    if (buttonClicked || type !== "") {
       const fetchResults = async () => {
         const resp = await fetchJsonp(
-          `https://api.deezer.com/search?q=${query.value}&output=jsonp`
+          `https://api.deezer.com/search/${type}?q=${query.value}&output=jsonp`
         );
         const data = await resp.json();
         setResults(data);
@@ -35,31 +47,52 @@ const BarreRecherche = () => {
       fetchResults();
       setButtonClicked(false);
     }
-  }, [buttonClicked]);
+  }, [buttonClicked, type]);
 
   return (
     <div>
-      <form
-        action=""
-        className="relative barre-recherche bg-corail-reg p-4 w-full text-center"
-      >
+      <form action="">
         <input
-          className="rounded-md px-2 py-1 w-7/12"
           type="text"
-          placeholder="Explorez de nouveaux rythmes"
+          placeholder="Query for Api"
           onChange={updateState}
           value={query.value}
         />
-        <button
-          className="ml-2 bg-corail-clair rounded-md px-2 py-1"
-          onClick={handleSearch}
-          disabled={!isValid()}
-        >
-          Recherche
+        <button onClick={handleSearch} disabled={!isValid()}>
+          Search
         </button>
+
+        <input
+          type="radio"
+          id="album"
+          name="type"
+          value="album"
+          onClick={handleType}
+        />
+        <label htmlFor="album">Album</label>
+
+        <input
+          type="radio"
+          id="artist"
+          name="type"
+          value="artist"
+          onClick={handleType}
+        />
+        <label htmlFor="artist">Artist</label>
+
+        <input
+          type="radio"
+          id="track"
+          name="type"
+          value="track"
+          onClick={handleType}
+        />
+        <label htmlFor="track">Track</label>
+
+        <h1>Looking for {type} </h1>
       </form>
 
-      <ListeRecherche liste={results} />
+      <ListeRecherche liste={results} type={type} />
     </div>
   );
 };

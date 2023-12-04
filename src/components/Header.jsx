@@ -5,6 +5,8 @@ import { useAuth } from "../context/authContext";
 import { HiHome } from "react-icons/hi";
 import { FaRegUserCircle } from "react-icons/fa";
 import { BsSearch } from "react-icons/bs";
+import { FaCompactDisc } from "react-icons/fa6";
+import { IoAlbums } from "react-icons/io5";
 import "../css/navigation.css";
 
 const Header = () => {
@@ -13,6 +15,9 @@ const Header = () => {
 
   const goToHome = () => {
     navigate("/accueil");
+  };
+  const goToLike = () => {
+    navigate("/favorite");
   };
   const goToUser = () => {
     {
@@ -39,6 +44,13 @@ const Header = () => {
                 onClick={goToHome}
               />
             </li>
+            <li className={pathname === "/favorite" ? "actif" : null}>
+              <FaCompactDisc
+                style={{ color: "white" }}
+                className="text-5xl text-white"
+                onClick={goToLike}
+              />
+            </li>
             <li className={pathname === "/recherche" ? "actif" : null}>
               {user ? (
                 <BsSearch
@@ -52,6 +64,13 @@ const Header = () => {
                   className="opacity-50 text-4xl"
                 />
               )}
+            </li>
+            <li className={pathname === "/playlist" ? "actif" : null}>
+              <IoAlbums
+                style={{ color: "white" }}
+                className="text-5xl"
+                onClick={goToUser}
+              />
             </li>
             <li className={pathname === "/profile" ? "actif" : null}>
               <FaRegUserCircle

@@ -1,7 +1,7 @@
 import {
-    Navigate,
-    RouterProvider,
-    createBrowserRouter,
+  Navigate,
+  RouterProvider,
+  createBrowserRouter,
 } from "react-router-dom";
 import { useEffect } from "react";
 import Login from "./pages/Login";
@@ -11,77 +11,88 @@ import Playlists from "./pages/Playlists";
 import Profile from "./pages/Profile";
 import Layout from "./components/Layout";
 import Accueil from "./pages/Accueil";
+import Search from "./pages/Search";
 
-import { useAuth } from './context/authContext';
+import { useAuth } from "./context/authContext";
 import { MusicProvider } from "./context/musicContext.jsx";
 import { AudioProvider } from "./context/audiotim.jsx";
 
 
-
 const App = () => {
-    const { user } = useAuth();
-    const routesNotAuth = [
+  const { user } = useAuth();
+  const routesNotAuth = [
+    {
+      path: "/",
+      element: <Layout />,
+      children: [
         {
-            path: "/",
-            element: <Layout />,
-            children: [
-                {
-                    index: true,
-                    element: <Navigate to="/login" replace />,
-                },
-                {
-                    path: "login",
-                    element: <Login />,
-                },
-            ],
+          index: true,
+          element: <Navigate to="/login" replace />,
         },
         {
-            path: "*",
-            element: <Navigate to="/login" replace />,
+          path: "login",
+          element: <Login />,
         },
-    ];
+      ],
+    },
+    {
+      path: "*",
+      element: <Navigate to="/login" replace />,
+    },
+  ];
 
-    const routesAuth = [
+  const routesAuth = [
+    {
+      path: "/",
+      element: <Layout />,
+      children: [
         {
-            path: "/",
-            element: <Layout />,
-            children: [
-                {
-                    index: true,
-                    element: <Navigate to="/accueil" replace />,
-                },
-                {
-                    path: "favorites",
-                    element: <Favorites />,
-                },
-                {
-                    path: "reader/track/:id",
-                    element:  <MusicProvider><AudioProvider><Reader/></AudioProvider></MusicProvider>,
-                },
-                {
-                    path: "playlists",
-                    element: <Playlists />,
-                },
-                {
-                    path: "profile",
-                    element: <Profile />,
-                },
-                {
-                    path: "accueil",
-                    element: <Accueil />,
-                },
-            ],
+          index: true,
+          element: <Navigate to="/accueil" replace />,
         },
         {
-            path: "*",
-            element: <Navigate to="/accueil" replace />,
+          path: "favorites",
+          element: <Favorites />,
         },
-    ];
+        {
+          path: "reader/track/:id",
+          element: (
+            <MusicProvider>
+              <AudioProvider>
+                <Reader />
+              </AudioProvider>
+            </MusicProvider>
+          ),
+        },
+        {
+          path: "playlists",
+          element: <Playlists />,
+        },
+        {
+          path: "profile",
+          element: <Profile />,
+        },
+        {
+          path: "search",
+          element: <Search />,
+        },
+        {
+          path: "accueil",
+          element: <Accueil />,
+        },
+      ],
+    },
+    {
+      path: "*",
+      element: <Navigate to="/accueil" replace />,
+    },
+  ];
 
-    return(
-        <RouterProvider router={createBrowserRouter(!!user ? routesAuth : routesNotAuth)}/>
+  return (
+    <RouterProvider
+      router={createBrowserRouter(!!user ? routesAuth : routesNotAuth)}
+    />
+  );
+};
 
-    )
-}
-
-export default App
+export default App;

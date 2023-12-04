@@ -1,0 +1,41 @@
+section.music-controler {}
+
+.btns-lecture {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+div.progress {
+    position: absolute;
+    top: 8px;
+    height: 10px;
+    width: 100%;
+    background-color: #ffa485;
+    border-radius: 50px;
+    transition: width 0.3s;
+    z-index: 30;
+}
+
+.slider-audio {
+    position: relative;
+    appearance: none;
+    height: 10px;
+    background-color: rgb(85, 85, 85);
+    border-radius: 50px;
+
+}
+
+.slider-audio::-webkit-slider-thumb {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 1px solid black;
+    background-color: white;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 50;
+    position: relative;
+}
