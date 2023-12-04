@@ -9,7 +9,7 @@ const BarreRecherche = () => {
     });
     const [buttonClicked, setButtonClicked] = useState(false);
     const [results, setResults] = useState([]);
-    const [type, setType] = useState("");
+    const [type, setType] = useState("track");
 
 
     const handleType = (e) => {
