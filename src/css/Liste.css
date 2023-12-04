@@ -43,6 +43,16 @@
         padding-bottom: 125px;
         padding-left: 78px;
     }
+
+    div.white {
+        position: absolute;
+        padding-top: 20px;
+        font-weight: bolder;
+        color: white;
+        z-index: 50;
+        font-size: 30px;
+        padding-left: 300px;
+    }
 }
 
 @media only screen and (min-width: 768px) {
@@ -78,6 +88,15 @@
     ul.liste_elements li {
         padding-left: 25px;
         padding-bottom: 25px;
+    }
+
+    div.white {
+        padding-top: 190px;
+        font-weight: bolder;
+        color: white;
+        z-index: 50;
+        font-size: 30px;
+        padding-left: 180px;
     }
 }
 
