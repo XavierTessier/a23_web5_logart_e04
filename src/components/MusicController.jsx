@@ -152,15 +152,15 @@ const MusicController = () => {
   return (
     <section className="music-controler relative w-screen">
       <div className="wrapper-controle w-full">
-        <div className="wrapper-controller flex flex-col">
-          <div className="wrapper-like relative end-px w-full flex justify-end pr-[10%] pb-6">
+        <div className="wrapper-controller flex flex-col relative w-fit mx-auto mt-16">
+          <div className="wrapper-like absolute bottom-8 right-0">
             <Like />
           </div>
-          <div className="audio-duration flex flex-row justify-center items-center">
+          <div className="audio-duration flex flex-row justify-center items-center ">
             <p className="temps-start mr-4">0:00</p>
-            <div className="lecteur w-1/2 relative">
+            <div className="lecteur w-fit relative">
               <input
-                className="slider-audio w-full "
+                className="slider-audio w-60 "
                 onChange={(e) => {
                   changeProgress(e.target.value);
                 }}
@@ -193,7 +193,7 @@ const MusicController = () => {
           </div>
         </div>
       </div>
-      <div className="volume flex flex-row justify-end pr-4 pt-8 items-center relative">
+      <div className="volume flex flex-row justify-end pr-4 pt-8 items-center relative right-6">
         <ImVolumeMedium className="text-4xl w-fit mr-2" />
         <div className="volume-wrap relative">
           <input
