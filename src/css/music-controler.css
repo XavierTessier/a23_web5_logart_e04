@@ -15,10 +15,12 @@ div.progress {
     width: 100%;
     background-color: #ffa485;
     border-radius: 50px;
-    transition: width 0.3s ease;
+    transition: width 0.3s;
+    z-index: 30;
 }
 
 .slider-audio {
+    position: relative;
     appearance: none;
     height: 10px;
     background-color: rgb(85, 85, 85);
@@ -40,6 +42,7 @@ div.progress {
     border-radius: 50%;
     cursor: pointer;
     z-index: 50;
+    position: relative;
 }
 
 .slider-volume {

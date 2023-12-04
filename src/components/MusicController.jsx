@@ -142,7 +142,7 @@ const MusicController = () => {
   }, [progress]);
   const tempsChanson = tracks[compteur]?.duration;
 
-  const formatTime = (time) => {
+  const FormatTime = (time) => {
     const minutes = Math.floor(time / 60);
     const seconds = time % 60;
     return `${minutes}:${seconds}`;
@@ -158,7 +158,7 @@ const MusicController = () => {
           <p className="temps-start mr-4">0:00</p>
           <div className="lecteur w-1/2 relative">
             <input
-              className="slider-audio w-full"
+              className="slider-audio w-full "
               onChange={(e) => {
                 changeProgress(e.target.value);
               }}
@@ -170,7 +170,7 @@ const MusicController = () => {
             />
             <div className="progress"></div>
           </div>
-          <p className="temps-fin ml-4">{formatTime(tempsChanson)}</p>
+          <p className="temps-fin ml-4">{FormatTime(tempsChanson)}</p>
         </div>
       </div>
       <div className="btns-lecture mt-4">
