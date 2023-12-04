@@ -18,12 +18,12 @@
 }
 
 .vinyle_container {
-  width: 220px;
-  height: 260px;
+  width: 200px;
+  height: 240px;
 }
 
 .vinyle_container:not(:first-child) {
-  margin-left: -200px;
+  margin-left: -180px;
 }
 
 .vinyle_container:nth-child(2) {

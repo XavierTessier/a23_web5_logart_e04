@@ -25,12 +25,7 @@ div.progress {
     height: 10px;
     background-color: rgb(85, 85, 85);
     border-radius: 50px;
-}
 
-.slider-audio:hover {
-
-    cursor: pointer;
-    background-color: black;
 }
 
 .slider-audio::-webkit-slider-thumb {
@@ -43,36 +38,4 @@ div.progress {
     cursor: pointer;
     z-index: 50;
     position: relative;
-}
-
-#volume {
-    height: 10px;
-    background-color: rgb(85, 85, 85);
-    border-radius: 50px;
-}
-
-.volume input.slider-volume::-webkit-slider-thumb {
-    appearance: none;
-    width: 20px;
-    height: 20px;
-    border: 1px solid black;
-    background-color: white;
-    border-radius: 50%;
-    cursor: pointer;
-    z-index: 50;
-    position: relative;
-}
-
-#volume:hover {
-    cursor: pointer;
-    background-color: black;
-}
-
-
-#volume::-webkit-slider-runnable-track {
-    -webkit-appearance: none;
-    width: 10px;
-    height: 100%;
-    background-color: rgb(85, 85, 85);
-    border-radius: 50px;
 }

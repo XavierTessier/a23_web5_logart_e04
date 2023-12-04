@@ -38,8 +38,8 @@ const InfoMusic = () => {
   ) : (
     <section className="info-track-mobile flex flex-col">
       <ul>
-        <li className="text-4xl font-bold">{choosenTrack.title}</li>
-        <li className="text-2xl italic">{choosenTrack.artist.name}</li>
+        {/* <li className="text-4xl font-bold">{choosenTrack.title}</li>
+        <li className="text-2xl italic">{choosenTrack.artist.name}</li> */}
       </ul>
     </section>
   );
