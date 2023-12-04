@@ -3,8 +3,11 @@ import { useMusic } from "../context/musicContext";
 import { useEffect, useState } from "react";
 
 import "../css/music-controler.css";
+import "../css/motion-reader.css";
 import { FaPlay, FaPause } from "react-icons/fa6";
 import { RiSkipBackFill, RiSkipForwardFill } from "react-icons/ri";
+import { ImVolumeMedium } from "react-icons/im";
+import Like from "./like";
 
 const MusicController = () => {
   const [joue, setJoue] = useState(false);
@@ -126,7 +129,7 @@ const MusicController = () => {
       const updateProgress = () => {
         const percent = (progress * 100).toFixed(2) + "%";
         progressBefore.style.width = percent;
-        console.log(Math.round(progress * 100));
+        // console.log(Math.round(progress * 100));
         inputRange.value = (progress * 100).toFixed(2);
       };
 
@@ -140,59 +143,74 @@ const MusicController = () => {
   }, [progress]);
   const tempsChanson = tracks[compteur]?.duration;
 
-  const formatTime = (time) => {
+  const FormatTime = (time) => {
     const minutes = Math.floor(time / 60);
     const seconds = time % 60;
     return `${minutes}:${seconds}`;
   };
 
   return (
-    <section className="music-controler relative">
-      <div className="audio-duration flex flex-row justify-center items-center">
-        <p className="temps-start mr-4">0:00</p>
-        <div className="lecteur w-1/2 relative">
-          <input
-            className="slider-audio w-full"
-            onChange={(e) => {
-              changeProgress(e.target.value);
+    <section className="music-controler relative w-screen">
+      <div className="wrapper-controle w-full">
+        <div className="wrapper-controller flex flex-col">
+          <div className="wrapper-like relative end-px w-full flex justify-end pr-[10%] pb-6">
+            <Like />
+          </div>
+          <div className="audio-duration flex flex-row justify-center items-center">
+            <p className="temps-start mr-4">0:00</p>
+            <div className="lecteur w-1/2 relative">
+              <input
+                className="slider-audio w-full "
+                onChange={(e) => {
+                  changeProgress(e.target.value);
+                }}
+                type="range"
+                min="0"
+                max="100"
+                value={Math.round(progress * 100)}
+                id="duration"
+              />
+              <div className="progress"></div>
+            </div>
+            <p className="temps-fin ml-4">{FormatTime(tempsChanson)}</p>
+          </div>
+        </div>
+        <div className="btns-lecture mt-4">
+          <div onClick={previousMusic} className="pointer">
+            <RiSkipBackFill className="text-4xl" />
+          </div>
+          <div
+            className="play cursor-pointer relative bg-corail-pale rounded-full text-4xl  w-16 h-16 flex justify-center items-center"
+            onClick={() => {
+              isPlaying();
+              togglePause();
             }}
+          >
+            {joue ? <FaPlay className="pl-1" /> : <FaPause />}
+          </div>
+          <div onClick={nextMusic} className="pointer">
+            <RiSkipForwardFill className="text-4xl" />
+          </div>
+        </div>
+      </div>
+      <div className="volume flex flex-row justify-end pr-4 pt-8 items-center">
+        <ImVolumeMedium className="text-4xl w-fit -mt-[30px]" />
+        <div className="volume-wrap relative">
+          <input
+            className="slider-audio"
+            onChange={(e) => volumeHandler(e.target.value)}
             type="range"
             min="0"
             max="100"
-            value={Math.round(progress * 100)}
-            id="duration"
+            value={volume * 100}
+            id="volume"
           />
           <div className="progress"></div>
         </div>
-        <p className="temps-fin ml-4">{formatTime(tempsChanson)}</p>
       </div>
-      <div className="btns-lecture mt-4">
-        <div onClick={previousMusic} className="pointer">
-          <RiSkipBackFill className="text-4xl" />
-        </div>
-        <div
-          className="play cursor-pointer relative bg-corail-pale rounded-full text-4xl pl-1 w-16 h-16 flex justify-center items-center"
-          onClick={() => {
-            isPlaying();
-            togglePause();
-          }}
-        >
-          {joue ? <FaPlay /> : <FaPause />}
-        </div>
-        <div onClick={nextMusic} className="pointer">
-          <RiSkipForwardFill className="text-4xl" />
-        </div>
-      </div>
-      <div className="volume">
-        <input
-          onChange={(e) => volumeHandler(e.target.value)}
-          type="range"
-          min="0"
-          max="100"
-          value={volume * 100}
-          id="volume"
-        />
-      </div>
+      <div className="motion-bg-front z-30 bg-corail-reg "></div>
+      <div className="motion-bg-middle z-20 bg-corail-pale  "></div>
+      <div className="motion-bg-back z-10 bg-corail-clair  "></div>
     </section>
   );
 };

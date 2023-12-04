@@ -7,6 +7,7 @@ const Tracks = () => {
   return (
     <section className="tracks">
       {console.log("mes tracks: " + tracks[0])}
+      {console.log(tracks[0])}
       <ul>
         {tracks.map(({ title, id }) => (
           <li

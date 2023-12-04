@@ -1,5 +1,9 @@
-.actif{
+.actif {
     background-color: #FFA485;
     padding: 1em;
     border-radius: 50%;
+}
+
+.navigation {
+    z-index: 10000;
 }
