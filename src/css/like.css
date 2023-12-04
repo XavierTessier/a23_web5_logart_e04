@@ -1,5 +1,5 @@
 .heart-container {
-    --heart-color: rgb(255, 91, 137);
+    --heart-color: coral;
     position: relative;
     width: 50px;
     height: 50px;
