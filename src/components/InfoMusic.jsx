@@ -5,7 +5,7 @@ import "../css/info-track.css";
 const InfoMusic = () => {
   const { album, choosenTrack } = useMusic();
   const [grosseurfenetres, setGrosseurfenetres] = useState(window.innerWidth);
-
+  console.log(choosenTrack);
   useEffect(() => {
     const handleResize = () => {
       setGrosseurfenetres(window.innerWidth);
@@ -36,7 +36,12 @@ const InfoMusic = () => {
       </ul>
     </section>
   ) : (
-    <section className="info-track"></section>
+    <section className="info-track-mobile flex flex-col">
+      <ul>
+        <li className="text-4xl font-bold">{choosenTrack.title}</li>
+        <li className="text-2xl italic">{choosenTrack.artist.name}</li>
+      </ul>
+    </section>
   );
 };
 
