@@ -1,6 +1,8 @@
 import fetchJsonp from "fetch-jsonp";
-import { useState, useEffect } from "react";
-import ListeRecherche from "./ListeRecherche";
+import { useState, useEffect, useRef } from "react";
+import { useAuth } from "../context/authContext";
+import { Link } from "react-router-dom";
+
 
 const BarreRecherche = () => {
 
@@ -11,9 +13,10 @@ const BarreRecherche = () => {
   const [results, setResults] = useState([]);
   const [type, setType] = useState("track");
   const [limit, setLimit] = useState(10); // New state to track the number of results to load
+  const observer = useRef();
+  const { addMusicToUser, user, userData, addToFav } = useAuth();
 
-  const handleLoadMore = (e) => {
-    e.preventDefault();
+  const handleLoadMore = () => {
     setLimit((prevLimit) => prevLimit + 10); // Increase the limit by 10 when the button is clicked
     setButtonClicked(true);
   };
@@ -41,19 +44,108 @@ const BarreRecherche = () => {
     console.log("type changed : " + type);
   }, [type]);
 
+  
   useEffect(() => {
     if (buttonClicked || type !== "") {
       const fetchResults = async () => {
         const resp = await fetchJsonp(
           `https://api.deezer.com/search/${type}?q=${query.value}&output=jsonp&limit=${limit}`
-        );
-        const data = await resp.json();
-        setResults(data);
-      };
+          );
+          const data = await resp.json();
+          setResults(data);
+        };
       fetchResults();
       setButtonClicked(false);
     }
-  }, [buttonClicked, type, limit]);
+  }, [buttonClicked, type]);
+
+  useEffect(() => {
+    const options = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.5,
+    };
+
+    observer.current = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        // When the end of the list is reached, load more items
+        handleLoadMore();
+      }
+    }, options);
+
+    if (observer.current && results.data && results.data.length > 0) {
+      // Observe the last item in the list
+      observer.current.observe(document.getElementById(`item-${results.data[results.data.length - 1].id}`));
+    }
+
+
+    // Cleanup the observer on component unmount
+    return () => {
+      if (observer.current) {
+        observer.current.disconnect();
+      }
+    };
+  }, [results]);
+
+  const displayList = (type) => {
+    switch (type) {
+        case "album":
+            return (
+                <div className='results'>
+                        {results.data && results.data.map((result) => (
+                            <div className='card' key={result.id} id={`item-${result.id}`}>
+                                <p className='title'>{result.title}</p>
+                                <p className='artist'>{result.artist && result.artist.name}</p>
+                                <img className='albumCover' src={result.cover_medium} alt="" />
+                            </div>
+                        ))}
+                </div>
+            );
+        case "artist":
+            return (
+                <div className='results'>
+                    {results.data && results.data.map((result) => (
+                        <div className='card' key={result.id} id={`item-${result.id}`}>
+                            <p className='artist'>{result.name}</p>
+                            <img className='picture' src={result.picture_medium} alt="" />
+                        </div>
+                    ))}
+                </div>
+            );
+        case "track":
+            return (
+                <div className='results'>
+                    {results.data && results.data.map((result) => (
+                        <div className='card' key={result.id} id={`item-${result.id}`}>
+                            <Link to={`reader/track/${result.id}`}>
+                                <p className='title'>{result.title}</p>
+                                <p className='artist'>{result.artist && result.artist.name}</p>
+                                <p className='album'>{result.album && result.album.title}</p>
+                                <img className='albumCover' src={result.album && result.album.cover_medium} alt="" />
+                            </Link>
+                            <button onClick={() => addMusicToUser(userData.playlist, { id: result.id, title: result.title, artist: result.artist.name, albumTitle: result.album.title, albumCover: result.album.cover_medium, duration: result.duration })}>Like</button>
+                            <button onClick={() => addToFav(userData.favorites, { id: result.id, title: result.title, artist: result.artist.name, albumTitle: result.album.title, albumCover: result.album.cover_medium, duration: result.duration })}>Fav</button>
+                        </div>
+                    ))}
+                </div>
+            );
+        default:
+            return (
+                <div className='results'>
+                    {liste.data && liste.data.map((result) => (
+                        <div className='card' key={result.id} id={`item-${result.id}`}>
+                            <p className='title'>{result.title}</p>
+                            <p className='artist'>{result.artist && result.artist.name}</p>
+                            <p className='album'>{result.album && result.album.title}</p>
+                            <img className='albumCover' src={result.album && result.album.cover_medium} alt="" />
+                            <button onClick={() => addMusicToUser(userData.playlist, { id: result.id, title: result.title, artist: result.artist.name, albumTitle: result.album.title, albumCover: result.album.cover_medium, duration: result.duration })}>Like</button>
+                            <button onClick={() => addToFav(userData.favorites, { id: result.id, title: result.title, artist: result.artist.name, albumTitle: result.album.title, albumCover: result.album.cover_medium, duration: result.duration })}>Fav</button>
+                        </div>
+                    ))}
+                </div>
+            );
+    }
+};
 
   return (
     <div>
@@ -99,7 +191,7 @@ const BarreRecherche = () => {
         <button onClick={handleLoadMore}>Load More</button>
       </form>
 
-      <ListeRecherche liste={results} type={type} />
+      {displayList(type)}
     </div>
   );
 };

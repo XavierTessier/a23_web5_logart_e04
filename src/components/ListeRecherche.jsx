@@ -4,7 +4,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { Link } from "react-router-dom";
 import { useMusic } from '../context/musicContext';
 
-const ListeRecherche = ({ liste, type }) => {
+const ListeRecherche = ({ liste, type, handleLoadMore }) => {
     const { addMusicToUser, user, userData, addToFav } = useAuth();
     console.log(userData);
 
@@ -13,14 +13,14 @@ const ListeRecherche = ({ liste, type }) => {
             case "album":
                 return (
                     <div className='results'>
-                        {liste.data && liste.data.map((result) => (
-                            <div className='card' key={result.id}>
-                                <p className='title'>{result.title}</p>
-                                <p className='artist'>{result.artist && result.artist.name}</p>
-                                {console.log(result)}
-                                <img className='albumCover' src={result.cover_medium} alt="" />
-                            </div>
-                        ))}
+                            {liste.data && liste.data.map((result) => (
+                                <div className='card' key={result.id}>
+                                    <p className='title'>{result.title}</p>
+                                    <p className='artist'>{result.artist && result.artist.name}</p>
+                                    {console.log(result)}
+                                    <img className='albumCover' src={result.cover_medium} alt="" />
+                                </div>
+                            ))}
                     </div>
                 );
             case "artist":
