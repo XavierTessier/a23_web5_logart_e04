@@ -14,7 +14,7 @@ const BarreRecherche = () => {
   const [type, setType] = useState("track");
   const [limit, setLimit] = useState(10); // New state to track the number of results to load
   const observer = useRef();
-  const { addMusicToUser, user, userData, addToFav } = useAuth();
+  const { addMusicToUser, user, userData, addToFav, addToHistory } = useAuth();
 
   const handleLoadMore = () => {
     setLimit((prevLimit) => prevLimit + 10); // Increase the limit by 10 when the button is clicked
@@ -125,6 +125,7 @@ const BarreRecherche = () => {
                             </Link>
                             <button onClick={() => addMusicToUser(userData.playlist, { id: result.id, title: result.title, artist: result.artist.name, albumTitle: result.album.title, albumCover: result.album.cover_medium, duration: result.duration })}>Like</button>
                             <button onClick={() => addToFav(userData.favorites, { id: result.id, title: result.title, artist: result.artist.name, albumTitle: result.album.title, albumCover: result.album.cover_medium, duration: result.duration })}>Fav</button>
+                            <button onClick={() => addToHistory({id: result.id, title: result.title, artist: result.artist.name, albumTitle: result.album.title, albumCover: result.album.cover_medium})}>historique</button>
                         </div>
                     ))}
                 </div>
