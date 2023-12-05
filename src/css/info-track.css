@@ -6,3 +6,51 @@ section.info-track-mobile {
     font-family: 'Playpen Sans', sans-serif;
     margin-bottom: -50px;
 }
+
+@media screen and (min-width: 1200px) {
+    section.info-track {
+
+        background-color: #FFCAB8;
+        width: fit-content;
+        height: fit-content;
+        padding: 2em;
+        position: absolute;
+        top: 40%;
+        left: 5%;
+    }
+
+    .info-track li {
+        border-bottom: 1px solid black;
+        font-size: 2em;
+    }
+
+    div.border {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        border: 2px solid #FFA485;
+        top: 10px;
+        left: 10px;
+        z-index: 10;
+    }
+
+
+    span.texte-info {
+        font-family: 'Playpen Sans', sans-serif;
+        font-weight: bold;
+    }
+
+}
+
+@media screen and (min-width:1600px) {
+    section.info-track {
+
+        background-color: #FFCAB8;
+        width: fit-content;
+        height: fit-content;
+        padding: 2em;
+        position: absolute;
+        top: 40%;
+        left: 10%;
+    }
+}

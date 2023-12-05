@@ -5,7 +5,6 @@ import "../css/info-track.css";
 const InfoMusic = () => {
   const { album, choosenTrack } = useMusic();
   const [grosseurfenetres, setGrosseurfenetres] = useState(window.innerWidth);
-  console.log(choosenTrack);
   useEffect(() => {
     const handleResize = () => {
       setGrosseurfenetres(window.innerWidth);
@@ -20,19 +19,30 @@ const InfoMusic = () => {
     };
   }, []); // Empty dependency array means this effect runs once after the initial render
 
-  return grosseurfenetres >= 768 ? (
-    <section className="info-track">
+  return grosseurfenetres >= 1200 ? (
+    <section className="info-track rounded-xl">
       <ul>
-        <li>Album: {album?.title}</li>
-        <li>Année: {choosenTrack?.release_date}</li>
-
+        <div className="border rounded-xl"></div>
+        {/* <li>Artiste: {choosenTrack.artist.name}</li> */}
+        <li>
+          <span className="texte-info">Album:</span> {album?.title}
+        </li>
+        <li>
+          <span className="texte-info">Année:</span>{" "}
+          {choosenTrack?.release_date}
+        </li>
+        <li>
+          <span className="texte-info">Genre:</span>{" "}
+          {album?.genre ? album.genre.data[0].name : "Inconnu"}
+        </li>
+        {/* 
         <ul>
-          {/* can't access to genre right now */}
+          can't access to genre right now
           <li>Genre</li>
           {album?.genre?.data.map(({ name }) => (
             <li key={name}>{name}</li>
           ))}
-        </ul>
+        </ul> */}
       </ul>
     </section>
   ) : (
