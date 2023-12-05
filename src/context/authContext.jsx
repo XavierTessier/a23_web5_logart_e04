@@ -52,7 +52,7 @@ const AuthProvider = ({ children }) => {
             const creds = await signInWithPopup(auth, googleProvider);
             // console.log(creds.user);
             setUser(creds.user);
-            toast.success("connection réussie"); 
+            toast.success(`connection réussie, bienvenue ${creds.user.displayName}`);
             return creds;
         } catch (error) {
             return { success: false, message: "connection non établie" }
@@ -87,6 +87,13 @@ const AuthProvider = ({ children }) => {
                 };
                 // If no user with the given uid exists, add a new user to the database
                 await setDoc(docRef, objUser);
+
+
+                // Create a sub-collection "historique" for the user
+                const historiqueCollectionRef = collection(docRef, 'historique');
+                await addDoc(historiqueCollectionRef, {
+                    count: 0,
+                });
 
             } else {
                 // Handle case where user with the given uid already exists
