@@ -3,14 +3,20 @@ import { useState, useEffect } from "react";
 import ListeRecherche from "./ListeRecherche";
 
 const BarreRecherche = () => {
-    
-    const [query, setQuery] = useState({
-        value: "",
-    });
-    const [buttonClicked, setButtonClicked] = useState(false);
-    const [results, setResults] = useState([]);
-    const [type, setType] = useState("track");
 
+  const [query, setQuery] = useState({
+    value: "",
+  });
+  const [buttonClicked, setButtonClicked] = useState(false);
+  const [results, setResults] = useState([]);
+  const [type, setType] = useState("track");
+  const [limit, setLimit] = useState(10); // New state to track the number of results to load
+
+  const handleLoadMore = (e) => {
+    e.preventDefault();
+    setLimit((prevLimit) => prevLimit + 10); // Increase the limit by 10 when the button is clicked
+    setButtonClicked(true);
+  };
 
   const handleType = (e) => {
     setType(e.target.value);
@@ -39,7 +45,7 @@ const BarreRecherche = () => {
     if (buttonClicked || type !== "") {
       const fetchResults = async () => {
         const resp = await fetchJsonp(
-          `https://api.deezer.com/search/${type}?q=${query.value}&output=jsonp`
+          `https://api.deezer.com/search/${type}?q=${query.value}&output=jsonp&limit=${limit}`
         );
         const data = await resp.json();
         setResults(data);
@@ -47,7 +53,7 @@ const BarreRecherche = () => {
       fetchResults();
       setButtonClicked(false);
     }
-  }, [buttonClicked, type]);
+  }, [buttonClicked, type, limit]);
 
   return (
     <div>
@@ -90,6 +96,7 @@ const BarreRecherche = () => {
         <label htmlFor="track">Track</label>
 
         <h1>Looking for {type} </h1>
+        <button onClick={handleLoadMore}>Load More</button>
       </form>
 
       <ListeRecherche liste={results} type={type} />
