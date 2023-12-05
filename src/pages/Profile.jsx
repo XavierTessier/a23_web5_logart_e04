@@ -1,4 +1,4 @@
- import { useAuth } from '../context/authContext';
+import { useAuth } from '../context/authContext';
 import { Reorder } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import '../css/Profile.css';
@@ -8,9 +8,11 @@ import Modal from '../components/Modal';
 import BarreRecherche from '../components/BarreRecherche';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { useMusic } from '../context/musicContext';
+import { Helmet } from 'react-helmet';
 
 const Profile = () => {
-    const { user, logout, setUserData, userData, getTopMusic} = useAuth();
+    const { user, logout, setUserData, userData, getTopMusic } = useAuth();
     const [topMusic, setTopMusic] = useState([]);
 
     useEffect(() => {
@@ -23,12 +25,15 @@ const Profile = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>Tune-Up | Profil</title>
+            </Helmet>
             <div className='user'>
                 <div className='background' ></div>
                 <h1 className='name'>{user.displayName}</h1>
                 <img src={user.photoURL} alt="avatar" />
-                <img src="src\img\png\Fichier 7.png" alt="forme" className='forme'/>
-                <img src="src/img/png/Fichier 11.png" alt="forme" className='ligne'/>
+                <img src="src\img\png\Fichier 7.png" alt="forme" className='forme' />
+                <img src="src/img/png/Fichier 11.png" alt="forme" className='ligne' />
             </div>
             {/* <p>Email : {user.email}</p> */}
             <div>
@@ -37,14 +42,16 @@ const Profile = () => {
             <div>
                 <p>Musique tendance</p>
                 {topMusic.map((item, index) => (
-                    <div className="fav" id={index} key={item.music.id}>
-                        <img src={item.music.albumCover} className='cover' />
-                        <div className="info" >
-                            <p>{item.music.title}</p>
-                            <p>{item.music.artist}</p>
-                            <p>{item.music.albumTitle}</p>
-                            <p>{item.music.duration}s</p>
-                        </div>
+                    <div className="fav" id={index} key={item.music.id} >
+                        <Link to={`/reader/track/${item.music.id}`}>
+                            <img src={item.music.albumCover} className='cover' />
+                            <div className="info" >
+                                <p>{item.music.title}</p>
+                                <p>{item.music.artist}</p>
+                                <p>{item.music.albumTitle}</p>
+                                <p>{item.music.duration}s</p>
+                            </div>
+                        </Link>
                     </div>
                 )
                 )}

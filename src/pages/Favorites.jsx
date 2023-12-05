@@ -1,6 +1,7 @@
 import { doc, updateDoc } from 'firebase/firestore';
 import { db } from '../config/firebase';
 import { useAuth } from '../context/authContext';
+import { Link } from 'react-router-dom';
 
 const Favorites = () => {
     const { user, setUserData, userData, removeFromFav } = useAuth();
@@ -17,6 +18,9 @@ const Favorites = () => {
                             <p>{item.info.duration}s</p>
                         </div>
                         <button className='Delete' onClick={() => removeFromFav(userData.favorites, item.info.id)}>Remove</button>
+                        <Link to={`/reader/track/${item.info.id}`}>
+                            <button className='Play'>Play</button>
+                        </Link>
                     </div>
                 ))
             )}

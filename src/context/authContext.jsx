@@ -177,7 +177,7 @@ const AuthProvider = ({ children }) => {
                     console.log("Musique ajoutée aux musiques tendances avec succès");
                 } else {
                     // Handle case where user with the given uid already exists
-                    favDocRef.update({ nbFavorites: increment });
+                    await updateDoc(favDocRef, { nbFavorites: increment });
                     console.log('La musique est déja dans les favoris du site');
                 }
 
@@ -207,7 +207,7 @@ const AuthProvider = ({ children }) => {
                 const querySnapshot = await getDoc(favDocRef);
                 if (querySnapshot.exists()) {
                     console.log('[IS NOT EMPTY SITE FAVORITE]');
-                    favDocRef.update({ nbFavorites: decrement });
+                    await updateDoc(favDocRef, { nbFavorites: decrement });
 
                     console.log("Enlever un favoris du site avec succès");
                     toast.success("Musique retirée de vos favoris avec succès");
