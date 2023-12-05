@@ -56,12 +56,22 @@ const App = () => {
           element: <Favorites />,
         },
         {
-          path: "discovers/*/:id",
+          path: "discovers/:categorie/:id",
           element: <MusicProvider><Discovers/></MusicProvider>,
-        },
-        {
-          path: "discovers/artist/:id",
-          element: <MusicProvider><Discovers/></MusicProvider>,
+          // children:[
+          //   {
+          //     path: "artist/:id",
+          //     element: <MusicProvider><Discovers categorie="artist"/></MusicProvider>,
+          //   },
+          //   {
+          //     path:"album/:id",
+          //     element: <MusicProvider><Discovers categorie="album"/></MusicProvider>
+          //   },
+          //   {
+          //     path:"track/:id",
+          //     element: <MusicProvider><Discovers categorie="track"/></MusicProvider>
+          //   }
+          // ]
         },
         {
           path: "reader/track/:id",

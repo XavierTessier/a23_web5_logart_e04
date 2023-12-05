@@ -1,4 +1,6 @@
 const InfosDiscovArtist = () => {
+    // const {musicData, getBySearch} = useMusic();
+    // getBySearch(`artist/${id}/albums`,"albums");
     return (
         <section className="infosDiscovArtist">
             <div>
