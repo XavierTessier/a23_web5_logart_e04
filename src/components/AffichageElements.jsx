@@ -83,7 +83,6 @@ const AffichageElements = ({ categorieChercher, type, }) => {
       default:
         return element.title;
     }
-
   };
 
   return (

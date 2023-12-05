@@ -12,6 +12,7 @@ import Profile from "./pages/Profile";
 import Layout from "./components/Layout";
 import Accueil from "./pages/Accueil";
 import Search from "./pages/Search";
+import Discovers from "./pages/Discovers";
 
 import { useAuth } from "./context/authContext";
 import { MusicProvider } from "./context/musicContext.jsx";
@@ -55,7 +56,7 @@ const App = () => {
           element: <Favorites />,
         },
         {
-          path: "discovers/album/:id",
+          path: "discovers/*/:id",
           element: <MusicProvider><Discovers/></MusicProvider>,
         },
         {

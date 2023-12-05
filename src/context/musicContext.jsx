@@ -19,7 +19,33 @@ const MusicProvider = ({children}) => {
     const [trackIndex, setTrackIndex] = useState(0);
     const [currentTrack, setCurrentTrack] = useState(null);
     const [choosenTrack, setChoosenTrack] = useState(null);
-
+    const getForDiscov = async(link, lookFor) => {
+        useEffect(() => {
+            const fetchForDiscov = async (link) => {
+                try {
+                    const resp = await fetchJsonp(`https://api.deezer.com/track/${link}&output=jsonp`);
+                    if (!resp.ok) throw new Error('Network response was not ok');
+                    const data = await resp.json();
+                } catch (error) {
+                    console.error('Error fetching track:', error);
+                }
+                switch(lookFor){
+                    case "album": ;
+                    case "artist": ;
+                    case "track": ;
+                }
+            };
+            // Call fetchTrack with the id
+            fetchForDiscov(trackId);
+          }, [trackId]);
+    }
+    const getBySearch = async() => {
+        useEffect(() => {
+            const search = async() => {
+                
+            }
+        });
+    }
     const getTrack = async(trackId) => {
         useEffect(() => {
             const fetchTrack = async () => {
@@ -27,9 +53,6 @@ const MusicProvider = ({children}) => {
                     const resp = await fetchJsonp(`https://api.deezer.com/track/${trackId}&output=jsonp`);
                     if (!resp.ok) throw new Error('Network response was not ok');
                     const data = await resp.json();
-                    // Handle the data as needed
-                    // console.log("album:")
-                    // console.log(data);
                     setChoosenTrack(data);
                     setAlbum(data.album);
                 } catch (error) {
