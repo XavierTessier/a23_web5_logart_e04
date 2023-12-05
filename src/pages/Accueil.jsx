@@ -4,7 +4,7 @@ import { Helmet } from "react-helmet";
 
 const Accueil = () => {
   return (
-    <div className="accueil">
+    <div className="accueil w-11/12">
       <Helmet>
         <title>Tune-Up | Accueil</title>
       </Helmet>

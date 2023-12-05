@@ -34,7 +34,7 @@ const Header = () => {
   return (
     <>
       {showSearch ? <BarreRecherche className="" /> : <> </>}
-      <nav className="navigation fixed bottom-0 bg-corail-reg w-full h-max py-4">
+      <nav className="navigation fixed bottom-0 bg-corail-reg w-1/12 h-max py-4">
         <div>
           <ul className="icons flex flex-row justify-around items-center">
             <li className={pathname === "/accueil" ? "actif" : null}>
