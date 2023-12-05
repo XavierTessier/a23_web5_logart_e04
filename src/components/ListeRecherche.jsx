@@ -40,11 +40,10 @@ const ListeRecherche = ({ liste, type }) => {
                                 <div className='card' key={result.id}>
                                     <p className='title'>{result.title}</p>
                                     <p className='artist'>{result.artist && result.artist.name}</p>
-                                    {console.log(result)}
                                     <p className='album'>{result.album && result.album.title}</p>
                                     <img className='albumCover' src={result.album && result.album.cover_medium} alt="" />
-                                    <button onClick={() => addMusicToUser(userData.playlist, result)}>Like</button>
-                                    <button onClick={() => addToFav(userData.favorites, result)}>Fav</button>
+                                    <button onClick={() => addMusicToUser(userData.playlist, {id: result.id, title: result.title, artist: result.artist.name, albumTitle: result.album.title, albumCover: result.album.cover_medium, duration: result.duration})}>Like</button>
+                                    <button onClick={() => addToFav(userData.favorites, {id: result.id, title: result.title, artist: result.artist.name, albumTitle: result.album.title, albumCover: result.album.cover_medium, duration: result.duration})}>Fav</button>
                                 </div>
                             ))}
                     </div>
@@ -56,11 +55,10 @@ const ListeRecherche = ({ liste, type }) => {
                                 <div className='card' key={result.id}>
                                     <p className='title'>{result.title}</p>
                                     <p className='artist'>{result.artist && result.artist.name}</p>
-                                    {console.log(result)}
                                     <p className='album'>{result.album && result.album.title}</p>
                                     <img className='albumCover' src={result.album && result.album.cover_medium} alt="" />
-                                    <button onClick={() => addMusicToUser(userData.playlist, result)}>Like</button>
-                                    <button onClick={() => addToFav(userData.favorites, result)}>Fav</button>
+                                    <button onClick={() => addMusicToUser(userData.playlist, {id: result.id, title: result.title, artist: result.artist.name, albumTitle: result.album.title, albumCover: result.album.cover_medium, duration: result.duration})}>Like</button>
+                                    <button onClick={() => addToFav(userData.favorites, {id: result.id, title: result.title, artist: result.artist.name, albumTitle: result.album.title, albumCover: result.album.cover_medium, duration: result.duration})}>Fav</button>
                                 </div>
                             ))}
                     </div>

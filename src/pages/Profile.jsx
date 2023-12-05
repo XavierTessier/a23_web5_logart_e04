@@ -7,6 +7,7 @@ import { db } from '../config/firebase';
 import Modal from '../components/Modal';
 import BarreRecherche from '../components/BarreRecherche';
 import { Navigate, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Profile = () => {
     const { user, logout, setUserData, userData, getTopMusic} = useAuth();
@@ -37,17 +38,19 @@ const Profile = () => {
                 <p>Musique tendance</p>
                 {topMusic.map((item, index) => (
                     <div className="fav" id={index} key={item.music.id}>
-                        <img src={item.music.album.cover_small} className='cover' />
+                        <img src={item.music.albumCover} className='cover' />
                         <div className="info" >
                             <p>{item.music.title}</p>
-                            <p>{item.music.artist.name}</p>
-                            <p>{item.music.album.title}</p>
+                            <p>{item.music.artist}</p>
+                            <p>{item.music.albumTitle}</p>
                             <p>{item.music.duration}s</p>
                         </div>
                     </div>
                 )
                 )}
             </div>
+            <Link to="/playlists">Playlist</Link>
+            <Link to="/favorites">Favoris</Link>
             <button onClick={logout}>Déconnexion</button>
         </div>
     );
