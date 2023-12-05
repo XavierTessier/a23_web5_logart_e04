@@ -40,7 +40,7 @@ const Header = () => {
       <div className="menu w-1/12"></div>
       <nav className="navigation fixed bottom-0 bg-corail-reg w-1/12 h-max py-4">
         <div>
-          <ul className="icons flex flex-row justify-around items-center">
+          <ul className="icons flex flex-row justigy-center items-center">
             <li className={pathname === "/accueil" ? "actif" : null}>
               <HiHome
                 style={{ color: "white" }}
@@ -49,9 +49,10 @@ const Header = () => {
               />
             </li>
             <li className={pathname === "/favorites" ? "actif" : null}>
-              <FaCompactDisc
+              <img
+                src="src/img/svg/like_menu.svg"
                 style={{ color: "white" }}
-                className="text-5xl text-white"
+                className="text-5xl text-white w-16 h-16"
                 onClick={goToLike}
               />
             </li>

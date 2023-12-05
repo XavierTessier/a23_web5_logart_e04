@@ -4,6 +4,7 @@
     border-radius: 50%;
 }
 
+
 .navigation {
     z-index: 10000;
 }
@@ -12,8 +13,8 @@
     nav.navigation {
         position: relative;
         height: 100%;
-        width: fit-content;
-        padding: 1em;
+        width: 160px;
+        padding: 2em;
         left: 0;
         margin-right: 2em;
     }
@@ -22,7 +23,7 @@
         position: fixed;
         background-color: #FF7E50;
         height: 100%;
-        width: 112px;
+        width: 160px;
         padding: 0;
 
     }
@@ -30,12 +31,11 @@
     ul.icons {
         display: flex;
         flex-direction: column;
-
-        width: fit-content;
+        width: 100%;
     }
 
     ul.icons li {
-        margin: 1em 0;
+        margin: 1.5em 0;
         cursor: pointer;
     }
 }

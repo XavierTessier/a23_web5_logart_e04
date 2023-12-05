@@ -2,7 +2,7 @@ import BarreRecherche from "../components/BarreRecherche";
 
 const Search = () => {
   return (
-    <div className="search">
+    <div className="search h-screen">
       <BarreRecherche />
     </div>
   );
