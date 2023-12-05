@@ -10,7 +10,7 @@
 
 @media screen and (min-width: 1200px) {
     nav.navigation {
-        position: relative;
+        position: fixed;
         height: 100vh;
         width: fit-content;
         padding: 1em;

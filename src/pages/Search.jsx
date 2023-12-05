@@ -1,11 +1,11 @@
 import BarreRecherche from "../components/BarreRecherche";
 
 const Search = () => {
-    return (
-        <div>
-            <BarreRecherche />
-        </div>
-    );
+  return (
+    <div className="search">
+      <BarreRecherche />
+    </div>
+  );
 };
 
 export default Search;
