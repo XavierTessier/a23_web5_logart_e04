@@ -2,6 +2,7 @@ import { Reorder } from "framer-motion";
 import { useAuth } from "../context/authContext";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../config/firebase";
+import { Link } from "react-router-dom";
 
 const Playlists = () => {
   const { user, playlist, deleteMusic, setUserData, userData } = useAuth();
