@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@100;200;300;400;500;600;700;800&display=swap');
+
 div.footer {
     display: none;
 }
@@ -15,6 +17,7 @@ div.footer {
     }
 
     div.footer img {
+        font-family: 'Playpen Sans', sans-serif;
         padding-top: 64px;
         width: 325px;
     }
