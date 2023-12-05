@@ -37,6 +37,7 @@ const Header = () => {
   return (
     <>
       {showSearch ? <BarreRecherche className="" /> : <> </>}
+      <div className="menu w-1/12"></div>
       <nav className="navigation fixed bottom-0 bg-corail-reg w-1/12 h-max py-4">
         <div>
           <ul className="icons flex flex-row justify-around items-center">
