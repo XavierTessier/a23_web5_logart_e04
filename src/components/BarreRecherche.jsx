@@ -16,6 +16,16 @@ const BarreRecherche = () => {
   const observer = useRef();
   const { addMusicToUser, user, userData, addToFav, addToHistory } = useAuth();
 
+  const debounce = (func, delay) => {
+    let timeoutId;
+    return (...args) => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        func(...args);
+      }, delay);
+    };
+  };
+
   const handleLoadMore = () => {
     setLimit((prevLimit) => prevLimit + 10); // Increase the limit by 10 when the button is clicked
     setButtonClicked(true);
@@ -39,6 +49,8 @@ const BarreRecherche = () => {
     setQuery({ ...query, value: e.target.value });
     console.log(query.value);
   };
+
+  const handleLoadMoreDebounced = debounce(handleLoadMore, 200); // Adjust the delay as needed
 
   useEffect(() => {
     console.log("type changed : " + type);
@@ -67,14 +79,13 @@ const BarreRecherche = () => {
     };
 
     observer.current = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        // When the end of the list is reached, load more items
-        handleLoadMore();
+      if (entry.isIntersecting && results.data && results.data.length > 0) {
+        // When the end of the list is reached and there are results, load more items
+        handleLoadMoreDebounced();
       }
     }, options);
 
     if (observer.current && results.data && results.data.length > 0) {
-      // Observe the last item in the list
       observer.current.observe(document.getElementById(`item-${results.data[results.data.length - 1].id}`));
     }
 
@@ -123,7 +134,7 @@ const BarreRecherche = () => {
                                 <p className='album'>{result.album && result.album.title}</p>
                                 <img className='albumCover' src={result.album && result.album.cover_medium} alt="" />
                             </Link>
-                            <button onClick={() => addMusicToUser(userData.playlist, { id: result.id, title: result.title, artist: result.artist.name, albumTitle: result.album.title, albumCover: result.album.cover_medium, duration: result.duration })}>Like</button>
+                            <button onClick={() => addMusicToUser(userData.playlist, { id: result.id, title: result.title, artist: result.artist.name, albumTitle: result.album.title, albumCover: result.album.cover_medium, duration: result.duration })}>Ajouter à la playlist</button>
                             <button onClick={() => addToFav(userData.favorites, { id: result.id, title: result.title, artist: result.artist.name, albumTitle: result.album.title, albumCover: result.album.cover_medium, duration: result.duration })}>Fav</button>
                             <button onClick={() => addToHistory({id: result.id, title: result.title, artist: result.artist.name, albumTitle: result.album.title, albumCover: result.album.cover_medium})}>historique</button>
                         </div>
@@ -139,7 +150,7 @@ const BarreRecherche = () => {
                             <p className='artist'>{result.artist && result.artist.name}</p>
                             <p className='album'>{result.album && result.album.title}</p>
                             <img className='albumCover' src={result.album && result.album.cover_medium} alt="" />
-                            <button onClick={() => addMusicToUser(userData.playlist, { id: result.id, title: result.title, artist: result.artist.name, albumTitle: result.album.title, albumCover: result.album.cover_medium, duration: result.duration })}>Like</button>
+                            <button onClick={() => addMusicToUser(userData.playlist, { id: result.id, title: result.title, artist: result.artist.name, albumTitle: result.album.title, albumCover: result.album.cover_medium, duration: result.duration })}>Ajouter à la playlist</button>
                             <button onClick={() => addToFav(userData.favorites, { id: result.id, title: result.title, artist: result.artist.name, albumTitle: result.album.title, albumCover: result.album.cover_medium, duration: result.duration })}>Fav</button>
                         </div>
                     ))}
@@ -189,7 +200,6 @@ const BarreRecherche = () => {
         <label htmlFor="track">Track</label>
 
         <h1>Looking for {type} </h1>
-        <button onClick={handleLoadMore}>Load More</button>
       </form>
 
       {displayList(type)}
