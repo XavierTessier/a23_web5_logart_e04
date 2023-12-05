@@ -6,7 +6,7 @@ const Footer = () => {
         <img src="src/img/svg/logo_dark.svg" alt="forme" className="logo" />
         <div className="designers">
           <h2>Designers</h2>
-          <p>Chadrisk Bertrand</p>
+          <p>Chadrik Bertrand</p>
           <p>Rosalie Cliche</p>
         </div>
         <div className="programmeurs">

@@ -17,7 +17,10 @@ const Header = () => {
     navigate("/accueil");
   };
   const goToLike = () => {
-    navigate("/favorite");
+    navigate("/favorites");
+  };
+  const goToPlaylists = () => {
+    navigate("/playlists");
   };
   const goToUser = () => {
     {
@@ -25,7 +28,7 @@ const Header = () => {
     }
   };
   const OpenSearch = () => {
-    setShowSearch(!showSearch);
+    navigate("/search");
   };
 
   const { pathname } = useLocation();
@@ -44,14 +47,14 @@ const Header = () => {
                 onClick={goToHome}
               />
             </li>
-            <li className={pathname === "/favorite" ? "actif" : null}>
+            <li className={pathname === "/favorites" ? "actif" : null}>
               <FaCompactDisc
                 style={{ color: "white" }}
                 className="text-5xl text-white"
                 onClick={goToLike}
               />
             </li>
-            <li className={pathname === "/recherche" ? "actif" : null}>
+            <li className={pathname === "/search" ? "actif" : null}>
               {user ? (
                 <BsSearch
                   style={{ color: "white" }}
@@ -65,11 +68,11 @@ const Header = () => {
                 />
               )}
             </li>
-            <li className={pathname === "/playlist" ? "actif" : null}>
+            <li className={pathname === "/playlists" ? "actif" : null}>
               <IoAlbums
                 style={{ color: "white" }}
                 className="text-5xl"
-                onClick={goToUser}
+                onClick={goToPlaylists}
               />
             </li>
             <li className={pathname === "/profile" ? "actif" : null}>

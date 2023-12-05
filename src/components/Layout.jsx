@@ -8,7 +8,7 @@ const Layout = () => {
   const { user } = useAuth();
   return (
     <div>
-      <div className="flex flex-col">
+      <div className="flex flex-row">
         <Header />
         <Outlet />
         {/* {user ? (
