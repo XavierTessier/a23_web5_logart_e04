@@ -36,7 +36,7 @@ const Header = () => {
       {showSearch ? <BarreRecherche className="" /> : <> </>}
       <nav className="navigation fixed bottom-0 bg-corail-reg w-full h-max py-4">
         <div>
-          <ul className="flex flex-row justify-around items-center">
+          <ul className="icons flex flex-row justify-around items-center">
             <li className={pathname === "/accueil" ? "actif" : null}>
               <HiHome
                 style={{ color: "white" }}

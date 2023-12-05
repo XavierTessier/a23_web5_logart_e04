@@ -7,3 +7,25 @@
 .navigation {
     z-index: 10000;
 }
+
+@media screen and (min-width: 1200px) {
+    nav.navigation {
+        position: fixed;
+        height: 100vh;
+        width: fit-content;
+        padding: 1em;
+        left: 0;
+    }
+
+    ul.icons {
+        display: flex;
+        flex-direction: column;
+
+        width: fit-content;
+    }
+
+    ul.icons li {
+        margin: 1em 0;
+        cursor: pointer;
+    }
+}

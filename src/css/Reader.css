@@ -5,6 +5,7 @@ div.wrapper_vinyle {
     align-items: center;
     height: 100%;
     width: 480px;
+    margin: 0 auto;
 }
 
 div.vinyles:first-child {
