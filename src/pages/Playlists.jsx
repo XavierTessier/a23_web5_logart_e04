@@ -2,12 +2,13 @@ import { Reorder } from 'framer-motion';
 import { useAuth } from '../context/authContext';
 import { doc, updateDoc } from 'firebase/firestore';
 import { db } from '../config/firebase';
+import { Link } from 'react-router-dom';
 
 const Playlists = () => {
-    
-    const { user, playlist, deleteMusic, setUserData, userData} = useAuth();
 
-    return(
+    const { user, playlist, deleteMusic, setUserData, userData } = useAuth();
+
+    return (
         <div className="playlist">
             <h1>Votre playlist</h1>
             {playlist && (
@@ -21,14 +22,20 @@ const Playlists = () => {
                 >
                     {playlist.map((item, index) => (
                         <Reorder.Item key={item.info.id} className='song' value={item}>
-                            <img src={item.info.album.cover} className='cover' />
+
+                            <img src={item.info.albumCover} className='cover' />
                             <div className="info">
                                 <p>{item.info.title}</p>
-                                <p>{item.info.artist.name}</p>
-                                <p>{item.info.album.title}</p>
+                                <p>{item.info.artist}</p>
+                                <p>{item.info.albumTitle}</p>
                                 <p>{item.info.duration}s</p>
                             </div>
+
                             <button className='Delete' onClick={() => deleteMusic(playlist, item.info.id)}>Delete</button>
+                            
+                            <Link to={`/reader/track/${item.info.id}`}>
+                                <button className='Play'>Play</button>
+                            </Link>
                         </Reorder.Item>
                     ))}
                 </Reorder.Group>

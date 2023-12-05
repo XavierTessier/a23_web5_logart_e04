@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { auth, db, incrementValue } from '../config/firebase';
 import { signInWithPopup, signOut, onAuthStateChanged } from "firebase/auth";
-import { addDoc, collection, doc, getDoc, getDocs, limit, onSnapshot, orderBy, query, setDoc, updateDoc, where } from 'firebase/firestore';
+import { addDoc, collection, doc, getDoc, getDocs, limit, onSnapshot, orderBy, query, serverTimestamp, setDoc, updateDoc, where } from 'firebase/firestore';
 
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
@@ -52,7 +52,7 @@ const AuthProvider = ({ children }) => {
             const creds = await signInWithPopup(auth, googleProvider);
             // console.log(creds.user);
             setUser(creds.user);
-            toast.success("connection réussie"); 
+            toast.success(`connection réussie, bienvenue ${creds.user.displayName}`);
             return creds;
         } catch (error) {
             return { success: false, message: "connection non établie" }
@@ -87,6 +87,11 @@ const AuthProvider = ({ children }) => {
                 };
                 // If no user with the given uid exists, add a new user to the database
                 await setDoc(docRef, objUser);
+
+
+                // Create a sub-collection "historique" for the user
+                const historiqueCollectionRef = collection(docRef, 'historique');
+                await addDoc(historiqueCollectionRef);
 
             } else {
                 // Handle case where user with the given uid already exists
@@ -177,7 +182,7 @@ const AuthProvider = ({ children }) => {
                     console.log("Musique ajoutée aux musiques tendances avec succès");
                 } else {
                     // Handle case where user with the given uid already exists
-                    favDocRef.update({ nbFavorites: increment });
+                    await updateDoc(favDocRef, { nbFavorites: increment });
                     console.log('La musique est déja dans les favoris du site');
                 }
 
@@ -207,7 +212,7 @@ const AuthProvider = ({ children }) => {
                 const querySnapshot = await getDoc(favDocRef);
                 if (querySnapshot.exists()) {
                     console.log('[IS NOT EMPTY SITE FAVORITE]');
-                    favDocRef.update({ nbFavorites: decrement });
+                    await updateDoc(favDocRef, { nbFavorites: decrement });
 
                     console.log("Enlever un favoris du site avec succès");
                     toast.success("Musique retirée de vos favoris avec succès");
@@ -239,9 +244,38 @@ const AuthProvider = ({ children }) => {
         }
     };
 
+    const addToHistory = async (info) => {
+        try {
+            const userHistoryRef = collection(db, 'users', userData.uid, 'historique');
+
+            await addDoc(userHistoryRef, {music: info, timestamp: serverTimestamp()});
+
+            console.log("Musique ajoutée aux musiques tendances avec succès");
+        } catch (error) {
+            console.error("Erreur lors de la suppression de la musique de vos favoris:", error);
+        }
+    };
+
+    const getHistory = async (callback) => {
+        try {
+            const userHistoryRef = collection(db, 'users', userData.uid, 'historique');
+            const q = query(userHistoryRef, orderBy('timestamp', 'desc'), limit(10));
+
+            const unsub = onSnapshot(q, (querySnapshot) => {
+                const history = querySnapshot.docs.map((doc) => doc.data());
+                callback(history);
+            });
+
+            return unsub;
+        } catch (error) {
+            console.error("Erreur lors de la récupération de l'historique:", error);
+            return () => { };
+        }
+    };
+
 
     return (
-        <Provider value={{ playlist: userData?.playlist, googleLogin, logout, user, addMusicToUser, addDocHandler, userData, deleteMusic, setUserData, addToFav, removeFromFav, getTopMusic }}>
+        <Provider value={{ playlist: userData?.playlist, googleLogin, logout, user, addMusicToUser, addDocHandler, userData, deleteMusic, setUserData, addToFav, removeFromFav, getTopMusic, addToHistory, getHistory }}>
             {children}
             <ToastContainer />
         </Provider>

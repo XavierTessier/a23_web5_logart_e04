@@ -10,6 +10,7 @@ import "../css/Reader.css";
 
 import VinylePers from "../components/VinylePerspective";
 import Vinyle from "../components/Vinyle";
+import { Helmet } from "react-helmet";
 
 const Reader = () => {
   const {
@@ -47,6 +48,9 @@ const Reader = () => {
   // }, []);
   return (
     <div className="Reader">
+      <Helmet>
+        <title>Tune-Up | Reader</title>
+      </Helmet>
       <div className="wrapper_vinyle">
         <div className="vinyles flex flex-row">
           <VinylePers />

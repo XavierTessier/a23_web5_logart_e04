@@ -4,16 +4,17 @@ import { FaPlay, FaPause } from "react-icons/fa6";
 import "../css/tracks.css";
 
 const Tracks = () => {
-  const { tracks, choosenTrack } = useMusic();
+  const { tracks, choosenTrack, album } = useMusic();
   const FormatTime = (time) => {
     const minutes = Math.floor(time / 60);
     const seconds = time % 60;
     return `${minutes}:${seconds}`;
   };
+  
   return (
     <section className="tracks">
       {console.log("mes tracks: " + tracks[0])}
-      <p className="album-name">{/*nom de l'album*/} Immortalized</p>
+      <p className="album-name">{album?.title}</p>
       <ul>
         {tracks.map(({ title, id }) => (
           <li

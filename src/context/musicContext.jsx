@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import fetchJsonp from 'fetch-jsonp'; 
 import { async } from '@firebase/util';
+import { useAuth } from './authContext';
 
 const musicContext = React.createContext({
     getInfo: async (googleProvider) => { },
@@ -14,6 +15,7 @@ const musicContext = React.createContext({
 const { Provider } = musicContext;
 
 const MusicProvider = ({children}) => {
+    const {addToHistory} = useAuth();
     const [album, setAlbum] = useState(null);
     const [tracks, setTracks] = useState([]);
     const [trackIndex, setTrackIndex] = useState(0);
@@ -31,6 +33,7 @@ const MusicProvider = ({children}) => {
                     // console.log("album:")
                     // console.log(data);
                     setChoosenTrack(data);
+                    addToHistory({id: data.id, title: data.title, artist: data.artist.name, albumTitle: data.album.title, albumCover: data.album.cover_medium});
                     setAlbum(data.album);
                 } catch (error) {
                     console.error('Error fetching track:', error);
