@@ -1,7 +1,10 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { auth, db, incrementValue} from '../config/firebase';
+import { auth, db, incrementValue } from '../config/firebase';
 import { signInWithPopup, signOut, onAuthStateChanged } from "firebase/auth";
 import { addDoc, collection, doc, getDoc, getDocs, limit, onSnapshot, orderBy, query, setDoc, updateDoc, where } from 'firebase/firestore';
+
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const authContext = React.createContext({
     googleLogin: async (googleProvider) => { },
@@ -49,6 +52,7 @@ const AuthProvider = ({ children }) => {
             const creds = await signInWithPopup(auth, googleProvider);
             // console.log(creds.user);
             setUser(creds.user);
+            toast.success("connection réussie"); 
             return creds;
         } catch (error) {
             return { success: false, message: "connection non établie" }
@@ -59,7 +63,7 @@ const AuthProvider = ({ children }) => {
             await signOut(auth);
             setUser(null);
             console.log("unconnection successful");
-            createSuccessNotif({ title: "Déconnexion", message: "Vous avez été déconnecté avec succès" });
+            toast.success("Déconnexion réussie");
         } catch (error) {
             console.log("Oops: " + error);
         }
@@ -98,6 +102,7 @@ const AuthProvider = ({ children }) => {
             // Vérifier si la musique est déjà dans la playlist
             if (playlist.some(item => item.info.id === info.id)) {
                 console.log("Musique déjà présente dans la playlist");
+                toast.error("Musique déjà présente dans la playlist");
                 return;
             }
             else {
@@ -110,6 +115,7 @@ const AuthProvider = ({ children }) => {
                 await updateDoc(userDocRef, { playlist });
 
                 console.log("Musique ajoutée à la playlist avec succès");
+                toast.success("Musique ajoutée à la playlist avec succès");
             }
         } catch (error) {
             console.error("Erreur lors de l'ajout de la musique à la nouvelle playlist:", error);
@@ -130,11 +136,14 @@ const AuthProvider = ({ children }) => {
                 await updateDoc(userDocRef, { playlist: updatedPlaylist }); // On met à jour la playlist de l'utilisateur
 
                 console.log("Musique retirée de la playlist avec succès");
+                toast.success("Musique retirée de la playlist avec succès");
             } else {
                 console.log("Musique non trouvée dans la playlist");
+                toast.error("Musique non trouvée dans la playlist");
             }
         } catch (error) {
             console.error("Erreur lors de la suppression de la musique à la nouvelle playlist:", error);
+            toast.error("Erreur lors de la suppression de la musique");
         }
     };
 
@@ -143,6 +152,7 @@ const AuthProvider = ({ children }) => {
             // Vérifier si la musique est déjà dans la playlist
             if (favorites.some(item => item.info.id === info.id)) {
                 console.log("Musique déjà présente dans vos favoris");
+                toast.error("Musique déjà présente dans vos favoris");
                 return;
             }
             else {
@@ -154,7 +164,7 @@ const AuthProvider = ({ children }) => {
                 const userDocRef = doc(db, 'users', userData.uid);
                 await updateDoc(userDocRef, { favorites });
 
-                const favDocRef = doc(db, 'favoris' , String(info.id));
+                const favDocRef = doc(db, 'favoris', String(info.id));
                 const querySnapshot = await getDoc(favDocRef);
                 if (!querySnapshot.exists()) {
                     console.log('[IS EMPTY SITE FAVORITE]');
@@ -165,6 +175,7 @@ const AuthProvider = ({ children }) => {
                     await setDoc(favDocRef, objMusic);
 
                     console.log("Musique ajoutée aux musiques tendances avec succès");
+                    toast.success("Musique ajoutée à vos favoris avec succès");
                 } else {
                     // Handle case where user with the given uid already exists
                     favDocRef.update({ nbFavorites: increment });
@@ -173,6 +184,7 @@ const AuthProvider = ({ children }) => {
 
 
                 console.log("Musique ajoutée à vos favoris avec succès");
+                toast.success("Musique ajoutée à vos favoris avec succès");
             }
         } catch (error) {
             console.error("Erreur lors de l'ajout de la musique dans vos favoris:", error);
@@ -192,14 +204,15 @@ const AuthProvider = ({ children }) => {
                 const userDocRef = doc(db, 'users', userData.uid); // On récupère le document utilisateur
                 await updateDoc(userDocRef, { favorites: updatedFavorites }); // On met à jour la playlist de l'utilisateur
 
-                const favDocRef = doc(db, 'favoris' , String(musicId));
+                const favDocRef = doc(db, 'favoris', String(musicId));
                 const querySnapshot = await getDoc(favDocRef);
                 if (querySnapshot.exists()) {
                     console.log('[IS NOT EMPTY SITE FAVORITE]');
                     favDocRef.update({ nbFavorites: decrement });
 
                     console.log("Enlever un favoris du site avec succès");
-                } 
+                    toast.success("Musique retirée de vos favoris avec succès");
+                }
 
                 console.log("Musique retirée de vos favoris avec succès");
             } else {
@@ -210,7 +223,7 @@ const AuthProvider = ({ children }) => {
         }
     };
 
-    const getTopMusic = async(callback) => {
+    const getTopMusic = async (callback) => {
         try {
             const musicCol = collection(db, 'favoris');
             const q = query(musicCol, orderBy('nbFavorites', 'desc'), limit(10));
@@ -223,17 +236,15 @@ const AuthProvider = ({ children }) => {
             return unsub;
         } catch (error) {
             console.error("Erreur lors de la récupération des musiques tendances:", error);
-            return () => {};
+            return () => { };
         }
     };
-
-
-
 
 
     return (
         <Provider value={{ playlist: userData?.playlist, googleLogin, logout, user, addMusicToUser, addDocHandler, userData, deleteMusic, setUserData, addToFav, removeFromFav, getTopMusic }}>
             {children}
+            <ToastContainer />
         </Provider>
     );
 
