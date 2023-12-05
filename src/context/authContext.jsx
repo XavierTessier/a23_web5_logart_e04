@@ -175,7 +175,6 @@ const AuthProvider = ({ children }) => {
                     await setDoc(favDocRef, objMusic);
 
                     console.log("Musique ajoutée aux musiques tendances avec succès");
-                    toast.success("Musique ajoutée à vos favoris avec succès");
                 } else {
                     // Handle case where user with the given uid already exists
                     favDocRef.update({ nbFavorites: increment });
