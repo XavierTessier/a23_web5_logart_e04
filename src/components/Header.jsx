@@ -17,7 +17,10 @@ const Header = () => {
     navigate("/accueil");
   };
   const goToLike = () => {
-    navigate("/favorite");
+    navigate("/favorites");
+  };
+  const goToPlaylists = () => {
+    navigate("/playlists");
   };
   const goToUser = () => {
     {
@@ -25,7 +28,7 @@ const Header = () => {
     }
   };
   const OpenSearch = () => {
-    setShowSearch(!showSearch);
+    navigate("/search");
   };
 
   const { pathname } = useLocation();
@@ -34,9 +37,10 @@ const Header = () => {
   return (
     <>
       {showSearch ? <BarreRecherche className="" /> : <> </>}
+      <div className="menu w-1/12"></div>
       <nav className="navigation fixed bottom-0 bg-corail-reg w-1/12 h-max py-4">
         <div>
-          <ul className="icons flex flex-row justify-around items-center">
+          <ul className="icons flex flex-row justigy-center items-center">
             <li className={pathname === "/accueil" ? "actif" : null}>
               <HiHome
                 style={{ color: "white" }}
@@ -44,14 +48,15 @@ const Header = () => {
                 onClick={goToHome}
               />
             </li>
-            <li className={pathname === "/favorite" ? "actif" : null}>
-              <FaCompactDisc
+            <li className={pathname === "/favorites" ? "actif" : null}>
+              <img
+                src="src/img/svg/like_menu.svg"
                 style={{ color: "white" }}
-                className="text-5xl text-white"
+                className="text-5xl text-white w-16 h-16"
                 onClick={goToLike}
               />
             </li>
-            <li className={pathname === "/recherche" ? "actif" : null}>
+            <li className={pathname === "/search" ? "actif" : null}>
               {user ? (
                 <BsSearch
                   style={{ color: "white" }}
@@ -65,11 +70,11 @@ const Header = () => {
                 />
               )}
             </li>
-            <li className={pathname === "/playlist" ? "actif" : null}>
+            <li className={pathname === "/playlists" ? "actif" : null}>
               <IoAlbums
                 style={{ color: "white" }}
                 className="text-5xl"
-                onClick={goToUser}
+                onClick={goToPlaylists}
               />
             </li>
             <li className={pathname === "/profile" ? "actif" : null}>
