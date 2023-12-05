@@ -55,6 +55,14 @@ const App = () => {
           element: <Favorites />,
         },
         {
+          path: "discovers/album/:id",
+          element: <MusicProvider><Discovers/></MusicProvider>,
+        },
+        {
+          path: "discovers/artist/:id",
+          element: <MusicProvider><Discovers/></MusicProvider>,
+        },
+        {
           path: "reader/track/:id",
           element: (
             <MusicProvider>
@@ -63,6 +71,7 @@ const App = () => {
               </AudioProvider>
             </MusicProvider>
           ),
+          
         },
         {
           path: "playlists",
