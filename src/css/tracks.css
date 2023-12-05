@@ -27,6 +27,8 @@ section.tracks {
         margin-right: 1em;
     }
 
+
+
     p.song-title {
         font-weight: 500;
         font-family: 'Playpen Sans', sans-serif;
@@ -34,7 +36,13 @@ section.tracks {
 
     }
 
+    li.active::after {
+        position: relative;
+    }
+
     li.active {
+        padding: 0.3em;
         background-color: #FFA485;
+        margin-left: -.3em;
     }
 }

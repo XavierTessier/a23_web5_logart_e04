@@ -18,15 +18,18 @@ const Tracks = () => {
         {tracks.map(({ title, id }) => (
           <li
             key={id}
-            style={{ color: id === choosenTrack.id ? "red" : "black" }}
             className={
               id === choosenTrack.id
-                ? "flex flex-row items-center mb-4 active rounded"
-                : "flex flex-row items-center mb-4"
+                ? "flex flex-row items-center mb-3 active rounded"
+                : "flex flex-row items-center mb-3"
             }
           >
             <p className="duration mr-4">{/*FormatTime(choosenTrack)*/}1:35</p>
-            <FaPlay className="mr-5" />
+            {id === choosenTrack.id ? (
+              <FaPause className="mr-5" />
+            ) : (
+              <FaPlay className="mr-5" />
+            )}
             <p className="song-title">{title}</p>
           </li>
         ))}
