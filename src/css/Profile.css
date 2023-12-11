@@ -7,7 +7,7 @@ div.user {
     margin-bottom: 100px;
 }
 
-div.user .opacite{
+div.user .opacite {
     position: absolute;
     top: 0em;
     left: 0em;
@@ -18,15 +18,15 @@ div.user .opacite{
     opacity: 35%;
 }
 
-div.user img.vinyles{
+div.user img.vinyles {
     display: none;
 }
 
-div.user img.vinyles2{
+div.user img.vinyles2 {
     display: none;
 }
 
-div.user img.vinyles3{
+div.user img.vinyles3 {
     position: absolute;
     top: 0em;
     left: 0em;
@@ -36,7 +36,7 @@ div.user img.vinyles3{
     opacity: 100%;
 }
 
-div.user img.avatar{
+div.user img.avatar {
     position: absolute;
     top: 7em;
     border-radius: 50%;
@@ -49,16 +49,16 @@ div.user h2 {
     z-index: 30;
     font-family: 'Playpen Sans', cursive;
     color: white;
-    font-weight:600;
+    font-weight: 600;
     font-size: 50px;
 }
 
 @media only screen and (min-width: 768px) {
-    div.user img.vinyles3{
+    div.user img.vinyles3 {
         display: none;
     }
 
-    div.user img.vinyles2{
+    div.user img.vinyles2 {
         display: block;
         position: absolute;
         top: 0em;
@@ -73,7 +73,7 @@ div.user h2 {
         top: 1.5em;
         left: 10%;
     }
-    
+
     div.user h2 {
         top: 1em;
         padding-top: 100px;
@@ -86,7 +86,7 @@ div.user h2 {
     div.user img {
         left: 18%;
     }
-    
+
     div.user h2 {
         padding-top: 100px;
         padding-left: 30%;
@@ -99,7 +99,7 @@ div.user h2 {
     div.user img {
         left: 23%;
     }
-    
+
     div.user h2 {
         padding-top: 100px;
         padding-left: 28%;
@@ -108,11 +108,11 @@ div.user h2 {
 }
 
 @media only screen and (min-width: 1200px) {
-    div.user img.vinyles2{
+    div.user img.vinyles2 {
         display: none;
     }
 
-    div.user img.vinyles{
+    div.user img.vinyles {
         display: block;
         position: absolute;
         top: 0em;
@@ -122,10 +122,11 @@ div.user h2 {
         z-index: -30;
         opacity: 100%;
     }
+
     div.user img {
         left: 28%;
     }
-    
+
     div.user h2 {
         padding-top: 100px;
         padding-left: 28%;
@@ -137,7 +138,7 @@ div.user h2 {
     div.user img {
         left: 30%;
     }
-    
+
     div.user h2 {
         padding-top: 100px;
         padding-left: 10%;
