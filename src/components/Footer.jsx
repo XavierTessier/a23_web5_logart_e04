@@ -16,7 +16,8 @@ const Footer = () => {
         </div>
         <div className="projet">
           <h2>Projet de web 5</h2>
-          <p>2023 Cégep de Saint-Jérôme</p>
+          <p>Cégep de Saint-Jérôme</p>
+          <p>2023</p>
         </div>
       </div>
     </div>

@@ -13,14 +13,14 @@
     position: relative;
     margin: 0 auto;
     width: 100%;
-    height: 850px;
+    height: 670px;
     display: flex;
     justify-content: center;
 }
 
 .authentification_lite div.login .connexion {
     position: absolute;
-    bottom: 6em;
+    top: 32em;
     background-color: #FF7E50;
     padding: 10px;
     border-radius: 2em;
@@ -61,7 +61,7 @@
     z-index: -30;
     position: absolute;
     right: 0em;
-    bottom: 0;
+    top: 27em;
     width: 19em;
     height: 15em;
 }
@@ -70,7 +70,7 @@
     z-index: -30;
     position: absolute;
     right: 0em;
-    bottom: 0;
+    top: 27em;
     width: 19em;
     height: 15em;
 }
@@ -88,4 +88,28 @@
     right: 2em;
     width: 8em;
     height: 6em;
+}
+
+@media only screen and (min-width: 1500px) {
+    .authentification_lite div.login {
+        height: 750px;
+    }
+    .authentification_lite .forme2 {
+        top: 32em;
+    }
+    .authentification_lite .ligne2 {
+        top: 32em;
+    }
+}
+
+@media only screen and (min-width: 1800px) {
+    .authentification_lite div.login {
+        height: 670px;
+    }
+    .authentification_lite .forme2 {
+        top: 27em;
+    }
+    .authentification_lite .ligne2 {
+        top: 27em;
+    }
 }
