@@ -1,75 +1,88 @@
-@media only screen and (min-width: 0px) {
-    div.footer {
-        display: none;
-    }
+@import url('https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@100;200;300;400;500;600;700;800&display=swap');
+
+div.footer {
+    display: none;
 }
-@media only screen and (min-width: 768px) {
+
+@media only screen and (min-width: 1200px) {
     div.footer {
         background-color: rgb(0, 0, 0);
         display: flex;
-        height: 550px;
+        height: fit-content;
         width: 100%;
         flex-direction: column;
         align-items: center;
+        position: relative;
+        bottom: 0;
     }
-    
+
     div.footer img {
+        font-family: 'Playpen Sans', sans-serif;
         padding-top: 64px;
         width: 325px;
     }
-    
+
     div.footer p, h2 {
         color: white;
     }
-    
+
     div.footer h2 {
         padding-bottom: 10px;
         font-weight: bold;
         font-family: 'Playpen Sans', cursive;
     }
-    
+
     div.footer .informations_footer {
         position: relative;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 2em 3em 2em 3em;
     }
-    
-    div.footer .designers {
-        position: absolute;
-        top: 3em;
-        left: -20em;
+
+    div.footer .informations_footer img {
+        margin-right: 4em;
     }
-    
-    div.footer .programmeurs {
+
+    div.footer div {
+        width: fit-content;
+        margin-left: 3em;
+        font-size: 1.2em;
+    }
+
+    /* div.footer .programmeurs {
         position: absolute;
         top: 3em;
         left: -3em;
     }
-    
+
     div.footer .projet {
         position: absolute;
         top: 3em;
         left: 12em;
         width: 130px;
-    }
+    } */
 }
 
-@media only screen and (min-width: 1200px) {
+/* @media only screen and (min-width: 1200px) {
     div.footer {
         height: 650px;
     }
+
     div.footer .designers {
         position: absolute;
         top: 3em;
         font-size: 25px;
         left: -20em;
     }
-    
+
     div.footer .programmeurs {
         position: absolute;
         top: 3em;
         left: -3em;
         font-size: 25px;
     }
-    
+
     div.footer .projet {
         position: absolute;
         top: 3em;
@@ -77,4 +90,4 @@
         width: 200px;
         font-size: 25px;
     }
-}
+} */

@@ -3,3 +3,19 @@ div.vinyle-single {
     height: 250px;
     margin: 0 auto;
 }
+
+@media screen and (min-width: 768px) {
+    div.vinyle-single {
+        width: 300px;
+        height: 300px;
+    }
+
+}
+
+@media screen and (min-width: 1200px) {
+    div.vinyle-single {
+        width: 350px;
+        height: 350px;
+    }
+
+}
