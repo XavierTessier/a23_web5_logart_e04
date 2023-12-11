@@ -37,8 +37,8 @@ const Header = () => {
   return (
     <>
       {showSearch ? <BarreRecherche className="" /> : <> </>}
-      <div className="menu w-1/12"></div>
-      <nav className="navigation fixed bottom-0 bg-corail-reg w-1/12 h-max py-4">
+      <div className="menu w-1/12 hidden"></div>
+      <nav className="navigation fixed bottom-0 bg-corail-reg w-full h-max py-4">
         <div>
           <ul className="icons flex flex-row justigy-center items-center">
             <li className={pathname === "/accueil" ? "actif" : null}>
