@@ -37,10 +37,10 @@ const Header = () => {
   return (
     <>
       {showSearch ? <BarreRecherche className="" /> : <> </>}
-      <div className="menu w-1/12 hidden"></div>
-      <nav className="navigation fixed bottom-0 bg-corail-reg w-full h-max py-4">
-        <div>
-          <ul className="icons flex flex-row justigy-center items-center">
+      <div className="menu hidden"></div>
+      <nav className="navigation relative bg-corail-reg py-4">
+        <div className="wrapper-icons">
+          <ul className="icons flex flex-row ">
             <li className={pathname === "/accueil" ? "actif" : null}>
               <HiHome
                 style={{ color: "white" }}
