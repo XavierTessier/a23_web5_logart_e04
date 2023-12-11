@@ -1,4 +1,4 @@
-@media only screen and (min-width: 450px) {
+@media only screen and (min-width: 360px) {
     div.coeur {
         position: absolute;
         padding-top: 30px;
@@ -20,7 +20,7 @@
         position: absolute;
         padding-top: 270px;
         padding-left: 30px;
-        width: 320px;
+        width: 270px;
         z-index: 30;
     }
     
