@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+.titre-page {
+    font-size: 2em;
+    margin-bottom: 1em;
+    font-family: 'Noto Sans', sans-serif;
+    text-transform: capitalize;
+    font-weight: bold;
+}
+
+.song {
+    border: 1px solid #ccc;
+    border-radius: 2em;
+    padding: 2em;
+    margin: 0 2em 0 2em;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 1em;
+}
+
+.cover {
+    width: 10%;
+    height: 10%;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    margin-right: 2em;
+}
+
+.song p {
+    margin: 0 0 0.5em 0;
+}
+
+.Delete {
+    width: 10em;
+    height: 2em;
+    margin-left: auto;
+    cursor: pointer;
+}
+
+div.info-playlist {
+    color: black;
+}

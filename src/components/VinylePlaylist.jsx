@@ -3,7 +3,7 @@ import Bras from "./BrasReader";
 
 const Vinyle = ({ img }) => {
   return (
-    <div className="vinyle-single relative">
+    <div className="vinyle-playlist relative">
       <svg
         className="vinyle"
         viewBox="0 0 500 500"
@@ -74,7 +74,6 @@ const Vinyle = ({ img }) => {
 
         <circle cx="50%" cy="50%" r="10" />
       </svg>
-      <Bras />
     </div>
   );
 };

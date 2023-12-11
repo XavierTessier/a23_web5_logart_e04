@@ -2,13 +2,30 @@ import { Reorder } from "framer-motion";
 import { useAuth } from "../context/authContext";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../config/firebase";
+import "../css/playlist.css";
+import Vinyle from "../components/VinylePlaylist";
+import { IoAdd } from "react-icons/io5";
 
 const Playlists = () => {
   const { user, playlist, deleteMusic, setUserData, userData } = useAuth();
 
   return (
-    <div className="playlist h-screen">
-      <h1>Votre playlist</h1>
+    <div className="playlist h-screen w-full">
+      <div className="entete-playlist flex flex-row items-end">
+        <Vinyle
+          img="src/img/jpg/pexels-cottonbro-studio-4629625.jpg"
+          className="vinyle-playlist"
+        />
+        <div className="entete-info-playlist mb-12">
+          <h1 className="titre-page">Votre playlist</h1>
+          <div className="info-playlist flex flex-row gap-6">
+            <h2>Yannick Charles</h2>
+            <h2>56 chansons</h2>
+            <h2>3 h 32 min </h2>
+          </div>
+        </div>
+        <IoAdd className="text-7xl mb-24 ml-24 " />
+      </div>
       {playlist && (
         <Reorder.Group
           axis="y"

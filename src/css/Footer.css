@@ -22,7 +22,7 @@ div.footer {
         width: 325px;
     }
 
-    div.footer p, h2 {
+    div.footer p, div.footer h2 {
         color: white;
     }
 
