@@ -9,6 +9,7 @@ import ButtonAdd from "../components/ButtonAdd";
 import { useEffect, useState } from "react";
 import { FaTrash } from "react-icons/fa";
 import Like from "../components/Like";
+import PlayButton from "../components/Play-playlist";
 
 const Playlists = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -23,7 +24,8 @@ const Playlists = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
   const truncateText = (text, maxLength, width) => {
-    const splice = width <= 678 ? width / 25 : 1000000;
+    const splice = width <= 678 ? width / 50 : 1000000;
+    console.log(splice);
 
     return text.length > maxLength ? text.slice(0, splice) + "..." : text;
   };
@@ -69,10 +71,13 @@ const Playlists = () => {
         >
           {playlist.map((item, index) => (
             <Reorder.Item key={item.info.id} className="song" value={item}>
-              <img src={item.info.albumCover} className="cover rounded-md" />
+              <Link to={`/reader/track/${item.info.id}`} className="play-btn">
+                <PlayButton />
+              </Link>
+              <img src={item.info.album.cover} className="cover rounded-md" />
               <div className="info">
                 <p className="song-title">
-                  {truncateText(item.info.title, 12, windowWidth)}
+                  {truncateText(item.info.title, 10, windowWidth)}
                 </p>
                 {windowWidth >= 1200 ? (
                   <div className="wrapper-info-desk flex flex-row gap-9">
@@ -92,10 +97,6 @@ const Playlists = () => {
               >
                 <FaTrash />
               </button>
-
-              <Link to={`/reader/track/${item.info.id}`}>
-                <button className="Play">Play</button>
-              </Link>
             </Reorder.Item>
           ))}
         </Reorder.Group>
