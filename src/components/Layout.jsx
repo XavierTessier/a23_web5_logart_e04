@@ -8,17 +8,17 @@ const Layout = () => {
   const { user } = useAuth();
   return (
     <div>
-      <div className="flex flex-row">
+      <div>
         <Header />
         <Outlet />
-        {/* {user ? (
+        {user ? (
                     <BarreRecherche />
                 ) : (
                     <></>
-                )}
-                {/* <AffichageElements categorieChercher="chart" type="albums"/> */}
-        {/* <AffichageElements categorieChercher="chart" type="artists"/> */}
-        {/* <AffichageElements categorieChercher="chart" type="tracks" /> */}
+                )} 
+        { <AffichageElements categorieChercher="chart" type="albums"/> }
+        { <AffichageElements categorieChercher="chart" type="artists"/> }
+        { <AffichageElements categorieChercher="chart" type="tracks" /> }
       </div>
     </div>
   );
