@@ -1,6 +1,7 @@
 .accueil {
     display: flex;
-    height: 500px;
+    width: 100%;
+    height: 1px;
     flex-direction: column;
     align-items: center;
 }
@@ -32,7 +33,6 @@
         position: absolute;
         top: 3em;
         font-size: 70px;
-        font-family: 'Playpen Sans', cursive;
     }
     
     .accueil .forme{
@@ -45,17 +45,15 @@
 
 @media only screen and (min-width: 1200px) {
     .accueil h1 {
-        position: absolute;
         top: 2em;
         font-size: 96px;
-        font-family: 'Playpen Sans', cursive;
     }
     
     .accueil .forme{
         width: 10em;
         z-index: -10;
         position: relative;
-        top: 9em;
+        top: -28em;
         left: -18em;
     }
 }

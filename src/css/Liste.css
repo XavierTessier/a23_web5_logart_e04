@@ -112,3 +112,15 @@
     }
 }
 
+@media only screen and (min-width: 1200px) {
+    ul.liste_elements {
+        padding-left: 200px;
+    }
+
+    h2.recommander {
+        padding-bottom: 75px;
+        padding-left: 200px;
+    }
+}
+
+
