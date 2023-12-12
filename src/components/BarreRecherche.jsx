@@ -29,12 +29,40 @@ const BarreRecherche = () => {
     };
   };
 
-  const truncateText = (text, maxLength, width) => {
-    const splice = width <= 678 ? width / 25 : 1000000;
-    console.log(splice);
+  const truncateText = (text, maxLength) => {
+    const width = window.innerWidth;
 
-    return text.length > maxLength ? text.slice(0, splice) + "..." : text;
+    // Create an invisible element to measure the width
+    const dummyElement = document.createElement("span");
+    dummyElement.style.visibility = "hidden";
+    dummyElement.style.whiteSpace = "nowrap";
+    dummyElement.textContent = text;
+
+    document.body.appendChild(dummyElement);
+
+    // Measure the width of the text
+    const textWidth = dummyElement.getBoundingClientRect().width;
+
+    // Remove the dummy element
+    document.body.removeChild(dummyElement);
+
+    if (width <= 920) {
+      const truncatedText = text.length > 12 ? text.slice(0, 12) : text;
+      const finalText =
+        truncatedText.length > maxLength || textWidth > width
+          ? truncatedText.slice(0, width / 55) + "..."
+          : truncatedText;
+      return finalText;
+    } else {
+      const truncatedText = text.length > 1000 ? text.slice(0, 10000) : text;
+      const finalText =
+        truncatedText.length > maxLength || textWidth > width
+          ? truncatedText.slice(0, width / 1) + "..."
+          : truncatedText;
+      return finalText;
+    }
   };
+
   useEffect(() => {
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
@@ -127,7 +155,9 @@ const BarreRecherche = () => {
               results.data.map((result) => (
                 <div className="card" key={result.id} id={`item-${result.id}`}>
                   <p className="title">
-                    {truncateText(result.title, 4, windowWidth)}
+                    {windowWidth <= 1500
+                      ? truncateText(result.title, 15, windowWidth)
+                      : result.title}
                   </p>
                   <p className="artist">
                     {result.artist && result.artist.name}
@@ -165,23 +195,37 @@ const BarreRecherche = () => {
                       src={result.album && result.album.cover_medium}
                       alt=""
                     />
-                    <p className="title">
-                      {truncateText(result.title, 12, windowWidth)}
-                    </p>
-                    {windowWidth >= 768 ? (
-                      <p className="artist">
-                        {result.artist && result.artist.name}
+                    <div className="wrapper-info-search">
+                      <p className="title">
+                        {windowWidth <= 1500
+                          ? truncateText(result.title, 10)
+                          : result.title}
                       </p>
-                    ) : (
-                      <></>
-                    )}
-                    {windowWidth >= 768 ? (
-                      <p className="album">
-                        {result.album && result.album.title}
-                      </p>
-                    ) : (
-                      <></>
-                    )}
+                      {windowWidth >= 768 ? (
+                        <p className="artist">
+                          {windowWidth <= 1500
+                            ? truncateText(
+                                result.artist && result.artist.name,
+                                8
+                              )
+                            : result.artist && result.artist.name}
+                        </p>
+                      ) : (
+                        <></>
+                      )}
+                      {windowWidth >= 768 ? (
+                        <p className="album">
+                          {windowWidth <= 1500
+                            ? truncateText(
+                                result.album && result.album.title,
+                                8
+                              )
+                            : result.album && result.album.title}
+                        </p>
+                      ) : (
+                        <></>
+                      )}
+                    </div>
                   </Link>
                   <div className="btn-add">
                     <button
@@ -283,54 +327,55 @@ const BarreRecherche = () => {
 
   return (
     <div className="barre-de-recherche">
-      <form action="">
-        <div className="wrapper-search">
-          <input
-            className="searchBar"
-            type="text"
-            placeholder="    Rechercher une chanson"
-            onChange={updateState}
-            value={query.value}
-          />
-          <button
-            onClick={handleSearch}
-            disabled={!isValid()}
-            className="btn-search"
-          >
-            Recherche
-          </button>
-        </div>
-
-        <div className="wrapper-radio">
-          <div className="radio-album">
+      <form action="" className="">
+        <div className="form">
+          <div className="wrapper-search">
             <input
-              type="radio"
-              id="album"
-              name="type"
-              value="album"
-              onClick={handleType}
+              className="searchBar"
+              type="text"
+              placeholder="    Rechercher une chanson"
+              onChange={updateState}
+              value={query.value}
             />
-            <label htmlFor="album">Album</label>
+            <button
+              onClick={handleSearch}
+              disabled={!isValid()}
+              className="btn-search"
+            >
+              Recherche
+            </button>
           </div>
-          <div className="radio-artist">
-            <input
-              type="radio"
-              id="artist"
-              name="type"
-              value="artist"
-              onClick={handleType}
-            />
-            <label htmlFor="artist">Artist</label>
-          </div>
-          <div className="radio-chanson">
-            <input
-              type="radio"
-              id="track"
-              name="type"
-              value="track"
-              onClick={handleType}
-            />
-            <label htmlFor="track">Chanson</label>
+          <div className="wrapper-radio">
+            <div className="radio-album">
+              <input
+                type="radio"
+                id="album"
+                name="type"
+                value="album"
+                onClick={handleType}
+              />
+              <label htmlFor="album">Album</label>
+            </div>
+            <div className="radio-artist">
+              <input
+                type="radio"
+                id="artist"
+                name="type"
+                value="artist"
+                onClick={handleType}
+              />
+              <label htmlFor="artist">Artist</label>
+            </div>
+            <div className="radio-chanson">
+              <input
+                type="radio"
+                id="track"
+                name="type"
+                value="track"
+                onClick={handleType}
+              />
+              <label htmlFor="track">Chanson</label>
+            </div>
           </div>
         </div>
 
