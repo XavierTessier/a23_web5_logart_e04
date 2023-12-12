@@ -1,0 +1,35 @@
+.radio-album,
+.radio-artist,
+.radio-chanson {
+    display: flex;
+    align-items: center;
+}
+
+.radio-album input,
+.radio-artist input,
+.radio-chanson input {
+    display: none;
+}
+
+.radio-album label,
+.radio-artist label,
+.radio-chanson label {
+    cursor: pointer;
+    padding: 8px 16px;
+    background-color: #f2f2f2;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.radio-album label:hover,
+.radio-artist label:hover,
+.radio-chanson label:hover {
+    background-color: #ddd;
+}
+
+.radio-album input:checked+label,
+.radio-artist input:checked+label,
+.radio-chanson input:checked+label {
+    background-color: #ff7e50;
+    color: #fff;
+}

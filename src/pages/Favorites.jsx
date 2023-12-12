@@ -1,6 +1,7 @@
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../config/firebase";
 import { useAuth } from "../context/authContext";
+import { Link } from "react-router-dom";
 
 const Favorites = () => {
   const { user, setUserData, userData, removeFromFav } = useAuth();

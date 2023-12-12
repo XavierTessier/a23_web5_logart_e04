@@ -3,17 +3,21 @@ import { useState, useEffect, useRef } from "react";
 import { useAuth } from "../context/authContext";
 import { Link } from "react-router-dom";
 import "../css/recherche.css";
+import "../css/radio-btn.css";
+import Like from "../components/Like";
 
 const BarreRecherche = () => {
   const [query, setQuery] = useState({
     value: "",
   });
+  const [dropdownVisible, setDropdownVisible] = useState(false);
   const [buttonClicked, setButtonClicked] = useState(false);
   const [results, setResults] = useState([]);
   const [type, setType] = useState("track");
   const [limit, setLimit] = useState(10); // New state to track the number of results to load
   const observer = useRef();
   const { addMusicToUser, user, userData, addToFav, addToHistory } = useAuth();
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   const debounce = (func, delay) => {
     let timeoutId;
@@ -24,6 +28,21 @@ const BarreRecherche = () => {
       }, delay);
     };
   };
+
+  const truncateText = (text, maxLength, width) => {
+    const splice = width <= 678 ? width / 25 : 1000000;
+    console.log(splice);
+
+    return text.length > maxLength ? text.slice(0, splice) + "..." : text;
+  };
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const handleLoadMore = () => {
     setLimit((prevLimit) => prevLimit + 10); // Increase the limit by 10 when the button is clicked
@@ -107,7 +126,9 @@ const BarreRecherche = () => {
             {results.data &&
               results.data.map((result) => (
                 <div className="card" key={result.id} id={`item-${result.id}`}>
-                  <p className="title">{result.title}</p>
+                  <p className="title">
+                    {truncateText(result.title, 4, windowWidth)}
+                  </p>
                   <p className="artist">
                     {result.artist && result.artist.name}
                   </p>
@@ -139,60 +160,72 @@ const BarreRecherche = () => {
               results.data.map((result) => (
                 <div className="card" key={result.id} id={`item-${result.id}`}>
                   <Link to={`reader/track/${result.id}`}>
-                    <p className="title">{result.title}</p>
-                    <p className="artist">
-                      {result.artist && result.artist.name}
-                    </p>
-                    <p className="album">
-                      {result.album && result.album.title}
-                    </p>
                     <img
                       className="albumCover"
                       src={result.album && result.album.cover_medium}
                       alt=""
                     />
+                    <p className="title">
+                      {truncateText(result.title, 12, windowWidth)}
+                    </p>
+                    {windowWidth >= 768 ? (
+                      <p className="artist">
+                        {result.artist && result.artist.name}
+                      </p>
+                    ) : (
+                      <></>
+                    )}
+                    {windowWidth >= 768 ? (
+                      <p className="album">
+                        {result.album && result.album.title}
+                      </p>
+                    ) : (
+                      <></>
+                    )}
                   </Link>
-                  <button
-                    onClick={() =>
-                      addMusicToUser(userData.playlist, {
-                        id: result.id,
-                        title: result.title,
-                        artist: result.artist.name,
-                        albumTitle: result.album.title,
-                        albumCover: result.album.cover_medium,
-                        duration: result.duration,
-                      })
-                    }
-                  >
-                    Ajouter à la playlist
-                  </button>
-                  <button
-                    onClick={() =>
-                      addToFav(userData.favorites, {
-                        id: result.id,
-                        title: result.title,
-                        artist: result.artist.name,
-                        albumTitle: result.album.title,
-                        albumCover: result.album.cover_medium,
-                        duration: result.duration,
-                      })
-                    }
-                  >
-                    Fav
-                  </button>
-                  <button
-                    onClick={() =>
-                      addToHistory({
-                        id: result.id,
-                        title: result.title,
-                        artist: result.artist.name,
-                        albumTitle: result.album.title,
-                        albumCover: result.album.cover_medium,
-                      })
-                    }
-                  >
-                    historique
-                  </button>
+                  <div className="btn-add">
+                    <button
+                      onClick={() =>
+                        addMusicToUser(userData.playlist, {
+                          id: result.id,
+                          title: result.title,
+                          artist: result.artist.name,
+                          albumTitle: result.album.title,
+                          albumCover: result.album.cover_medium,
+                          duration: result.duration,
+                        })
+                      }
+                    >
+                      <Like />
+                    </button>
+                    {/* <button
+                      onClick={() =>
+                        addToFav(userData.favorites, {
+                          id: result.id,
+                          title: result.title,
+                          artist: result.artist.name,
+                          albumTitle: result.album.title,
+                          albumCover: result.album.cover_medium,
+                          duration: result.duration,
+                        })
+                      }
+                    >
+                      Fav
+                    </button>
+                    <button
+                      onClick={() =>
+                        addToHistory({
+                          id: result.id,
+                          title: result.title,
+                          artist: result.artist.name,
+                          albumTitle: result.album.title,
+                          albumCover: result.album.cover_medium,
+                        })
+                      }
+                    >
+                      historique
+                    </button> */}
+                  </div>
                 </div>
               ))}
           </div>
@@ -200,8 +233,8 @@ const BarreRecherche = () => {
       default:
         return (
           <div className="results">
-            {liste.data &&
-              liste.data.map((result) => (
+            {results.data &&
+              results.data.map((result) => (
                 <div className="card" key={result.id} id={`item-${result.id}`}>
                   <p className="title">{result.title}</p>
                   <p className="artist">
@@ -249,48 +282,59 @@ const BarreRecherche = () => {
   };
 
   return (
-    <div>
+    <div className="barre-de-recherche">
       <form action="">
-        <input
-          type="text"
-          placeholder="Rechercher une chanson"
-          onChange={updateState}
-          value={query.value}
-        />
-        <button onClick={handleSearch} disabled={!isValid()}>
-          Recherche
-        </button>
-
-        <label htmlFor="album">
+        <div className="wrapper-search">
           <input
-            type="radio"
-            id="album"
-            name="type"
-            value="album"
-            onClick={handleType}
+            className="searchBar"
+            type="text"
+            placeholder="    Rechercher une chanson"
+            onChange={updateState}
+            value={query.value}
           />
-          Album
-        </label>
+          <button
+            onClick={handleSearch}
+            disabled={!isValid()}
+            className="btn-search"
+          >
+            Recherche
+          </button>
+        </div>
 
-        <input
-          type="radio"
-          id="artist"
-          name="type"
-          value="artist"
-          onClick={handleType}
-        />
-        <label htmlFor="artist">Artist</label>
+        <div className="wrapper-radio">
+          <div className="radio-album">
+            <input
+              type="radio"
+              id="album"
+              name="type"
+              value="album"
+              onClick={handleType}
+            />
+            <label htmlFor="album">Album</label>
+          </div>
+          <div className="radio-artist">
+            <input
+              type="radio"
+              id="artist"
+              name="type"
+              value="artist"
+              onClick={handleType}
+            />
+            <label htmlFor="artist">Artist</label>
+          </div>
+          <div className="radio-chanson">
+            <input
+              type="radio"
+              id="track"
+              name="type"
+              value="track"
+              onClick={handleType}
+            />
+            <label htmlFor="track">Chanson</label>
+          </div>
+        </div>
 
-        <input
-          type="radio"
-          id="track"
-          name="type"
-          value="track"
-          onClick={handleType}
-        />
-        <label htmlFor="track">Track</label>
-
-        <h1>Looking for {type} </h1>
+        <h1 className="ml-2">Résultat pour {type} </h1>
       </form>
 
       {displayList(type)}
