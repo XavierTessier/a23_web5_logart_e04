@@ -25,6 +25,8 @@ const MusicProvider = ({children}) => {
             artist:null,
             track:null,
             albums:null,
+            tracks:null,
+            artists:null,
         }
     );
     /* getBySeach -> Informations
@@ -38,11 +40,11 @@ const MusicProvider = ({children}) => {
     | album, track, artist, albums | --> This is used to know what information the func has to return.
     --------------------------------
     */
-    const getBySearch = async(need, lookFor) => {
+    const getBySearch = async(need, lookFor, limit="") => {
         useEffect(() => {
             const search = async () => {
                 try {
-                    const resp = await fetchJsonp(`https://api.deezer.com/${need}&output=jsonp`);
+                    const resp = await fetchJsonp(`https://api.deezer.com/${need}${(limit != "")? "?limit=" + limit : ""}&output=jsonp`);
                     if (!resp.ok) throw new Error('Network response was not ok');
                     const data = await resp.json();
                     
@@ -58,7 +60,7 @@ const MusicProvider = ({children}) => {
               };
           
               search();
-        },[need]);
+        },[need,lookFor]);
     }
     const sendUsableData = (data, lookFor) => {
         switch (lookFor) {
@@ -80,11 +82,15 @@ const MusicProvider = ({children}) => {
               text: data.title,
               link: data.link,
               image: data.cover,
-              image_small: data.picture_small,
-              image_medium: data.picture_medium,
-              image_big: data.picture_big,
-              image_xl: data.picture_xl,
+              image_small: data.cover_small,
+              image_medium: data.cover_medium,
+              image_big: data.cover_big,
+              image_xl: data.cover_xl,
               type: data.type,
+              artist:data.artist,
+              tracks:data.tracks.data,
+              genres:data.genres.data,
+            //   data:data
             };
           case "track":
             return {
@@ -94,9 +100,10 @@ const MusicProvider = ({children}) => {
             };
           case "albums":
             return data.data;
+          case "artists": return data.data;
           default:
             console.warn(`Unhandled case: ${lookFor}`);
-            return null;
+            return data;
         }
       };
     const getTrack = async(trackId) => {

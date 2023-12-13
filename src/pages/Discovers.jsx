@@ -17,14 +17,16 @@ what you are looking for.
 const Discovers = () => {
     const { id, categorie } = useParams();
     const {musicData, getBySearch} = useMusic();
-    getBySearch(`artist/${id}`,"artist");
-    getBySearch(`artist/${id}/albums`,"albums");
+    // getBySearch(`artist/${id}`,"artist");
+    getBySearch(`${categorie}/${id}`,categorie);
+    // getBySearch(`artist/${id}/albums`,"albums");
     // getBySearch(`search/artist?q=`,"albums");
     let contenu = null;
+    if(musicData[categorie])
     switch(categorie){
-        case "album": contenu = <AlbumInfo/>;break;
-        case "artist": contenu = <ArtistInfo/>;break;
-        case "track": contenu = <TrackInfo/>;break;
+        case "album": contenu = <AlbumInfo musicData={musicData} onSearch={getBySearch} id={id}/>;break;
+        case "artist": contenu = <ArtistInfo musicData={musicData} onSearch={getBySearch} id={id}/>;break;
+        case "track": contenu = <TrackInfo onSearch={getBySearch} id={id}/>;break;
         default: contenu = null;
     }
     console.log("Welcome on discovers");
@@ -33,7 +35,7 @@ const Discovers = () => {
         (musicData[categorie])?
         <section className="Discovers">
             {/* h1 + img */}
-            <DiscoversInfosBase text={musicData[categorie]?.text}/>
+            <DiscoversInfosBase musicData={musicData[categorie]}/>
             {contenu}
         </section>
         : null
