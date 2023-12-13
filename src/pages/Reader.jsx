@@ -66,7 +66,7 @@ const Reader = () => {
         </div>
       </div>
       <div className="vinyle-tourne relative">
-        <Vinyle />
+        <Vinyle img={choosenTrack?.album?.cover || choosenTrack?.albumCover}/>
       </div>
       <InfoMusic />
       <Tracks />
