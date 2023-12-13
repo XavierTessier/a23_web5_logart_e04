@@ -72,6 +72,7 @@
     .liste_elements {
         flex-direction: row;
         flex-wrap: wrap;
+        margin-left: 9em;
     }
 
     .liste_elements img {
@@ -96,6 +97,7 @@
     h2.recommander {
         padding-bottom: 75px;
         padding-left: 28px;
+        margin-left: 6em;
     }
 
     .liste_elements li {
@@ -116,11 +118,13 @@
 @media only screen and (min-width: 1200px) {
     .liste_elements {
         padding-left: 200px;
+        margin-left: 0em;
     }
 
     h2.recommander {
         padding-bottom: 75px;
         padding-left: 200px;
+        margin-left: 1em;
     }
 }
 
