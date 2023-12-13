@@ -25,10 +25,10 @@ const Login = () => {
           Se connecter avec Google
         </button>
       </div>
-      <img src="src\img\png\Fichier 3.png" alt="forme" className="forme1" />
-      <img src="src/img/png/Fichier 1.png" alt="forme" className="ligne1" />
-      <img src="src\img\png\Fichier 13.png" alt="forme" className="forme2" />
-      <img src="src/img/png/Fichier 14.png" alt="forme" className="ligne2" />
+      <img src="src\img\png\Fichier_3.png" alt="forme" className="forme1" />
+      <img src="src/img/png/Fichier_1.png" alt="forme" className="ligne1" />
+      <img src="src\img\png\Fichier_13.png" alt="forme" className="forme2" />
+      <img src="src/img/png/Fichier_14.png" alt="forme" className="ligne2" />
     </div>
   );
 };
