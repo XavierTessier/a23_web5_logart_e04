@@ -153,8 +153,8 @@ const MusicController = ({ onJoueChange }) => {
   };
 
   return (
-    <section className="music-controler relative w-screen">
-      <div className="wrapper-controle w-full">
+    <section className="music-controler relative ">
+      <div className="wrapper-controle">
         <div className="wrapper-controler">
           <div className="wrapper-like absolute bottom-8 right-0">
             <Like />
