@@ -8,15 +8,11 @@ const Layout = () => {
   const { user } = useAuth();
   return (
     <div>
-      <div>
-        <Header />
-        <div className="layout">
-          <Outlet />
-        </div>
-        {/* <AffichageElements categorieChercher="chart" type="albums"/> */}
-        <AffichageElements categorieChercher="chart" type="artists" /> 
-        <AffichageElements categorieChercher="chart" type="tracks" />
-      </div>
+      <Header />
+      <Outlet />
+      {/* <AffichageElements categorieChercher="chart" type="albums"/> */}
+      <AffichageElements categorieChercher="chart" type="artists" /> 
+      <AffichageElements categorieChercher="chart" type="tracks" />
     </div>
   );
 };

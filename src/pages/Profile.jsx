@@ -10,6 +10,8 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useMusic } from "../context/musicContext";
 import { Helmet } from "react-helmet";
+import { HiDotsHorizontal } from "react-icons/hi";
+import Like from "../components/Like";
 
 const Profile = () => {
   const { user, logout, setUserData, userData, getTopMusic, getHistory } =
@@ -34,7 +36,7 @@ const Profile = () => {
   }, []);
 
   return (
-    <div className="h-screen">
+    <div>
       <Helmet>
         <title>Tune-Up | Profil</title>
       </Helmet>
@@ -47,40 +49,48 @@ const Profile = () => {
         <img src={user.photoURL} alt="avatar" className="avatar"/>
       </div>
       {/* <p>Email : {user.email}</p> */}
+      {/* <div>
+        <h2 className="recommander">vos plus écoutés</h2>
+      </div> */}
       <div>
-        <p>vos plus écoutés</p>
-      </div>
-      <div>
-        <p>Musique tendance</p>
+        <h2 className="recommander">Musique tendance</h2>
         {topMusic.map((item, index) => (
           <div className="fav" id={index} key={item.music.id}>
-            <Link to={`/reader/track/${item.music.id}`}>
-              <img src={item.music.albumCover} className="cover" />
-              <div className="info">
-                <p>{item.music.title}</p>
-                <p>{item.music.artist}</p>
+            <li>
+              <p>{item.music.title}</p>
+              <Link to={`/reader/track/${item.music.id}`}>
+                <div className="white"><HiDotsHorizontal /></div>
+                <div className="coeur"><Like /></div>
+                <div className="opacite"></div>
+                <img src={item.music.albumCover}/>
+                {/* <p>{item.music.artist}</p>
                 <p>{item.music.albumTitle}</p>
-                <p>{item.music.duration}s</p>
-              </div>
-            </Link>
+                <p>{item.music.duration}s</p> */}
+              </Link>
+            </li>
           </div>
         ))}
       </div>
       <div>
-        Musique récentes écoutés :
+        <h2 className="recommander">Musique récentes écoutés :</h2>
+        <div className="liste_elements">
         {history.map((item, index) => (
           <div className="fav" id={index} key={item.music.id + index}>
-            <Link to={`/reader/track/${item.music.id}`}>
-              <img src={item.music.albumCover} className="cover" />
-              <div className="info">
-                <p>{item.music.title}</p>
-                <p>{item.music.artist}</p>
-                <p>{item.music.albumTitle}</p>
-                <p>{item.music.duration}s</p>
-              </div>
-            </Link>
+                <li>
+                  <p>{item.music.title}</p>
+                  <Link to={`/reader/track/${item.music.id}`}>
+                      <div className="white"><HiDotsHorizontal /></div>
+                      <div className="coeur"><Like /></div>
+                      <div className="opacite"></div>
+                      <img src={item.music.albumCover} />
+                      {/* <p>{item.music.artist}</p>
+                      <p>{item.music.albumTitle}</p>
+                      <p>{item.music.duration}s</p> */}
+                  </Link>
+                </li>
           </div>
         ))}
+        </div>
       </div>
       <Link to="/playlists">Playlist</Link>
       <Link to="/favorites">Favoris</Link>

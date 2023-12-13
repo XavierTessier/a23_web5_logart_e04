@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const Favorites = () => {
   const { user, setUserData, userData, removeFromFav } = useAuth();
   return (
-    <div className="h-screen">
+    <div >
       {userData.favorites &&
         userData.favorites.map((item, index) => (
           <div className="fav" id={index} key={item.info.id}>
