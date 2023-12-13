@@ -8,93 +8,100 @@ import Like from "./Like";
 import { Navigate } from "react-router-dom";
 
 const AffichageElements = ({ categorieChercher, type, }) => {
-  const [listeCategorie, setListeCategorie] = useState(null);
-  const [link, setLink] = useState("");
-  let test = null;
+  const [myInfos, setMyInfos] = useState({
+    charts:null,
+    tracksFromAlbums:[]
+  });
   useEffect(() => {
     const fetchByCategorie = async () => {
       try {
         const resp = await fetchJsonp(`https://api.deezer.com/${categorieChercher}&output=jsonp`);
         if (!resp) throw new Error('Network response was incorrect');
         const data = await resp.json();
-        setListeCategorie(data[type].data);
+        setMyInfos((current) => ({
+          ...current,
+          charts: data,
+        }));
+        return data;
       } catch (error) {
         console.error(`Error fetching ${categorieChercher}:`, error);
+        throw error;
       }
     };
-    fetchByCategorie();
-
+  
+    const fetchByID = async (id) => {
+      try {
+        const resp = await fetchJsonp(`https://api.deezer.com/album/${id}/tracks&output=jsonp`);
+        if (!resp) throw new Error('Network response was incorrect');
+        const data = await resp.json();
+        return data;
+      } catch (error) {
+        console.error(`Error fetching album tracks for ID ${id}:`, error);
+        throw error;
+      }
+    };
+  
+    const fetchData = async () => {
+      try {
+        const categorieData = await fetchByCategorie();
+        if(type == "albums") {
+          if (categorieData && categorieData.albums && categorieData.albums.data) {
+            const albumDataArray = categorieData.albums.data;
+            const tracksPromises = albumDataArray.map((element) => fetchByID(element.id));
+            const allTracksData = await Promise.all(tracksPromises);
+            setMyInfos((current) => ({
+              ...current,
+              tracksFromAlbums: allTracksData,
+            }));
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+  
+    fetchData();
   }, []);
-  const fetchTest = async (id) => {
-    console.log("try to fetch");
-    try {
-      console.log("async fetch");
-
-      const resp = await fetchJsonp(`https://api.deezer.com/album/${id}/tracks&output=jsonp`);
-      if (!resp) throw new Error('Network response was incorrect');
-      const data = await resp.json();
-      console.log(data.data[0].id);
-      if (data) setLink(data.data[0].id);
-    } catch (error) {
-      console.error('Error fetching tracks:', error);
-    }
-    return link;
-  };
-  const fetchTracks = async (id) => {
-    const resp = await fetchJsonp(`https://api.deezer.com/album/${id}/tracks&output=jsonp`);
-    if (!resp) throw new Error('Network response was incorrect');
-    const data = await resp.json();
-
-    // await setLink(data.data[0].id);
-    return id;
-  }
+   
   const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
-  const getDisplayValue = (element) => {
+  const getDisplayValue = (element, index=0) => {
     switch (type) {
       case "artists":
         return {
           text: element.name,
           image: element.picture_medium,
-          link: '/artist/' + element.id,
-          debug: () => { console.log(element.type) }
+          link: "discover/artist/" + element.id,
         };
-      // '/reader/track/' + 
       case "albums":
-        const getAlbumLink = async () => {
-          const trackId = await fetchTest(element.id);
-          return '/reader/track/' + trackId;
-        };
-
         return {
           text: element.title,
           image: element.cover_medium,
-          link: getAlbumLink(),
-          debug: () => { console.log(element.type) }
+          link: "reader/track/" + myInfos.tracksFromAlbums[index]?.data[0]?.id,
         };
       case "tracks":
         return {
           text: element.title,
           image: element.album.cover_medium,
-          link: '/reader/track/' + element.id,
-          debug: () => { console.log(element.type) }
+          link: "reader/track/" + element.id, 
         };
       default:
         return element.title;
     }
-
   };
-
+  if(myInfos.tracksFromAlbums != null)
+  if(myInfos.charts?.artists != null)
+  console.log(myInfos.charts[type]);
   return (
     <div>
       <h2 className="recommander">{capitalizeFirstLetter(type)} recommander</h2>
       <ul className="liste_elements">
         {
-          listeCategorie && listeCategorie.map((element) => (
+          (myInfos.charts && myInfos.tracksFromAlbums || type != "albums") && myInfos.charts?.[type].data.map((element,index) => (
             <li key={element.id}>
               <p>{getDisplayValue(element).text}</p>
-              <Link to={getDisplayValue(element).link} state={element}>
+              <Link to={getDisplayValue(element,index).link} state={element}>
                 <div className="white"><HiDotsHorizontal /></div>
                 <div className="coeur"><Like /></div>
                 <div className="opacite"></div>

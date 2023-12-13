@@ -40,11 +40,17 @@ section.info-track-mobile {
         font-weight: bold;
     }
 
+    section.info-track li {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        max-width: 500px;
+    }
+
 }
 
 @media screen and (min-width:1600px) {
     section.info-track {
-
         background-color: #FFCAB8;
         width: fit-content;
         height: fit-content;
@@ -52,5 +58,21 @@ section.info-track-mobile {
         position: absolute;
         top: 40%;
         left: 10%;
+    }
+
+    section.info-track li {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        max-width: 400px;
+    }
+
+    span.texte-info {
+        font-family: 'Playpen Sans', sans-serif;
+        font-weight: bold;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        max-width: 20px;
     }
 }

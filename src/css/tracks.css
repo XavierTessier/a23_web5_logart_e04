@@ -60,7 +60,7 @@ section.tracks {
         top: 2em;
         right: 0;
         margin-right: 3%;
-        overflow: scroll;
+        overflow-y: scroll;
     }
 
     p.song-title {
@@ -78,7 +78,7 @@ section.tracks {
     section.tracks {
         width: 500px;
         height: 600px;
-        overflow: scroll;
+        overflow-y: scroll;
     }
 
     p.album-name {
