@@ -7,7 +7,7 @@ import AffichageElements from "./AffichageElements";
 const Layout = () => {
   const { user } = useAuth();
   return (
-    <div>
+    <div className="h-screen">
       <div className="layout">
         <Header />
         <Outlet />
