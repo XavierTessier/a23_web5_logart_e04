@@ -74,7 +74,7 @@ const Playlists = () => {
               <Link to={`/reader/track/${item.info.id}`} className="play-btn">
                 <PlayButton />
               </Link>
-              <img src={item.info.album.cover} className="cover rounded-md" />
+              <img src={item.info.albumCover} className="cover rounded-md" />
               <div className="info">
                 <p className="song-title">
                   {truncateText(item.info.title, 10, windowWidth)}

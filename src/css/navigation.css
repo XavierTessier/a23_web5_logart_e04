@@ -15,6 +15,7 @@ ul.icons {
     justify-content: space-around;
     align-items: center;
     width: 100%;
+    margin: 0 auto;
 
 }
 
@@ -23,11 +24,9 @@ nav.navigation {
     width: 100%;
     height: fit-content;
     bottom: 0;
-}
-
-.navigation {
     z-index: 10000;
 }
+
 
 @media screen and (min-width: 768px) {
     .layout {
@@ -35,36 +34,32 @@ nav.navigation {
         flex-direction: row;
     }
 
+
     div.wrapper-icons {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
+        width: 150px;
     }
 
     nav.navigation {
         position: relative;
         height: 100%;
-        width: 15%;
-        margin: 0 2em 2em 0;
-        left: 0;
-        top: 0;
+        width: 150px;
+        margin: 0 1em 1em 0;
+        padding: 0;
     }
 
     div.menu {
-        display: block;
+        display: inline-block;
         position: fixed;
         background-color: #FF7E50;
         height: 100%;
-        width: 15%;
-        padding: 0;
+        width: 150px;
     }
 
     ul.icons {
         display: flex;
         flex-direction: column;
         width: 100%;
+
         align-items: center;
         justify-content: center;
     }
@@ -83,6 +78,6 @@ nav.navigation {
     div.menu {
 
         height: 100%;
-        width: 145px;
+        width: 150px;
     }
 }

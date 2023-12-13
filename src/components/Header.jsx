@@ -40,7 +40,7 @@ const Header = () => {
       <div className="menu hidden"></div>
       <nav className="navigation relative bg-corail-reg py-4">
         <div className="wrapper-icons">
-          <ul className="icons flex flex-row ">
+          <ul className="icons">
             <li className={pathname === "/accueil" ? "actif" : null}>
               <HiHome
                 style={{ color: "white" }}
