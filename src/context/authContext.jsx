@@ -154,46 +154,47 @@ const AuthProvider = ({ children }) => {
 
     const addToFav = async (favorites, info) => {
         try {
-            // Vérifier si la musique est déjà dans la playlist
-            if (favorites.some(item => item.info.id === info.id)) {
-                console.log("Musique déjà présente dans vos favoris");
-                toast.error("Musique déjà présente dans vos favoris");
-                return;
+          // Vérifier si la musique est déjà dans la playlist
+          if (favorites.some(item => item.info.id === info.id)) {
+            console.log("Musique déjà présente dans vos favoris");
+            toast.error("Musique déjà présente dans vos favoris");
+            return;
+          } else {
+            // Créer une copie de la liste actuelle
+            const updatedFavorites = [...favorites];
+      
+            // Ajouter la nouvelle playlist avec la musique
+            const newFav = { info };
+            updatedFavorites.push(newFav);
+      
+            // Mettre à jour le document utilisateur avec la nouvelle liste de playlists
+            const userDocRef = doc(db, 'users', userData.uid);
+            await updateDoc(userDocRef, { favorites: updatedFavorites });
+      
+            const favDocRef = doc(db, 'favoris', String(info.id));
+            const querySnapshot = await getDoc(favDocRef);
+            if (!querySnapshot.exists()) {
+              console.log('[IS EMPTY SITE FAVORITE]');
+              const objMusic = {
+                music: info,
+                nbFavorites: 1,
+              }
+              await setDoc(favDocRef, objMusic);
+      
+              console.log("Musique ajoutée aux musiques tendances avec succès");
+            } else {
+              // Handle case where user with the given uid already exists
+              await updateDoc(favDocRef, { nbFavorites: increment });
+              console.log('La musique est déjà dans les favoris du site');
             }
-            else {
-                // Ajouter la nouvelle playlist avec la musique
-                const newFav = { info };
-                favorites.push(newFav);
-
-                // Mettre à jour le document utilisateur avec la nouvelle liste de playlists
-                const userDocRef = doc(db, 'users', userData.uid);
-                await updateDoc(userDocRef, { favorites });
-
-                const favDocRef = doc(db, 'favoris', String(info.id));
-                const querySnapshot = await getDoc(favDocRef);
-                if (!querySnapshot.exists()) {
-                    console.log('[IS EMPTY SITE FAVORITE]');
-                    const objMusic = {
-                        music: info,
-                        nbFavorites: 1,
-                    }
-                    await setDoc(favDocRef, objMusic);
-
-                    console.log("Musique ajoutée aux musiques tendances avec succès");
-                } else {
-                    // Handle case where user with the given uid already exists
-                    await updateDoc(favDocRef, { nbFavorites: increment });
-                    console.log('La musique est déja dans les favoris du site');
-                }
-
-
-                console.log("Musique ajoutée à vos favoris avec succès");
-                toast.success("Musique ajoutée à vos favoris avec succès");
-            }
+      
+            console.log("Musique ajoutée à vos favoris avec succès");
+            toast.success("Musique ajoutée à vos favoris avec succès");
+          }
         } catch (error) {
-            console.error("Erreur lors de l'ajout de la musique dans vos favoris:", error);
+          console.error("Erreur lors de l'ajout de la musique dans vos favoris:", error);
         }
-    };
+      };
 
     const removeFromFav = async (favorites, musicId) => {
         try {

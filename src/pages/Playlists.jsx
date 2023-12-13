@@ -13,7 +13,7 @@ import PlayButton from "../components/Play-playlist";
 
 const Playlists = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const { user, playlist, deleteMusic, setUserData, userData } = useAuth();
+  const { user, playlist, deleteMusic, setUserData, userData, addToFav } = useAuth();
 
   useEffect(() => {
     const handleResize = () => {
@@ -84,7 +84,16 @@ const Playlists = () => {
                     <p className="song-duration">
                       {FormatTime(item.info.duration)}
                     </p>
-                    <Like />
+                    <div onClick={() => addToFav(userData.favorites, {
+                      id: item.info.id,
+                      title: item.info.title,
+                      artist: item.info.artist,
+                      albumTitle: item.info.albumTitle,
+                      albumCover: item.info.albumCover,
+                      duration: item.info.duration,
+                    })}>
+                      <Like />
+                    </div>
                   </div>
                 ) : (
                   <></>
