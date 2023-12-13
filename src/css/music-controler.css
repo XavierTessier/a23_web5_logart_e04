@@ -13,6 +13,7 @@ section.music-controler {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 100%;
     gap: 1rem;
     margin: 0 auto;
     width: 100%;
@@ -55,6 +56,7 @@ div.progress {
     position: relative;
     appearance: none;
     height: 10px;
+    width: 200px;
     background-color: rgb(85, 85, 85);
     border-radius: 50px;
 
@@ -97,7 +99,7 @@ div.progress-volume {
         align-items: center;
         gap: 1rem;
         margin: 0;
-        width: 100%;
+        width: fit-content;
         height: 100%;
         padding: 1rem;
     }
@@ -111,7 +113,48 @@ div.progress-volume {
     }
 
     div.volume {
-        margin-left: 8em;
+        margin-left: 5em;
     }
 
+}
+
+@media screen and (min-width:1200px) {
+    section.music-controler {
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    div.volume {
+        margin: 0;
+        position: absolute;
+        right: 10em;
+        bottom: 5em;
+    }
+}
+
+@media screen and (min-width:1600px) {
+    section.music-controler {
+        flex-direction: row;
+        justify-content: center;
+        margin: 0 auto;
+    }
+
+    div.wrapper-controler {
+        margin: 0 auto;
+        margin-top: 2em;
+        width: fit-content;
+    }
+
+    div.btns-lecture {
+        margin: 0 auto;
+        margin-top: 2em;
+    }
+
+    div.volume {
+        margin: 0;
+        position: absolute;
+        right: 10em;
+        bottom: 5em;
+    }
 }

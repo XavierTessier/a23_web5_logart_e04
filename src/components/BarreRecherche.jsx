@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import "../css/recherche.css";
 import "../css/radio-btn.css";
 import Like from "../components/Like";
+import { TbPlaylistAdd } from "react-icons/tb";
 
 const BarreRecherche = () => {
   const [query, setQuery] = useState({
@@ -158,20 +159,26 @@ const BarreRecherche = () => {
           <div className="results">
             {results.data &&
               results.data.map((result) => (
-                <div className="card" key={result.id} id={`item-${result.id}`}>
-                  <p className="title">
-                    {windowWidth <= 1500
-                      ? truncateText(result.title, 15, windowWidth)
-                      : result.title}
-                  </p>
-                  <p className="artist">
-                    {result.artist && result.artist.name}
-                  </p>
+                <div
+                  className="wrapper-search-album"
+                  key={result.id}
+                  id={`item-${result.id}`}
+                >
                   <img
                     className="albumCover"
                     src={result.cover_medium}
                     alt=""
                   />
+                  <div className="card">
+                    <p className="title">
+                      {windowWidth <= 1500
+                        ? truncateText(result.title, 15, windowWidth)
+                        : result.title}
+                    </p>
+                    <p className="artist">
+                      {result.artist && result.artist.name}
+                    </p>
+                  </div>
                 </div>
               ))}
           </div>
@@ -181,9 +188,19 @@ const BarreRecherche = () => {
           <div className="results">
             {results.data &&
               results.data.map((result) => (
-                <div className="card" key={result.id} id={`item-${result.id}`}>
-                  <p className="artist">{result.name}</p>
+                <div
+                  className="wrapper-search-artist"
+                  key={result.id}
+                  id={`item-${result.id}`}
+                >
                   <img className="picture" src={result.picture_medium} alt="" />
+                  <div
+                    className="card"
+                    key={result.id}
+                    id={`item-${result.id}`}
+                  >
+                    <p className="artist">{result.name}</p>
+                  </div>
                 </div>
               ))}
           </div>
@@ -202,31 +219,17 @@ const BarreRecherche = () => {
                       alt=""
                     />
                     <div className="wrapper-info-search">
-                      <p className="title">
-                        {windowWidth <= 1500
-                          ? truncateText(result.title, 10)
-                          : result.title}
-                      </p>
+                      <p className="title">{result.title}</p>
                       {windowWidth >= 768 ? (
                         <p className="artist">
-                          {windowWidth <= 1500
-                            ? truncateText(
-                                result.artist && result.artist.name,
-                                8
-                              )
-                            : result.artist && result.artist.name}
+                          {result.artist && result.artist.name}
                         </p>
                       ) : (
                         <></>
                       )}
-                      {windowWidth >= 768 ? (
+                      {windowWidth >= 1200 ? (
                         <p className="album">
-                          {windowWidth <= 1500
-                            ? truncateText(
-                                result.album && result.album.title,
-                                8
-                              )
-                            : result.album && result.album.title}
+                          {result.album && result.album.title}
                         </p>
                       ) : (
                         <></>
@@ -246,9 +249,9 @@ const BarreRecherche = () => {
                         })
                       }
                     >
-                      <Like />
+                      <TbPlaylistAdd className="playlist-add" />
                     </button>
-                    {/* <button
+                    <button
                       onClick={() =>
                         addToFav(userData.favorites, {
                           id: result.id,
@@ -260,9 +263,9 @@ const BarreRecherche = () => {
                         })
                       }
                     >
-                      Fav
+                      <Like />
                     </button>
-                    <button
+                    {/*<button
                       onClick={() =>
                         addToHistory({
                           id: result.id,
@@ -385,7 +388,7 @@ const BarreRecherche = () => {
           </div>
         </div>
 
-        <h1 className="ml-2">Résultat pour {type} </h1>
+        <h1 className="text-result">Résultat pour {type} </h1>
       </form>
 
       {displayList(type)}
