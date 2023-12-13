@@ -4,10 +4,10 @@
     border-radius: 50%;
 }
 
-/* .layout {
+.layout {
     display: flex;
     flex-direction: column-reverse;
-} */
+}
 
 ul.icons {
     display: flex;
@@ -29,10 +29,10 @@ nav.navigation {
 
 
 @media screen and (min-width: 768px) {
-    /* .layout {
+    .layout {
         display: flex;
         flex-direction: row;
-    } */
+    }
 
 
     div.wrapper-icons {
