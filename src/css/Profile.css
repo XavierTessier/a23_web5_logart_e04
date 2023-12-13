@@ -49,8 +49,8 @@ div.user h2 {
     z-index: 30;
     font-family: 'Playpen Sans', cursive;
     color: white;
-    font-weight:600;
-    font-size: 25px;
+    font-weight: 600;
+    font-size: 50px;
 }
 
 @media only screen and (min-width: 768px) {
@@ -79,7 +79,7 @@ div.user h2 {
         left: 25%;
         padding-top: 100px;
         padding-left: 30%;
-        font-size: 45px;
+        font-size: 70px;
     }
 }
 
@@ -91,6 +91,7 @@ div.user h2 {
     div.user h2 {
         padding-top: 100px;
         padding-left: 30%;
+        font-size: 70px;
     }
 }
 
@@ -103,6 +104,7 @@ div.user h2 {
     div.user h2 {
         padding-top: 100px;
         padding-left: 28%;
+        font-size: 70px;
     }
 }
 
@@ -141,5 +143,6 @@ div.user h2 {
     div.user h2 {
         padding-top: 100px;
         padding-left: 10%;
+        font-size: 70px;
     }
 }
