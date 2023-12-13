@@ -194,7 +194,7 @@ const BarreRecherche = () => {
             {results.data &&
               results.data.map((result) => (
                 <div className="card" key={result.id} id={`item-${result.id}`}>
-                  <Link to={`reader/track/${result.id}`}>
+                  <Link to={`/reader/track/${result.id}`}>
                     {console.log(result.id)}
                     <img
                       className="albumCover"
