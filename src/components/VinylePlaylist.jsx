@@ -1,14 +1,9 @@
 import "../css/vinyle-single.css";
 import Bras from "./BrasReader";
-import "../css/anim-vinyle.css";
 
-const Vinyle = ({ img, isPlaying }) => {
+const Vinyle = ({ img }) => {
   return (
-    <div
-      className={
-        !isPlaying ? "vinyle-single relative playing" : "vinyle-single relative"
-      }
-    >
+    <div className="vinyle-playlist relative">
       <svg
         className="vinyle"
         viewBox="0 0 500 500"
@@ -25,14 +20,17 @@ const Vinyle = ({ img, isPlaying }) => {
           stroke="#3c3c3b"
           strokeWidth="10"
         />
+        <clipPath id="circleClip">
+          <circle cx="50%" cy="50%" r="75" />
+        </clipPath>
         <image
           className=""
-          clipPath="inset(0% round 50%)"
+          clipPath="url(#circleClip)"
           href={img}
-          width="100px"
-          height="100px"
-          x="40%"
-          y="40%"
+          width="50%"
+          height="50%"
+          x="25%"
+          y="25%"
         />
         <path
           d="M 120 250 A 125 125 , 0, 0, 0, 250 380"

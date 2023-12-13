@@ -21,7 +21,7 @@ div.footer {
         width: 150px;
     }
 
-    div.footer p, h2 {
+    div.footer p, div.footer h2 {
         color: white;
     }
 
@@ -67,7 +67,7 @@ div.footer {
         width: 320px;
     }
 
-    div.footer p, h2 {
+    div.footer p, div.footer h2 {
         color: white;
     }
 
@@ -95,4 +95,3 @@ div.footer {
         font-size: 1.2em;
     }
 }
-

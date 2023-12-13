@@ -9,7 +9,7 @@ import { RiSkipBackFill, RiSkipForwardFill } from "react-icons/ri";
 import { ImVolumeMedium } from "react-icons/im";
 import Like from "./Like";
 
-const MusicController = () => {
+const MusicController = ({ onJoueChange }) => {
   const [joue, setJoue] = useState(false);
   let value = 0;
   const { tracks, choosenTrack, setChoosenTrack } = useMusic();
@@ -19,6 +19,7 @@ const MusicController = () => {
 
   const isPlaying = () => {
     setJoue(!joue);
+    onJoueChange(!joue);
   };
 
   const {
@@ -146,13 +147,15 @@ const MusicController = () => {
   const FormatTime = (time) => {
     const minutes = Math.floor(time / 60);
     const seconds = time % 60;
-    return `${minutes}:${seconds}`;
+    const formattedSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
+
+    return `${minutes}:${formattedSeconds}`;
   };
 
   return (
     <section className="music-controler relative w-screen">
       <div className="wrapper-controle w-full">
-        <div className="wrapper-controller flex flex-col relative w-fit mx-auto mt-16">
+        <div className="wrapper-controler">
           <div className="wrapper-like absolute bottom-8 right-0">
             <Like />
           </div>
@@ -193,7 +196,7 @@ const MusicController = () => {
           </div>
         </div>
       </div>
-      <div className="volume flex flex-row justify-end pr-4 pt-8 items-center relative right-6">
+      <div className="volume">
         <ImVolumeMedium className="text-4xl w-fit mr-2" />
         <div className="volume-wrap relative">
           <input
