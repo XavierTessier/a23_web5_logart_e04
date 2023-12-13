@@ -7,7 +7,7 @@ section.info-track-mobile {
     margin-bottom: -50px;
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1600px) {
     section.info-track {
 
         background-color: #FFCAB8;
