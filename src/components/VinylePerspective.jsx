@@ -1,6 +1,6 @@
 import "../css/vinyles.css";
 
-const Vinyle = () => {
+const Vinyle = ({ img }) => {
   return (
     <div className="vinyle_container">
       <svg
@@ -30,7 +30,7 @@ const Vinyle = () => {
         />
         <image
           clipPath="inset(0% round 50%)"
-          href="/img/png/michaeljackson_thriller.jpg"
+          href={img}
           width="100px"
           height="100px"
           x="40%"

@@ -1,9 +1,14 @@
 import "../css/vinyle-single.css";
 import Bras from "./BrasReader";
+import "../css/anim-vinyle.css";
 
-const Vinyle = ({ img }) => {
+const Vinyle = ({ img, isPlaying }) => {
   return (
-    <div className="vinyle-single relative">
+    <div
+      className={
+        !isPlaying ? "vinyle-single relative playing" : "vinyle-single relative"
+      }
+    >
       <svg
         className="vinyle"
         viewBox="0 0 500 500"
@@ -74,7 +79,6 @@ const Vinyle = ({ img }) => {
 
         <circle cx="50%" cy="50%" r="10" />
       </svg>
-      <Bras />
     </div>
   );
 };

@@ -19,7 +19,7 @@ const InfoMusic = () => {
     };
   }, []); // Empty dependency array means this effect runs once after the initial render
 
-  return grosseurfenetres >= 1200 ? (
+  return grosseurfenetres >= 1600 ? (
     <section className="info-track rounded-xl">
       <ul>
         <div className="border rounded-xl"></div>

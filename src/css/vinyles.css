@@ -18,12 +18,12 @@
 }
 
 .vinyle_container {
-  width: 200px;
-  height: 240px;
+  width: 180px;
+  height: 220px;
 }
 
 .vinyle_container:not(:first-child) {
-  margin-left: -180px;
+  margin-left: -165px;
 }
 
 .vinyle_container:nth-child(2) {
@@ -38,6 +38,17 @@
   z-index: -3;
 }
 
+@media screen and (min-width: 576px) {
+  .vinyle_container {
+    width: 200px;
+    height: 250px;
+  }
+
+  .vinyle_container:not(:first-child) {
+    margin-left: -185px;
+  }
+}
+
 @media screen and (min-width: 768px) {
   .vinyle_container {
     width: 300px;
@@ -48,3 +59,5 @@
     margin-left: -280px;
   }
 }
+
+@media screen and (min-width: 1100px) {}
