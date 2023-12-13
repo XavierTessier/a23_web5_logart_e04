@@ -11,14 +11,14 @@ const Layout = () => {
       <div className="layout">
         <Header />
         <Outlet />
-        {/* {user ? (
+        {user ? (
                     <BarreRecherche />
                 ) : (
                     <></>
                 )}
-                {/* <AffichageElements categorieChercher="chart" type="albums"/> */}
-        {/* <AffichageElements categorieChercher="chart" type="artists" />
-        <AffichageElements categorieChercher="chart" type="tracks" /> */}
+        {/* <AffichageElements categorieChercher="chart" type="albums"/> */}
+        <AffichageElements categorieChercher="chart" type="artists" /> 
+        <AffichageElements categorieChercher="chart" type="tracks" />
       </div>
     </div>
   );
