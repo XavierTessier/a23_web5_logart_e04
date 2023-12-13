@@ -11,9 +11,9 @@ const Layout = () => {
       <div className="layout">
         <Header />
         <Outlet />
-        {/* <AffichageElements categorieChercher="chart" type="albums"/> */}
-        {/* <AffichageElements categorieChercher="chart" type="artists" />
-        <AffichageElements categorieChercher="chart" type="tracks" /> */}
+        <AffichageElements categorieChercher="chart" type="albums"/>
+        <AffichageElements categorieChercher="chart" type="artists"/>
+        <AffichageElements categorieChercher="chart" type="tracks"/>
       </div>
     </div>
   );
