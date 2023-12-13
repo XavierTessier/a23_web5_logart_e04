@@ -4,13 +4,9 @@ import "../css/anim-vinyle.css";
 
 const Vinyle = ({ img, isPlaying }) => {
   return (
-    <div
-      className={
-        !isPlaying ? "vinyle-single relative playing" : "vinyle-single relative"
-      }
-    >
+    <div className="vinyle-single relative">
       <svg
-        className="vinyle"
+        className={!isPlaying ? "vinyle playing" : "vinyle"}
         viewBox="0 0 500 500"
         preserveAspectRatio="none"
         transform="translate(-10 0)"
