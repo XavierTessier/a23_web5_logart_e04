@@ -55,10 +55,12 @@ section.tracks {
         flex-direction: column;
         align-items: end;
         width: 60%;
+        height: 550px;
         position: absolute;
         top: 2em;
         right: 0;
         margin-right: 3%;
+        overflow: scroll;
     }
 
     p.song-title {
@@ -68,6 +70,18 @@ section.tracks {
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
-        max-width: 3500px;
+        max-width: 350px;
+    }
+}
+
+@media screen and (min-width:1600px) {
+    section.tracks {
+        width: 500px;
+        height: 600px;
+        overflow: scroll;
+    }
+
+    p.album-name {
+        margin: 0 auto;
     }
 }

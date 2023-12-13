@@ -46,4 +46,19 @@ div.vinyles:first-child {
         width: 350px;
         height: 350px;
     }
+
+    div.vinyle-tourne {
+        margin-left: 5em;
+        margin-top: -2em;
+    }
+}
+
+@media screen and (min-width: 1600px) {
+    div.wrapper_vinyle {
+        margin: 0 auto;
+    }
+
+    div.vinyle-tourne {
+        margin: 0 auto;
+    }
 }
