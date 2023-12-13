@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import "../css/recherche.css";
 import "../css/radio-btn.css";
 import Like from "../components/Like";
+import { TbPlaylistAdd } from "react-icons/tb";
 
 const BarreRecherche = () => {
   const [query, setQuery] = useState({
@@ -154,6 +155,11 @@ const BarreRecherche = () => {
             {results.data &&
               results.data.map((result) => (
                 <div className="card" key={result.id} id={`item-${result.id}`}>
+                  <img
+                    className="albumCover"
+                    src={result.cover_medium}
+                    alt=""
+                  />
                   <p className="title">
                     {windowWidth <= 1500
                       ? truncateText(result.title, 15, windowWidth)
@@ -162,11 +168,6 @@ const BarreRecherche = () => {
                   <p className="artist">
                     {result.artist && result.artist.name}
                   </p>
-                  <img
-                    className="albumCover"
-                    src={result.cover_medium}
-                    alt=""
-                  />
                 </div>
               ))}
           </div>
@@ -226,9 +227,9 @@ const BarreRecherche = () => {
                         })
                       }
                     >
-                      <Like />
+                      <TbPlaylistAdd className="playlist-add" />
                     </button>
-                    {/* <button
+                    <button
                       onClick={() =>
                         addToFav(userData.favorites, {
                           id: result.id,
@@ -240,9 +241,9 @@ const BarreRecherche = () => {
                         })
                       }
                     >
-                      Fav
+                      <Like />
                     </button>
-                    <button
+                    {/*<button
                       onClick={() =>
                         addToHistory({
                           id: result.id,
