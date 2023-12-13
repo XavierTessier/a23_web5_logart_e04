@@ -154,20 +154,26 @@ const BarreRecherche = () => {
           <div className="results">
             {results.data &&
               results.data.map((result) => (
-                <div className="card" key={result.id} id={`item-${result.id}`}>
+                <div
+                  className="wrapper-search-album"
+                  key={result.id}
+                  id={`item-${result.id}`}
+                >
                   <img
                     className="albumCover"
                     src={result.cover_medium}
                     alt=""
                   />
-                  <p className="title">
-                    {windowWidth <= 1500
-                      ? truncateText(result.title, 15, windowWidth)
-                      : result.title}
-                  </p>
-                  <p className="artist">
-                    {result.artist && result.artist.name}
-                  </p>
+                  <div className="card">
+                    <p className="title">
+                      {windowWidth <= 1500
+                        ? truncateText(result.title, 15, windowWidth)
+                        : result.title}
+                    </p>
+                    <p className="artist">
+                      {result.artist && result.artist.name}
+                    </p>
+                  </div>
                 </div>
               ))}
           </div>
@@ -177,9 +183,19 @@ const BarreRecherche = () => {
           <div className="results">
             {results.data &&
               results.data.map((result) => (
-                <div className="card" key={result.id} id={`item-${result.id}`}>
-                  <p className="artist">{result.name}</p>
+                <div
+                  className="wrapper-search-artist"
+                  key={result.id}
+                  id={`item-${result.id}`}
+                >
                   <img className="picture" src={result.picture_medium} alt="" />
+                  <div
+                    className="card"
+                    key={result.id}
+                    id={`item-${result.id}`}
+                  >
+                    <p className="artist">{result.name}</p>
+                  </div>
                 </div>
               ))}
           </div>
@@ -366,7 +382,7 @@ const BarreRecherche = () => {
           </div>
         </div>
 
-        <h1 className="ml-2">Résultat pour {type} </h1>
+        <h1 className="text-result">Résultat pour {type} </h1>
       </form>
 
       {displayList(type)}
