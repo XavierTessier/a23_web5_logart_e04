@@ -196,31 +196,17 @@ const BarreRecherche = () => {
                       alt=""
                     />
                     <div className="wrapper-info-search">
-                      <p className="title">
-                        {windowWidth <= 1500
-                          ? truncateText(result.title, 10)
-                          : result.title}
-                      </p>
+                      <p className="title">{result.title}</p>
                       {windowWidth >= 768 ? (
                         <p className="artist">
-                          {windowWidth <= 1500
-                            ? truncateText(
-                                result.artist && result.artist.name,
-                                8
-                              )
-                            : result.artist && result.artist.name}
+                          {result.artist && result.artist.name}
                         </p>
                       ) : (
                         <></>
                       )}
-                      {windowWidth >= 768 ? (
+                      {windowWidth >= 1200 ? (
                         <p className="album">
-                          {windowWidth <= 1500
-                            ? truncateText(
-                                result.album && result.album.title,
-                                8
-                              )
-                            : result.album && result.album.title}
+                          {result.album && result.album.title}
                         </p>
                       ) : (
                         <></>
