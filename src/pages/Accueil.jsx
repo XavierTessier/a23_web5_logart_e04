@@ -7,7 +7,7 @@ const Accueil = () => {
         <div className="accueil">
             <img src="src/img/svg/logo.svg" alt="forme" className="logo"/>
             {/* À enlever */}
-            <Link to="/discovers/artist/27"><h1>Découverte</h1></Link>
+            <Link to="/discovers/track/3135556"><h1>Découverte</h1></Link>
             
             <img src="src/img/png/Fichier 8.png" alt="forme" className="forme"/>
             {/* <img src="src/img/png/Fichier 9.png" alt="ligne" className="ligne"/> */}

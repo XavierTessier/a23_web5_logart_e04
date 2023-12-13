@@ -22,12 +22,14 @@ const Discovers = () => {
     // getBySearch(`artist/${id}/albums`,"albums");
     // getBySearch(`search/artist?q=`,"albums");
     let contenu = null;
-    if(musicData[categorie])
-    switch(categorie){
-        case "album": contenu = <AlbumInfo musicData={musicData} onSearch={getBySearch} id={id}/>;break;
-        case "artist": contenu = <ArtistInfo musicData={musicData} onSearch={getBySearch} id={id}/>;break;
-        case "track": contenu = <TrackInfo onSearch={getBySearch} id={id}/>;break;
-        default: contenu = null;
+    console.log(musicData[categorie]?.album.id);
+    if(musicData[categorie] != null){
+        switch(categorie){
+            case "album": contenu = <AlbumInfo musicData={musicData} onSearch={getBySearch} id={id}/>;break;
+            case "artist": contenu = <ArtistInfo musicData={musicData} onSearch={getBySearch} id={id}/>;break;
+            case "track": contenu = <TrackInfo musicData={musicData} onSearch={getBySearch} album_id={musicData[categorie]?.album.id}/>;break;;
+            default: contenu = null;
+        }
     }
     console.log("Welcome on discovers");
     console.log(musicData);

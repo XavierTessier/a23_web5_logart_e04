@@ -88,8 +88,9 @@ const MusicProvider = ({children}) => {
               image_xl: data.cover_xl,
               type: data.type,
               artist:data.artist,
-              tracks:data.tracks.data,
-              genres:data.genres.data,
+              tracks:data?.tracks?.data,
+              genres:data?.genres?.data,
+              data:data
             //   data:data
             };
           case "track":
@@ -97,6 +98,8 @@ const MusicProvider = ({children}) => {
               id: data.id,
               text: data.title,
               link: data.link,
+              album:data.album,
+            //   data:data,
             };
           case "albums":
             return data.data;
