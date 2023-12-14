@@ -75,7 +75,9 @@ const Playlists = () => {
               {windowWidth >= 768 ? <h2>{FormatTime(getTotalDuration())}</h2> : <></>}
             </div>
             <div className="add relative ">
-              <ButtonAdd />
+              <Link to={"/search"}>
+                <ButtonAdd />
+              </Link>
             </div>
           </div>
         </div>
