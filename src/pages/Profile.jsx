@@ -14,6 +14,7 @@ import Footer from "../components/Footer";
 import AffichageElements from "../components/AffichageElements";
 import { HiDotsHorizontal } from "react-icons/hi";
 import Like from "../components/Like";
+import "../css/Liste.css";
 
 const Profile = () => {
   const { user, logout, setUserData, userData, getTopMusic, getHistory } =
@@ -54,24 +55,26 @@ const Profile = () => {
       {/* <div>
         <h2 className="recommander">vos plus écoutés</h2>
       </div> */}
-      <div>
+      <div className="listes">
         <h2 className="recommander">Musique tendance</h2>
-        {topMusic.map((item, index) => (
-          <div className="fav" id={index} key={item.music.id}>
-            <li>
-              <p>{item.music.title}</p>
-              <Link to={`/reader/track/${item.music.id}`}>
-                <div className="white"><HiDotsHorizontal /></div>
-                <div className="coeur"><Like /></div>
-                <div className="opacite"></div>
-                <img src={item.music.albumCover}/>
-                {/* <p>{item.music.artist}</p>
-                <p>{item.music.albumTitle}</p>
-                <p>{item.music.duration}s</p> */}
-              </Link>
-            </li>
-          </div>
-        ))}
+        <div className="liste_elements">
+          {topMusic.map((item, index) => (
+            <div className="fav" id={index} key={item.music.id}>
+              <li>
+                <p>{item.music.title}</p>
+                <Link to={`/reader/track/${item.music.id}`}>
+                  <div className="white"><HiDotsHorizontal /></div>
+                  <div className="coeur"><Like /></div>
+                  <div className="opacite"></div>
+                  <img src={item.music.albumCover}/>
+                  {/* <p>{item.music.artist}</p>
+                  <p>{item.music.albumTitle}</p>
+                  <p>{item.music.duration}s</p> */}
+                </Link>
+              </li>
+            </div>
+          ))}
+        </div>
       </div>
       <div>
         <h2 className="recommander">Musique récentes écoutés :</h2>
@@ -93,11 +96,6 @@ const Profile = () => {
           </div>
         ))}
         </div>
-      </div>
-      <div>
-        <AffichageElements categorieChercher="chart" type="albums" />
-        <AffichageElements categorieChercher="chart" type="artists" />
-        <AffichageElements categorieChercher="chart" type="tracks" />
       </div>
       <div>
         <AffichageElements categorieChercher="chart" type="albums" />
