@@ -51,47 +51,7 @@ div.footer {
 }
 
 @media only screen and (min-width: 1400px) {
-    div.footer {
-        background-color: rgb(0, 0, 0);
-        display: flex;
-        height: fit-content;
-        width: 100%;
-        flex-direction: column;
-        align-items: center;
-        position: relative;
-        bottom: 0;
-    }
-
     div.footer img {
-        font-family: 'Playpen Sans', sans-serif;
         width: 320px;
-    }
-
-    div.footer p, div.footer h2 {
-        color: white;
-    }
-
-    div.footer h2 {
-        padding-bottom: 10px;
-        font-weight: bold;
-        font-family: 'Playpen Sans', cursive;
-    }
-
-    div.footer .informations_footer {
-        position: relative;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        padding: 2em 3em 2em 3em;
-    }
-
-    div.footer .informations_footer img {
-        margin-right: 4em;
-    }
-
-    div.footer div {
-        width: fit-content;
-        margin-left: 3em;
-        font-size: 1.2em;
     }
 }
