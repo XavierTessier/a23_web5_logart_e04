@@ -89,8 +89,8 @@ const AffichageElements = ({ categorieChercher, type, }) => {
           link: "/reader/track/" + element.id,
           albumTitle:element.album.title,
           artistName:element.artist.name,
-          duration:element.duration
-
+          duration:element.duration,
+          id: element.id,
         };
       default:
         return element.title;
@@ -110,7 +110,7 @@ const AffichageElements = ({ categorieChercher, type, }) => {
                 {(type == "tracks") &&
                   <div onClick={(e) => {
                     addToFav(userData.favorites, {
-                      id: getDisplayValue(element).text,
+                      id: getDisplayValue(element).id,
                       title: getDisplayValue(element).text,
                       artist: getDisplayValue(element).artistName,
                       albumTitle: getDisplayValue(element).albumTitle,
