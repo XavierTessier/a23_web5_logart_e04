@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import "../css/Accueil.css";
 import { Helmet } from "react-helmet";
 import "../css/anim-accueil.css";
-
+import AffichageElements from "../components/AffichageElements";
 const Accueil = () => {
   return (
     <div className="accueil">
@@ -23,7 +23,11 @@ const Accueil = () => {
         <span></span>
         <span></span>
       </div>
+      <AffichageElements categorieChercher="chart" type="albums"/>
+      <AffichageElements categorieChercher="chart" type="artists"/>
+      <AffichageElements categorieChercher="chart" type="tracks"/>
     </div>
+    
   );
 };
 export default Accueil;

@@ -4,6 +4,7 @@ import { useAuth } from "../context/authContext";
 import { useState } from "react";
 import "../css/Login.css";
 import { FaRegUserCircle } from "react-icons/fa";
+import AffichageElements from "../components/AffichageElements";
 const Login = () => {
   const { googleLogin, logout, user, addDocHandler } = useAuth();
 
@@ -29,6 +30,9 @@ const Login = () => {
       <img src="src/img/png/Fichier_1.png" alt="forme" className="ligne1" />
       <img src="src\img\png\Fichier_13.png" alt="forme" className="forme2" />
       <img src="src/img/png/Fichier_14.png" alt="forme" className="ligne2" />
+      <AffichageElements categorieChercher="chart" type="albums"/>
+      <AffichageElements categorieChercher="chart" type="artists"/>
+      <AffichageElements categorieChercher="chart" type="tracks"/>
     </div>
   );
 };
