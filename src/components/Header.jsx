@@ -50,7 +50,7 @@ const Header = () => {
             </li>
             <li className={pathname === "/favorites" ? "actif" : null}>
               <img
-                src="src/img/svg/like_menu.svg"
+                src="/img/svg/like_menu.svg"
                 style={{ color: "white" }}
                 className="text-5xl text-white w-16 h-16"
                 onClick={goToLike}

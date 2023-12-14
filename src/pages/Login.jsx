@@ -20,17 +20,17 @@ const Login = () => {
   };
   return (
     <div className="authentification_lite">
-      <img src="src\img\svg\logo.svg" className="logo"></img>
+      <img src="\img\svg\logo.svg" className="logo"></img>
       <div className="login h-screen">
         <FaRegUserCircle className="z-10" style={{ color: "coral" }} />
         <button onClick={handleGoogleLogin} className="connexion">
           Se connecter avec Google
         </button>
       </div>
-      <img src="src\img\png\Fichier_3.png" alt="forme" className="forme1" />
-      <img src="src/img/png/Fichier_1.png" alt="forme" className="ligne1" />
-      <img src="src\img\png\Fichier_13.png" alt="forme" className="forme2" />
-      <img src="src/img/png/Fichier_14.png" alt="forme" className="ligne2" />
+      <img src="/img/png/Fichier_3.png" alt="forme" className="forme1" />
+      <img src="/img/png/Fichier_1.png" alt="forme" className="ligne1" />
+      <img src="/img/png/Fichier_13.png" alt="forme" className="forme2" />
+      <img src="/img/png/Fichier_14.png" alt="forme" className="ligne2" />
       <AffichageElements categorieChercher="chart" type="albums" />
       <AffichageElements categorieChercher="chart" type="artists" />
       <AffichageElements categorieChercher="chart" type="tracks" />

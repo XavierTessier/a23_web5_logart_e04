@@ -12,10 +12,10 @@ const Accueil = () => {
         <title>Tune-Up | Accueil</title>
       </Helmet>
       <div className="wrapper-accueil h-full w-full">
-        <img src="src/img/svg/logo.svg" alt="forme" className="logo" />
+        <img src="/img/svg/logo.svg" alt="forme" className="logo" />
         <h1>Découverte</h1>
         <div className="forme-accueil">
-          <img src="src/img/png/Fichier_8.png" alt="forme" className="forme" />
+          <img src="/img/png/Fichier_8.png" alt="forme" className="forme" />
         </div>
       </div>
 
