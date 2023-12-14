@@ -87,11 +87,6 @@ div.user h2 {
     div.user img {
         left: 18%;
     }
-
-    div.user h2 {
-        padding-left: 30%;
-        font-size: 70px;
-    }
 }
 
 @media only screen and (min-width: 1100px) {
@@ -102,7 +97,6 @@ div.user h2 {
 
     div.user h2 {
         padding-left: 28%;
-        font-size: 70px;
     }
 }
 
@@ -127,7 +121,6 @@ div.user h2 {
     }
 
     div.user h2 {
-        padding-left: 28%;
         font-size: 65px;
     }
 }

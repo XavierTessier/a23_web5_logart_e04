@@ -107,10 +107,6 @@
 
     div.white {
         padding-top: 190px;
-        font-weight: bolder;
-        color: white;
-        z-index: 50;
-        font-size: 30px;
         padding-left: 180px;
     }
 }
@@ -122,7 +118,6 @@
     }
 
     h2.recommander {
-        padding-bottom: 75px;
         padding-left: 200px;
         margin-left: 1em;
     }
