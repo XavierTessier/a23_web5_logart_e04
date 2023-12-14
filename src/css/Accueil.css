@@ -29,15 +29,9 @@ Description : Css de page d'accueil  */
 
 .accueil h1 {
     font-size: 50px;
+    margin-bottom: 1em;
+    font-weight: bold;
     font-family: 'Playpen Sans', cursive;
-}
-
-.accueil .forme {
-    width: 5em;
-    z-index: -10;
-    position: relative;
-    bottom: 5em;
-    right: 50%;
 }
 
 @media only screen and (min-width: 768px) {
