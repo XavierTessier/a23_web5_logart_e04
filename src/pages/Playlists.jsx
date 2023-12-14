@@ -13,7 +13,8 @@ import PlayButton from "../components/Play-playlist";
 
 const Playlists = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const { user, playlist, deleteMusic, setUserData, userData, addToFav } = useAuth();
+  const { user, playlist, deleteMusic, setUserData, userData, addToFav } =
+    useAuth();
 
   useEffect(() => {
     const handleResize = () => {
@@ -42,7 +43,7 @@ const Playlists = () => {
     <div className="playlist w-full mb-16">
       <div className="entete-playlist items-center w-full">
         <Vinyle
-          img="src/img/jpg/pexels-cottonbro-studio-4629625.jpg"
+          img="/img/jpg/pexels-cottonbro-studio-4629625.jpg"
           className="vinyle-playlist"
         />
         <div className="entete-info-playlist mb-16 w-full">
@@ -84,14 +85,18 @@ const Playlists = () => {
                     <p className="song-duration">
                       {FormatTime(item.info.duration)}
                     </p>
-                    <div onClick={() => addToFav(userData.favorites, {
-                      id: item.info.id,
-                      title: item.info.title,
-                      artist: item.info.artist,
-                      albumTitle: item.info.albumTitle,
-                      albumCover: item.info.albumCover,
-                      duration: item.info.duration,
-                    })}>
+                    <div
+                      onClick={() =>
+                        addToFav(userData.favorites, {
+                          id: item.info.id,
+                          title: item.info.title,
+                          artist: item.info.artist,
+                          albumTitle: item.info.albumTitle,
+                          albumCover: item.info.albumCover,
+                          duration: item.info.duration,
+                        })
+                      }
+                    >
                       <Like />
                     </div>
                   </div>
