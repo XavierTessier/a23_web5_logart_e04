@@ -55,6 +55,7 @@ const Profile = () => {
       {/* <div>
         <h2 className="recommander">vos plus écoutés</h2>
       </div> */}
+      {/* commentaire final*/}
       <div className="listes">
         <h2 className="recommander">Musique tendance</h2>
         <div className="liste_elements">
