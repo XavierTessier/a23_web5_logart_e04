@@ -8,10 +8,10 @@ Description : Css des listes  */
     }
     div.coeur {
         position: absolute;
-        padding-top: 30px;
-        padding-left: 30px; 
+        margin-top: 30px;
+        margin-left: 30px; 
         font-size: 20px;  
-        z-index: 30;
+        z-index: 70;
     }
 
     .liste_elements {
@@ -45,7 +45,7 @@ Description : Css des listes  */
     div.opacite {
         position: absolute;
         opacity: 35%;
-        z-index: 0;
+        z-index: 50;
         background-color: black;
         width: 350px;
         height: 350px;
@@ -73,7 +73,7 @@ Description : Css des listes  */
 
 @media only screen and (min-width: 768px) {
     div.coeur {
-        padding-top: 160px;
+        margin-top: 160px;
     }
 
     .liste_elements {
