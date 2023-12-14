@@ -6,8 +6,10 @@ import { Link } from "react-router-dom";
 import { HiDotsHorizontal } from "react-icons/hi";
 import Like from "./Like";
 import { Navigate } from "react-router-dom";
+import { useAuth } from "../context/authContext";
 
 const AffichageElements = ({ categorieChercher, type, }) => {
+  const {userData, addToFav } = useAuth();
   const [myInfos, setMyInfos] = useState({
     charts:null,
     tracksFromAlbums:[]
@@ -84,7 +86,11 @@ const AffichageElements = ({ categorieChercher, type, }) => {
         return {
           text: element.title,
           image: element.album.cover_medium,
-          link: "/reader/track/" + element.id, 
+          link: "/reader/track/" + element.id,
+          albumTitle:element.album.title,
+          artistName:element.artist.name,
+          duration:element.duration
+
         };
       default:
         return element.title;
@@ -101,12 +107,23 @@ const AffichageElements = ({ categorieChercher, type, }) => {
           (myInfos.charts && myInfos.tracksFromAlbums || type != "albums") && myInfos.charts?.[type].data.map((element,index) => (
             <li key={element.id}>
               <p>{getDisplayValue(element).text}</p>
-              <Link to={getDisplayValue(element,index).link} state={element}>
+                {(type == "tracks") &&
+                  <div onClick={(e) => {
+                    addToFav(userData.favorites, {
+                      id: getDisplayValue(element).text,
+                      title: getDisplayValue(element).text,
+                      artist: getDisplayValue(element).artistName,
+                      albumTitle: getDisplayValue(element).albumTitle,
+                      albumCover: getDisplayValue(element).image,
+                      duration: getDisplayValue(element).duration
+                    })}}  className="coeur"><Like /></div>
+                  }
+                      <Link to={getDisplayValue(element,index).link} state={element}>
                 <div className="white"><HiDotsHorizontal /></div>
-                {type === "tracks" && <div className="coeur"><Like /></div>}
                 <div className="opacite"></div>
                 <img src={getDisplayValue(element).image} alt="" />
-              </Link>
+                  </Link>
+              
             </li>
           ))
         }
@@ -115,3 +132,4 @@ const AffichageElements = ({ categorieChercher, type, }) => {
   );
 }
 export default AffichageElements;
+
