@@ -103,7 +103,7 @@ const AffichageElements = ({ categorieChercher, type, }) => {
               <p>{getDisplayValue(element).text}</p>
               <Link to={getDisplayValue(element,index).link} state={element}>
                 <div className="white"><HiDotsHorizontal /></div>
-                <div className="coeur"><Like /></div>
+                {type === "tracks" && <div className="coeur"><Like /></div>}
                 <div className="opacite"></div>
                 <img src={getDisplayValue(element).image} alt="" />
               </Link>
