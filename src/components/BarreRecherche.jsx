@@ -32,26 +32,26 @@ const BarreRecherche = () => {
 
   const truncateText = (text, maxLength) => {
     const width = window.innerWidth;
-  
+
     // Check if text is undefined
     if (!text) {
       return ""; // or some default value
     }
-  
+
     // Create an invisible element to measure the width
     const dummyElement = document.createElement("span");
     dummyElement.style.visibility = "hidden";
     dummyElement.style.whiteSpace = "nowrap";
     dummyElement.textContent = text;
-  
+
     document.body.appendChild(dummyElement);
-  
+
     // Measure the width of the text
     const textWidth = dummyElement.getBoundingClientRect().width;
-  
+
     // Remove the dummy element
     document.body.removeChild(dummyElement);
-  
+
     if (width <= 920) {
       const truncatedText = text.length > 12 ? text.slice(0, 12) : text;
       const finalText =
@@ -265,19 +265,6 @@ const BarreRecherche = () => {
                     >
                       <Like />
                     </button>
-                    {/*<button
-                      onClick={() =>
-                        addToHistory({
-                          id: result.id,
-                          title: result.title,
-                          artist: result.artist.name,
-                          albumTitle: result.album.title,
-                          albumCover: result.album.cover_medium,
-                        })
-                      }
-                    >
-                      historique
-                    </button> */}
                   </div>
                 </div>
               ))}

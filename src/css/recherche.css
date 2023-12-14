@@ -471,7 +471,7 @@ img.albumCover {
     p.title {
         font-size: 2.5em;
         font-weight: bold;
-        max-width: fit-content;
+        max-width: 800px;
     }
 
     p.artist {
@@ -481,7 +481,11 @@ img.albumCover {
 
     p.album {
         font-size: 1.5em;
-        max-width: 450px;
+        max-width: 300px;
     }
 
+    div.card {
+        margin-left: 4em;
+
+    }
 }
