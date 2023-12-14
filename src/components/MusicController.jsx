@@ -1,6 +1,7 @@
 import { useAudio, useAudioEnded, useAudioProgress } from "../context/audiotim";
 import { useMusic } from "../context/musicContext";
 import { useEffect, useState } from "react";
+import { useAuth } from "../context/authContext";
 
 import "../css/music-controler.css";
 import "../css/motion-reader.css";
@@ -16,6 +17,7 @@ const MusicController = ({ onJoueChange }) => {
   const [compteur, setCompteur] = useState(0);
   const [link, SetLink] = useState("");
   const [volumeInput, setVolumeInput] = useState(0.3);
+  const { user, userData, addToFav } = useAuth();
 
   const isPlaying = () => {
     setJoue(!joue);
@@ -152,11 +154,20 @@ const MusicController = ({ onJoueChange }) => {
     return `${minutes}:${formattedSeconds}`;
   };
 
+  // console.log(choosenTrack);
+
   return (
     <section className="music-controler relative ">
       <div className="wrapper-controle">
         <div className="wrapper-controler">
-          <div className="wrapper-like absolute bottom-8 right-0">
+          <div className="wrapper-like absolute bottom-8 right-0" onClick={() => addToFav(userData.favorites, {
+            id: choosenTrack?.id,
+            title: choosenTrack?.title,
+            artist: choosenTrack?.artist.name,
+            albumTitle: choosenTrack?.album.title,
+            albumCover: choosenTrack?.album.cover_medium,
+            duration: choosenTrack?.duration,
+          })}>
             <Like />
           </div>
           <div className="audio-duration flex flex-row justify-center items-center ">
