@@ -61,10 +61,14 @@ const Profile = () => {
             <li>
               <p>{item.music.title}</p>
               <Link to={`/reader/track/${item.music.id}`}>
-                <div className="white"><HiDotsHorizontal /></div>
-                <div className="coeur"><Like /></div>
+                <div className="white">
+                  <HiDotsHorizontal />
+                </div>
+                <div className="coeur">
+                  <Like />
+                </div>
                 <div className="opacite"></div>
-                <img src={item.music.albumCover}/>
+                <img src={item.music.albumCover} />
                 {/* <p>{item.music.artist}</p>
                 <p>{item.music.albumTitle}</p>
                 <p>{item.music.duration}s</p> */}
@@ -76,28 +80,27 @@ const Profile = () => {
       <div>
         <h2 className="recommander">Musique récentes écoutés :</h2>
         <div className="liste_elements">
-        {history.map((item, index) => (
-          <div className="fav" id={index} key={item.music.id + index}>
-                <li>
-                  <p>{item.music.title}</p>
-                  <Link to={`/reader/track/${item.music.id}`}>
-                      <div className="white"><HiDotsHorizontal /></div>
-                      <div className="coeur"><Like /></div>
-                      <div className="opacite"></div>
-                      <img src={item.music.albumCover} />
-                      {/* <p>{item.music.artist}</p>
+          {history.map((item, index) => (
+            <div className="fav" id={index} key={item.music.id + index}>
+              <li>
+                <p>{item.music.title}</p>
+                <Link to={`/reader/track/${item.music.id}`}>
+                  <div className="white">
+                    <HiDotsHorizontal />
+                  </div>
+                  <div className="coeur">
+                    <Like />
+                  </div>
+                  <div className="opacite"></div>
+                  <img src={item.music.albumCover} />
+                  {/* <p>{item.music.artist}</p>
                       <p>{item.music.albumTitle}</p>
                       <p>{item.music.duration}s</p> */}
-                  </Link>
-                </li>
-          </div>
-        ))}
+                </Link>
+              </li>
+            </div>
+          ))}
         </div>
-      </div>
-      <div>
-        <AffichageElements categorieChercher="chart" type="albums" />
-        <AffichageElements categorieChercher="chart" type="artists" />
-        <AffichageElements categorieChercher="chart" type="tracks" />
       </div>
       <div>
         <AffichageElements categorieChercher="chart" type="albums" />
