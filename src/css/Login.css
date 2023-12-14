@@ -34,8 +34,8 @@ Description : Css de la connexion  */
 
 .deconnexion {
     top: 18em;
-    left: 14em;
-    width: 10em;
+    left: 0em;
+    width: 7em;
 }
 
 .authentification_lite .cercle {
@@ -100,7 +100,46 @@ Description : Css de la connexion  */
     height: 6em;
 }
 
+@media only screen and (min-width: 768px) {
+    .deconnexion {
+        top: 18em;
+        left: 30em;
+        width: 7em;
+    }
+}
+
+@media only screen and (min-width: 900px) {
+    .deconnexion {
+        top: 18em;
+        left: 32em;
+        width: 7em;
+    }
+}
+
+@media only screen and (min-width: 960px) {
+    .deconnexion {
+        top: 18em;
+        left: 36em;
+        width: 7em;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    .deconnexion {
+        top: 18em;
+        left: 14em;
+        width: 7em;
+    }
+}
+
+
 @media only screen and (min-width: 1500px) {
+    .deconnexion {
+        top: 18em;
+        left: 14em;
+        width: 10em;
+    }
+
     .authentification_lite div.login {
         height: 100vh;
     }
