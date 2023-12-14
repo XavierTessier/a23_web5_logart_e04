@@ -11,14 +11,14 @@ const Accueil = () => {
       <Helmet>
         <title>Tune-Up | Accueil</title>
       </Helmet>
-      <div className="wrapper-accueil h-screen w-full">
+      <div className="wrapper-accueil h-full w-full">
         <img src="src/img/svg/logo.svg" alt="forme" className="logo" />
         <h1>Découverte</h1>
         <div className="forme-accueil">
           <img src="src/img/png/Fichier_8.png" alt="forme" className="forme" />
         </div>
       </div>
-      <Footer />
+
       <div className="background">
         <span></span>
         <span></span>
@@ -34,6 +34,7 @@ const Accueil = () => {
       <AffichageElements categorieChercher="chart" type="albums" />
       <AffichageElements categorieChercher="chart" type="artists" />
       <AffichageElements categorieChercher="chart" type="tracks" />
+      <Footer />
     </div>
   );
 };
