@@ -1,3 +1,5 @@
+
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 const InfosDiscovArtist = ({musicData,onSearch,id}) => {
     const [genre_id,setGenre_id] = useState(null);
@@ -19,20 +21,25 @@ const InfosDiscovArtist = ({musicData,onSearch,id}) => {
             <div>
                 {/*Ses albums*/}
                 {console.log(musicData.albums)}
-                {musicData.albums.map(({title, cover})=>(
+                {musicData.albums.map(({id,title, cover})=>(
+                    <Link to={"/discovers/album/"+id}>
                     <div key={cover}>
                         <h2>{title}</h2>
                         <img src={cover} alt="" />
                     </div>
+                    </Link>
                 ))}
             </div>
             <div className="artistes-similaire">
-                {musicData.artists && musicData.artists.map(({name,picture},index) => (
+                {musicData.artists && musicData.artists.map(({id,name,picture},index) => (
                     (index < 10)?
+                    <Link to={"/discovers/artist/"+id}>
                     <div key={name}>
                         <div>{name}</div>
                         <img src={picture} alt="" />
-                    </div>:null
+                    </div>
+                    </Link>
+                    :null
                 ))}
             </div>
         </section>

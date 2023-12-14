@@ -9,7 +9,7 @@ import { Navigate } from "react-router-dom";
 import { useAuth } from "../context/authContext";
 
 const AffichageElements = ({ categorieChercher, type, }) => {
-  const {userData, addToFav } = useAuth();
+  const {userData, addToFav, user } = useAuth();
   const [myInfos, setMyInfos] = useState({
     charts:null,
     tracksFromAlbums:[]
@@ -74,7 +74,7 @@ const AffichageElements = ({ categorieChercher, type, }) => {
         return {
           text: element.name,
           image: element.picture_medium,
-          link: "/discover/artist/" + element.id,
+          link: "/discovers/artist/" + element.id,
         };
       case "albums":
         return {
@@ -107,7 +107,7 @@ const AffichageElements = ({ categorieChercher, type, }) => {
           (myInfos.charts && myInfos.tracksFromAlbums || type != "albums") && myInfos.charts?.[type].data.map((element,index) => (
             <li key={element.id}>
               <p>{getDisplayValue(element).text}</p>
-                {(type == "tracks") &&
+                {(type == "tracks" && user != null) &&
                   <div onClick={(e) => {
                     addToFav(userData.favorites, {
                       id: getDisplayValue(element).id,

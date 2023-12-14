@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import AlbumInfo from "../components/InfosDiscovAlbum";
 import ArtistInfo from "../components/InfosDiscovArtist";
 import TrackInfo from "../components/InfosDiscovTrack";
-import DiscoversInfosBase from "../components/DiscoversInfoBase";
+import DiscoversInfosBase from "../components/DiscoversInfosBase";
 import { useMusic } from "../context/musicContext";
 import { useParams } from "react-router-dom";
 
@@ -22,7 +22,8 @@ const Discovers = () => {
     // getBySearch(`artist/${id}/albums`,"albums");
     // getBySearch(`search/artist?q=`,"albums");
     let contenu = null;
-    console.log(musicData[categorie]?.album.id);
+    console.log(id);
+    // console.log(musicData[categorie]?.album.id);
     if(musicData[categorie] != null){
         switch(categorie){
             case "album": contenu = <AlbumInfo musicData={musicData} onSearch={getBySearch} id={id}/>;break;
