@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import { useMusic } from "../context/musicContext";
 import { Helmet } from "react-helmet";
 import Footer from "../components/Footer";
+import AffichageElements from "../components/AffichageElements";
 
 const Profile = () => {
   const { user, logout, setUserData, userData, getTopMusic, getHistory } =
@@ -82,6 +83,11 @@ const Profile = () => {
             </Link>
           </div>
         ))}
+      </div>
+      <div>
+        <AffichageElements categorieChercher="chart" type="albums" />
+        <AffichageElements categorieChercher="chart" type="artists" />
+        <AffichageElements categorieChercher="chart" type="tracks" />
       </div>
       <Link to="/playlists">Playlist</Link>
       <Link to="/favorites">Favoris</Link>
