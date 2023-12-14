@@ -50,7 +50,7 @@ const Playlists = () => {
           <h1 className="titre-page">Votre playlist</h1>
           <div className="wrapper-info flex flex-row">
             <div className="info-playlist flex flex-col gap-2">
-              <h2 className="name-user text-2xl">Yannick Charles</h2>
+              <h2 className="name-user text-2xl">{user.displayName}</h2>
               <h2 className="nb-track text-xl">56 chansons</h2>
               {windowWidth >= 768 ? <h2>3 h 32 min </h2> : <></>}
             </div>
