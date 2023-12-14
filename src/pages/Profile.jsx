@@ -45,9 +45,9 @@ const Profile = () => {
       </Helmet>
       <div className="user">
         <div className="opacite"></div>
-        <img src="src\img\png\Baniere.png" alt="" className="vinyles" />
-        <img src="src\img\png\Baniere2.png" alt="" className="vinyles2" />
-        <img src="src\img\png\Baniere3.png" alt="" className="vinyles3" />
+        <img src="\img\png\Baniere.png" alt="" className="vinyles" />
+        <img src="\img\png\Baniere2.png" alt="" className="vinyles2" />
+        <img src="\img\png\Baniere3.png" alt="" className="vinyles3" />
         <h2 className="name">{user.displayName}</h2>
         <img src={user.photoURL} alt="avatar" className="avatar" />
       </div>
@@ -63,10 +63,14 @@ const Profile = () => {
               <li>
                 <p>{item.music.title}</p>
                 <Link to={`/reader/track/${item.music.id}`}>
-                  <div className="white"><HiDotsHorizontal /></div>
-                  <div className="coeur"><Like /></div>
+                  <div className="white">
+                    <HiDotsHorizontal />
+                  </div>
+                  <div className="coeur">
+                    <Like />
+                  </div>
                   <div className="opacite"></div>
-                  <img src={item.music.albumCover}/>
+                  <img src={item.music.albumCover} />
                   {/* <p>{item.music.artist}</p>
                   <p>{item.music.albumTitle}</p>
                   <p>{item.music.duration}s</p> */}

@@ -3,11 +3,7 @@ const Footer = () => {
   return (
     <div className="footer">
       <div className="informations_footer">
-        <img
-          src="src/img/svg/logo_noir.svg"
-          alt="forme"
-          className="logo-footer"
-        />
+        <img src="/img/svg/logo_noir.svg" alt="forme" className="logo-footer" />
         <div className="designers">
           <h2>Designers</h2>
           <p>Chadrik Bertrand</p>
