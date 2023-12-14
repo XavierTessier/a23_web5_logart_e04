@@ -107,24 +107,22 @@ const AffichageElements = ({ categorieChercher, type, }) => {
           (myInfos.charts && myInfos.tracksFromAlbums || type != "albums") && myInfos.charts?.[type].data.map((element,index) => (
             <li key={element.id}>
               <p>{getDisplayValue(element).text}</p>
-                {/* <Link to={getDisplayValue(element,index).link} state={element}> */}
-                {/* </Link> */}
                 {(type == "tracks") &&
                   <div onClick={(e) => {
-                    console.log();
-                    e.preventDefault();
-                  addToFav(userData.favorites, {
-                  id: getDisplayValue(element).text,
-                  title: getDisplayValue(element).text,
-                  artist: getDisplayValue(element).artistName,
-                  albumTitle: getDisplayValue(element).albumTitle,
-                  albumCover: getDisplayValue(element).image,
-                  duration: getDisplayValue(element).duration
-                  })}}  className="coeur"><Like /></div>
-                }
+                    addToFav(userData.favorites, {
+                      id: getDisplayValue(element).text,
+                      title: getDisplayValue(element).text,
+                      artist: getDisplayValue(element).artistName,
+                      albumTitle: getDisplayValue(element).albumTitle,
+                      albumCover: getDisplayValue(element).image,
+                      duration: getDisplayValue(element).duration
+                    })}}  className="coeur"><Like /></div>
+                  }
+                      <Link to={getDisplayValue(element,index).link} state={element}>
                 <div className="white"><HiDotsHorizontal /></div>
                 <div className="opacite"></div>
                 <img src={getDisplayValue(element).image} alt="" />
+                  </Link>
               
             </li>
           ))
