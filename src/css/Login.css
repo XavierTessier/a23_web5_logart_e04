@@ -18,7 +18,7 @@
     justify-content: center;
 }
 
-.authentification_lite div.login .connexion {
+.connexion, .deconnexion {
     position: absolute;
     top: 32em;
     background-color: #FF7E50;
@@ -26,6 +26,12 @@
     border-radius: 2em;
     color: white;
     width: 15em;
+}
+
+.deconnexion {
+    top: 18em;
+    left: 14em;
+    width: 10em;
 }
 
 .authentification_lite .cercle {

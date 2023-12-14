@@ -110,9 +110,7 @@ const Profile = () => {
         <AffichageElements categorieChercher="chart" type="artists" />
         <AffichageElements categorieChercher="chart" type="tracks" />
       </div>
-      <Link to="/playlists">Playlist</Link>
-      <Link to="/favorites">Favoris</Link>
-      <button onClick={logout}>Déconnexion</button>
+      <button onClick={logout} className="deconnexion">Déconnexion</button>
       <Footer />
     </div>
   );
