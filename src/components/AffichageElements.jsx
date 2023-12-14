@@ -72,19 +72,19 @@ const AffichageElements = ({ categorieChercher, type, }) => {
         return {
           text: element.name,
           image: element.picture_medium,
-          link: "discover/artist/" + element.id,
+          link: "/discover/artist/" + element.id,
         };
       case "albums":
         return {
           text: element.title,
           image: element.cover_medium,
-          link: "reader/track/" + myInfos.tracksFromAlbums[index]?.data[0]?.id,
+          link: "/reader/track/" + myInfos.tracksFromAlbums[index]?.data[0]?.id,
         };
       case "tracks":
         return {
           text: element.title,
           image: element.album.cover_medium,
-          link: "reader/track/" + element.id, 
+          link: "/reader/track/" + element.id, 
         };
       default:
         return element.title;
