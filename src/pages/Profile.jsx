@@ -10,6 +10,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useMusic } from "../context/musicContext";
 import { Helmet } from "react-helmet";
+import Footer from "../components/Footer";
 
 const Profile = () => {
   const { user, logout, setUserData, userData, getTopMusic, getHistory } =
@@ -40,11 +41,11 @@ const Profile = () => {
       </Helmet>
       <div className="user">
         <div className="opacite"></div>
-        <img src="src\img\png\Baniere.png" alt="" className="vinyles"/>
-        <img src="src\img\png\Baniere2.png" alt="" className="vinyles2"/>
-        <img src="src\img\png\Baniere3.png" alt="" className="vinyles3"/>
+        <img src="src\img\png\Baniere.png" alt="" className="vinyles" />
+        <img src="src\img\png\Baniere2.png" alt="" className="vinyles2" />
+        <img src="src\img\png\Baniere3.png" alt="" className="vinyles3" />
         <h2 className="name">{user.displayName}</h2>
-        <img src={user.photoURL} alt="avatar" className="avatar"/>
+        <img src={user.photoURL} alt="avatar" className="avatar" />
       </div>
       {/* <p>Email : {user.email}</p> */}
       <div>
@@ -85,6 +86,7 @@ const Profile = () => {
       <Link to="/playlists">Playlist</Link>
       <Link to="/favorites">Favoris</Link>
       <button onClick={logout}>Déconnexion</button>
+      <Footer />
     </div>
   );
 };

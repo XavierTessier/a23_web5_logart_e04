@@ -4,6 +4,7 @@ import { useAuth } from "../context/authContext";
 import { useState } from "react";
 import "../css/Login.css";
 import { FaRegUserCircle } from "react-icons/fa";
+import Footer from "../components/Footer";
 const Login = () => {
   const { googleLogin, logout, user, addDocHandler } = useAuth();
 
@@ -19,7 +20,7 @@ const Login = () => {
   return (
     <div className="authentification_lite">
       <img src="src\img\svg\logo.svg" className="logo"></img>
-      <div className="login">
+      <div className="login h-screen">
         <FaRegUserCircle className="z-10" style={{ color: "coral" }} />
         <button onClick={handleGoogleLogin} className="connexion">
           Se connecter avec Google
@@ -29,6 +30,7 @@ const Login = () => {
       <img src="src/img/png/Fichier_1.png" alt="forme" className="ligne1" />
       <img src="src\img\png\Fichier_13.png" alt="forme" className="forme2" />
       <img src="src/img/png/Fichier_14.png" alt="forme" className="ligne2" />
+      <Footer />
     </div>
   );
 };
